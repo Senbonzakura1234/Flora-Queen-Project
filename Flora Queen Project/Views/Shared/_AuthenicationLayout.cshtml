@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Purple DashBoard/vendors/mdi/css/materialdesignicons.min.css")
+    @Styles.Render("~/Content/Purple DashBoard/vendors/css/vendor.bundle.base.css")
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    @Styles.Render("~/Content/Purple DashBoard/css/style.css")
+    @*@Styles.Render("~/Content/bootstrap-select.css")*@
+
+    @*@Styles.Render("~/Content/site.css")*@
+
+    <!-- End layout styles -->
+
+    <link rel="shortcut icon" href="https://res.cloudinary.com/senbonzakura/image/upload/v1573316040/images/favicon_tsvmth.png" />
+</head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
+            <div class="row flex-grow">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+@Scripts.Render("~/Content/Purple DashBoard/vendors/js/vendor.bundle.base.js")
+
+@Scripts.Render("~/Content/Purple DashBoard/js/off-canvas.js")
+@Scripts.Render("~/Content/Purple DashBoard/js/hoverable-collapse.js")
+@Scripts.Render("~/Content/Purple DashBoard/js/misc.js")
+@*@Scripts.Render("~/bundles/bootstrap-select-js")*@
+@RenderSection("scripts", required: false)
+
+<!-- endinject -->
+</body>
+</html>
+
