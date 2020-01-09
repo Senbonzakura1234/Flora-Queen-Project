@@ -24,6 +24,14 @@ namespace Flora_Queen_Project
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/root-script").Include(
+                "~/Content/Purple DashBoard/vendors/js/vendor.bundle.base.js",
+                "~/Content/Purple DashBoard/vendors/chart.js/Chart.min.js",
+                "~/Content/Purple DashBoard/js/off-canvas.js", "~/Content/Purple DashBoard/js/hoverable-collapse.js",
+                "~/Content/Purple DashBoard/js/misc.js", "~/Content/Purple DashBoard/js/dashboard.js",
+                "~/Content/Purple DashBoard/js/todolist.js"));
         }
     }
 }

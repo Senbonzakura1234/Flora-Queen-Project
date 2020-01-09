@@ -104,3 +104,4 @@ E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora 
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.CopyComplete
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.dll
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.pdb
+E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csprojAssemblyReference.cache
