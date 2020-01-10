@@ -1,22 +1,17 @@
 ﻿@using Microsoft.AspNet.Identity
+@* ReSharper disable Html.IdNotResolved *@
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "d-none" }))
     {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        @Html.AntiForgeryToken()
     }
+
+    <span><a id="userLink" href="@Url.Action("Index", "Manage", null)">@User.Identity.GetUserName()</a></span>
+    <span><a id="logoutLink" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></span>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <span><a id="loginLink" href="@Url.Action("Login", "Account", null)">Login</a></span>
+    <span><a id="registerLink" href="@Url.Action("Register", "Account", null)">Register</a></span>
 }
