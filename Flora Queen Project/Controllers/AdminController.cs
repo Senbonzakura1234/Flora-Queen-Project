@@ -12,7 +12,8 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Flora_Queen_Project.Controllers
 {
-    [Authorize(Roles = "Admin,Mod")]
+    //[Authorize(Roles = "Admin,Mod")]
+    [Authorize]
     public class AdminController : Controller
     {
         private ApplicationDbContext _db;
@@ -89,7 +90,7 @@ namespace Flora_Queen_Project.Controllers
             return View(data);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult ChangeRole(string id)
         {
             if (string.IsNullOrEmpty(id)) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -107,7 +108,7 @@ namespace Flora_Queen_Project.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult ChangeRole(AccountManageRoleViewModel model)
         {

@@ -7,7 +7,8 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Flora_Queen_Project.Controllers
 {
-    [Authorize(Roles = "Admin,Mod")]
+    //[Authorize(Roles = "Admin,Mod")]
+    [Authorize]
     public class DashboardController : Controller
     {   
         private ApplicationDbContext _db;

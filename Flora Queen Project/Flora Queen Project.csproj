@@ -185,11 +185,23 @@
     <Compile Include="Migrations\202001091435330_Initial.Designer.cs">
       <DependentUpon>202001091435330_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001131325520_AddOrderTable.cs" />
+    <Compile Include="Migrations\202001131325520_AddOrderTable.Designer.cs">
+      <DependentUpon>202001131325520_AddOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001131615461_ProductTypeOccasionColor.cs" />
+    <Compile Include="Migrations\202001131615461_ProductTypeOccasionColor.Designer.cs">
+      <DependentUpon>202001131615461_ProductTypeOccasionColor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -519,6 +531,7 @@
     <Content Include="Content\Boighor Homepage\fonts\slick.eot" />
     <Content Include="Content\Boighor Homepage\fonts\slick.ttf" />
     <Content Include="Content\Boighor Homepage\fonts\slick.woff" />
+    <None Include="Properties\PublishProfiles\FloraQueen - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -672,6 +685,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001091435330_Initial.resx">
       <DependentUpon>202001091435330_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001131325520_AddOrderTable.resx">
+      <DependentUpon>202001131325520_AddOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001131615461_ProductTypeOccasionColor.resx">
+      <DependentUpon>202001131615461_ProductTypeOccasionColor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

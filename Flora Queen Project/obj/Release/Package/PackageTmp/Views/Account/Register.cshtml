@@ -1,0 +1,201 @@
+﻿@using Flora_Queen_Project.Models
+@model Flora_Queen_Project.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    ViewBag.ContentTitle = "New here?";
+    ViewBag.ContentSubTitle = "Register is easy. It only takes a few steps";
+    Layout = "~/Views/Shared/_AuthenicationLayout.cshtml";
+}
+
+
+@* ReSharper disable Html.IdNotResolved *@
+<div class="col-lg-4 mx-auto">
+    <div class="auth-form-light text-left p-5">
+        <div class="brand-logo">
+            <img src="https://res.cloudinary.com/senbonzakura/image/upload/v1573316040/images/logo_fyzuba.svg" alt="logo">
+        </div>
+        <h4>@ViewBag.ContentTitle</h4>
+        <h6 class="font-weight-light">@ViewBag.ContentSubTitle</h6>
+        <form class="pt-3" action="@Url.Action("Register", "Account")" role="form" method="post" name="RegisterForm" id="RegisterForm" novalidate="novalidate">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", spellcheck = "false" })
+                <span class="iconWrap d-none d-sm-block">
+                    <i class="icon mdi " id="EmailIcon"></i>
+                </span>
+            </div>
+            <div class="form-group" id="passwordField">
+                <div class="input-group">
+                    <div class="input-group-prepend" title="show password">
+                        <span class="input-group-text bg-gradient-primary text-white">
+                            <i class="mdi mdi-eye"></i>
+                        </span>
+                    </div>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", autocomplete = "new-password" })
+                    <span class="iconWrap d-none d-sm-block">
+                        <i class="icon mdi " id="PasswordIcon"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="mt-3">
+                <input class="btn btn-block btn-gradient-primary font-weight-medium auth-form-btn" type="submit" value="Register" />
+                <p class="text-small text-primary mt-1 text-center">
+                    By clicking this button, you are agree with our <a href="#/">Terms and Condition</a>,
+                    including our <a href="#/">Cookie Use</a>
+                </p>
+            </div>
+        </form>
+        <div class="mb-2">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </div>
+        <div class="text-center mt-3 text-small">
+            Already have an account? <a href="@Url.Action("Login")">Login</a>
+        </div>
+        <div class="text-center mt-1 text-small">
+            <a class=" text-muted" href="@Url.Action("Index","Home")">Back to home</a>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+
+    .form-group {
+        position: relative;
+    }
+
+    .iconWrap {
+        position: absolute;
+        top: 14px;
+        right: 20px;
+    }
+</style>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $().ready(function () {
+            jQuery.validator.setDefaults({
+                debug: false,
+                ignore: [],
+                errorClass: "error text-small text-danger border-danger",
+                validClass: "text-small text-primary border-primary",
+                errorElement: 'span',
+                success: "valid"
+            });
+
+            const inputChange = $("input.form-control");
+            inputChange.on('input',
+                function () {
+                    const idChange = $(this).attr("id");
+                    const targetChange = $(`#${idChange}Icon`);
+                    if ($(this).valid()) {
+                        targetChange.addClass("mdi-check-circle");
+                        targetChange.addClass("text-primary");
+                        targetChange.removeClass("mdi-close-circle");
+                        targetChange.removeClass("text-danger");
+                    } else {
+                        targetChange.removeClass("mdi-check-circle");
+                        targetChange.removeClass("text-primary");
+                        targetChange.addClass("mdi-close-circle");
+                        targetChange.addClass("text-danger");
+                    }
+                });
+
+
+            // ReSharper disable once AssignedValueIsNeverUsed
+            var value = $("#Password").val();
+            // ReSharper disable once UnusedLocals
+
+            $("#Password").change(function () {
+                value = $("#Password").val();
+            });
+
+
+            $.validator.addMethod("checkLower",
+                function (value) {
+                    return /[a-z]/.test(value);
+                });
+            $.validator.addMethod("checkUpper",
+                function (value) {
+                    return /[A-Z]/.test(value);
+                });
+            $.validator.addMethod("checkDigit",
+                function (value) {
+                    return /[0-9]/.test(value);
+                });
+
+
+
+
+
+            $.validator.addMethod("passwordCheck",
+                function (value) {
+                    return /^[A-Za-z0-9\d=!\-@@._*]*$/.test(value) &&
+                        /[a-z]/.test(value) &&
+                        /\d/.test(value) &&
+                        /[A-Z]/.test(value);
+                });
+
+            $("#RegisterForm").validate({
+                // ReSharper disable UnusedParameter
+                invalidHandler: function (event, validator) {
+                    // ReSharper restore UnusedParameter
+                    const input = $("input.form-control");
+                    input.each(function () {
+                        const id = $(this).attr("id");
+                        const target = $(`#${id}Icon`);
+                        if ($(this).valid()) {
+                            target.addClass("mdi-check-circle");
+                            target.addClass("text-primary");
+                            target.removeClass("mdi-close-circle");
+                            target.removeClass("text-danger");
+                        } else {
+                            target.removeClass("mdi-check-circle");
+                            target.removeClass("text-primary");
+                            target.addClass("mdi-close-circle");
+                            target.addClass("text-danger");
+                        }
+                    });
+                },
+                rules: {
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 3,
+                        checkLower: true,
+                        checkUpper: true,
+                        checkDigit: true
+                    }
+                },
+                messages: {
+                    Email: {
+                        required: "* Email is required *",
+                        email: "* Please enter a valid email address *"
+                    },
+                    Password: {
+                        required: "* Password is required *",
+                        minlength: "* Password must be at least 3 characters *",
+                        passwordCheck: "* Password is not strong enough *",
+                        checkLower: "* Need at least 1 lowercase alphabet *",
+                        checkUpper: "* Need at least 1 uppercase alphabet *",
+                        checkDigit: "* Need at least 1 digit"
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if((element.attr('name') === 'Password')){
+                        error.appendTo("div#passwordField");  
+                    }
+                    else{
+                        element.after(error);
+                    }
+                }
+            });
+        });
+    </script>
+}
