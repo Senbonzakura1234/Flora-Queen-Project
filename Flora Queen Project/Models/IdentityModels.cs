@@ -95,6 +95,11 @@ namespace Flora_Queen_Project.Models
             return new ApplicationDbContext();
         }
         public DbSet<Order> ApplicationOrders { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Occasion> Occasions { get; set; }
+        public DbSet<Type> Types { get; set; }
+        public DbSet<Product> Products { get; set; }
         //public System.Data.Entity.DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
