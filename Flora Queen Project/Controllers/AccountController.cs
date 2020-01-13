@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -6,12 +7,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Flora_Queen_Project.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Flora_Queen_Project.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private RoleManager<ApplicationUserRole> _roleManager;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _db;
@@ -20,13 +23,24 @@ namespace Flora_Queen_Project.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext dbContext )
+        public AccountController(
+            RoleManager<ApplicationUserRole> roleManager,
+            ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager, 
+            ApplicationDbContext dbContext 
+            )
         {
+            RoleManager = roleManager;
             DbContext = dbContext;
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
+        public RoleManager<ApplicationUserRole> RoleManager
+        {
+            get => _roleManager ?? new RoleManager<ApplicationUserRole>(new RoleStore<ApplicationUserRole>(DbContext));
+            private set => _roleManager = value;
+        }
         public ApplicationDbContext DbContext
         {
             get => _db ?? ApplicationDbContext.Create();
@@ -37,7 +51,6 @@ namespace Flora_Queen_Project.Controllers
             get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             private set => _signInManager = value;
         }
-
         public ApplicationUserManager UserManager
         {
             get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -359,6 +372,7 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+            Debug.WriteLine(returnUrl);
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
@@ -388,6 +402,7 @@ namespace Flora_Queen_Project.Controllers
             }
 
             ViewBag.ReturnUrl = returnUrl;
+ 
             return View(model);
         }
 
@@ -395,10 +410,14 @@ namespace Flora_Queen_Project.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public ActionResult LogOff(string currentUrl)
         {
+            if (!string.IsNullOrEmpty(currentUrl))
+            {
+                Debug.WriteLine(currentUrl);
+            }
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return Redirect(currentUrl);
         }
 
         //

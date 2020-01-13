@@ -252,11 +252,7 @@
                                             <div class="switcher-options">
                                                 <div class="switcher-currency-trigger">
                                                     <div class="setting__menu">
-                                                        <span><a href="#/">Compare Product</a></span>
-                                                        <span><a href="#/">My Account</a></span>
-                                                        <span><a href="#/">My Wishlist</a></span>
                                                         @Html.Partial("_LoginPartial")
-                                                        <span><a href="@Url.Action("Index", "DashBoard")">To DashBoard</a></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -418,6 +414,7 @@
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Content/Boighor Homepage/js/plugins.js")
     @Scripts.Render("~/Content/Boighor Homepage/js/active.js")
+    @RenderSection("scripts", required: false)
 
     <style type="text/css">
         .owl-carousel {

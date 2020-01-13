@@ -1,13 +1,17 @@
-﻿@using Microsoft.AspNet.Identity
-@* ReSharper disable Html.IdNotResolved *@
+﻿@* ReSharper disable Html.IdNotResolved *@
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "d-none" }))
     {
         @Html.AntiForgeryToken()
-    }
 
-    <span><a id="userLink" href="@Url.Action("Index", "Manage", null)">@User.Identity.GetUserName()</a></span>
+        @Html.Hidden("currentURL", Request.Url?.ToString())
+    }
+    if (User.IsInRole("Admin") || User.IsInRole("Mod"))
+    {
+        <span><a href="@Url.Action("Index", "DashBoard")">To DashBoard</a></span>
+    }
+    <span><a id="userLink" href="@Url.Action("Index", "Manage", null)">My Account</a></span>
     <span><a id="logoutLink" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></span>
 }
 else
