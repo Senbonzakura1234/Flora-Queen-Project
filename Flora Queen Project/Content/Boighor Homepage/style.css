@@ -628,6 +628,18 @@ a {
   margin-bottom: -30px; }
 
 /* Background Image */
+.bg-banner--2 {
+    background-image: url(https://res.cloudinary.com/senbonzakura/image/upload/v1578993637/images/ImagePlaceHolder/banner/featured-1920x950_u34olx.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.bg-banner--4 {
+    background-image: url(https://res.cloudinary.com/senbonzakura/image/upload/v1578993636/images/ImagePlaceHolder/banner/PB014-1920x950_qrff2o.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 .bg-image--1 {
   background-image: url(images/bg/1.jpg);
   background-repeat: no-repeat;
@@ -1876,7 +1888,7 @@ Header Styles
     .mainmenu__nav .meninmenu li a {
 	  align-items: center;
 	  align-self: stretch;
-	  color: #333;
+	  color: #ffffff;
 	  display: flex;
 	  font-size: 14px;
 	  font-weight: 600;
@@ -3024,7 +3036,7 @@ h3.widget-title-modal {
   font-size: 60px;
 }
 .slide .slider__content h2 {
-  color: #3c3c3c;
+  color: #ffffff;
   font-size: 68px;
   font-family: poppins;
   font-weight: 700;
