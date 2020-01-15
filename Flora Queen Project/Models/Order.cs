@@ -14,7 +14,6 @@ namespace Flora_Queen_Project.Models
         public double Amount { get; set; }
         public string OrderDescription  { get; set; }
         public string BankCode { get; set; }
-        public DateTime CreatedDate { get; set; }
         // ReSharper disable InconsistentNaming
         public int vnp_TransactionNo { get; set; }
         public string vpn_Message { get; set; }
@@ -25,11 +24,41 @@ namespace Flora_Queen_Project.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime CreatedAt { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime UpdatedAt { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime? DeletedAt { get; set; }
+
+
+        public OrderStatusEnum OrderStatus { get; set; }
+        public enum OrderStatusEnum
+        {
+            [Display(Name = "Pending")]
+            Pending = 4,
+            [Display(Name = "Shipping")]
+            Shipping = 3,
+            [Display(Name = "Paid")]
+            Paid = 2,
+            [Display(Name = "Cancel")]
+            Cancel = 0,
+            [Display(Name = "Done")]
+            Done = 1,
+            [Display(Name = "Deleted")]
+            Deleted = -1,
+        }
+
         public Order()
         {
             Id = Guid.NewGuid().ToString();
-            CreatedDate = DateTime.Now;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+            OrderStatus = OrderStatusEnum.Pending;
         }
     }
 }
