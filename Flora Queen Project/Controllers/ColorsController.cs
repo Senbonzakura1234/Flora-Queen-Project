@@ -110,7 +110,9 @@ namespace Flora_Queen_Project.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Color color = db.Colors.Find(id);
-            db.Colors.Remove(color);
+            color.DeletedAt = DateTime.Now;
+            color.ColorStatus = 0;
+            db.Entry(color).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

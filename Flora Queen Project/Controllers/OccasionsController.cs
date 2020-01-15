@@ -110,7 +110,9 @@ namespace Flora_Queen_Project.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Occasion occasion = db.Occasions.Find(id);
-            db.Occasions.Remove(occasion);
+            occasion.DeletedAt = DateTime.Now;
+            occasion.OccasionStatus = 0;
+            db.Entry(occasion).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
