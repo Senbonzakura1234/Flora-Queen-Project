@@ -1,0 +1,115 @@
+﻿@model Flora_Queen_Project.Models.Type
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    Dictionary<String, String> errors = new Dictionary<string, string>();
+    if (ViewBag.Errors != null)
+    {
+        errors = ViewBag.Errors as Dictionary<string, string>;
+    }
+}
+
+@* <h2>Create</h2> *@
+@* *@
+@* @using (Html.BeginForm()) *@
+@* { *@
+@*     @Html.AntiForgeryToken() *@
+@* *@
+@*     <div class="form-horizontal"> *@
+@*         <h4>Type</h4> *@
+@*         <hr /> *@
+@*         @Html.ValidationSummary(true, "", new { @class = "text-danger" }) *@
+@*         <div class="form-group"> *@
+@*             @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+@*             <div class="col-md-10"> *@
+@*                 @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } }) *@
+@*                 @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" }) *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group"> *@
+@*             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+@*             <div class="col-md-10"> *@
+@*                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } }) *@
+@*                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" }) *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group"> *@
+@*             @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+@*             <div class="col-md-10"> *@
+@*                 @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } }) *@
+@*                 @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" }) *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group"> *@
+@*             @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+@*             <div class="col-md-10"> *@
+@*                 @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } }) *@
+@*                 @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" }) *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group"> *@
+@*             @Html.LabelFor(model => model.DeletedAt, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+@*             <div class="col-md-10"> *@
+@*                 @Html.EditorFor(model => model.DeletedAt, new { htmlAttributes = new { @class = "form-control" } }) *@
+@*                 @Html.ValidationMessageFor(model => model.DeletedAt, "", new { @class = "text-danger" }) *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group"> *@
+@*             @Html.LabelFor(model => model.TypeStatus, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+@*             <div class="col-md-10"> *@
+@*                 @Html.EnumDropDownListFor(model => model.TypeStatus, htmlAttributes: new { @class = "form-control" }) *@
+@*                 @Html.ValidationMessageFor(model => model.TypeStatus, "", new { @class = "text-danger" }) *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group"> *@
+@*             <div class="col-md-offset-2 col-md-10"> *@
+@*                 <input type="submit" value="Create" class="btn btn-default" /> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* } *@
+@* *@
+@* <div> *@
+@*     @Html.ActionLink("Back to List", "Index") *@
+@* </div> *@
+
+<div class="row">
+    <div class="col-md-8 mx-auto grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                @if (TempData["Error"] != null)
+                {
+                    <h4>@TempData["Error"]</h4>
+                }
+
+                <h4 class="card-title">Type</h4>
+                <p class="card-description">Create new Type</p>
+                @using (Html.BeginForm("Create", "Types", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name)
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, errors.ContainsKey("Name") ? errors["Name"] : "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeStatus)
+                        @Html.EnumDropDownListFor(model => model.TypeStatus, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TypeStatus, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" class="btn btn-gradient-primary mr-2" value="Create new Type" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
