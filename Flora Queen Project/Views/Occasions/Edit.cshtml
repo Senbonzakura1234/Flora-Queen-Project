@@ -1,0 +1,34 @@
+﻿@model Flora_Queen_Project.Models.Occasion
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+    <div class="row">
+        <div class="col-md-8 mx-auto grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <h4>Occasion</h4>
+                        <p class="card-description">Edit Occasion</p>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="submit" class="btn btn-gradient-primary mr-2" value="Save" />
+                        <a class="btn btn-light" href="@Url.Action("Index")">
+                            Cancel
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Flora_Queen_Project.Models.Color>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body table-responsive">
+                <h4 class="card-title">Colors</h4>
+                <p class="card-description d-sm-flex">
+                    <span class="text-muted text-small my-auto">Click color name to see detail</span>
+                    <br class="d-sm-none" />
+
+                    <a class="btn btn-sm btn-primary ml-auto mr-2 mt-2 mt-sm-0" href="@Url.Action("Create", "Colors")">
+                        Create New <span class="mdi mdi-plus-circle"></span>
+                    </a>
+                </p>
+                <table class="table" id="update-customer">
+                    <thead class="text-primary">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th class="text-right d-none d-lg-table-cell">
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <a class="badge w-100 badge-gradient-primary w-100"
+                                       href="@Url.Action("Details", "Colors", new {id = item.Id})">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                </td>
+                                <td class="text-right d-none d-lg-table-cell">
+                                    <a class="badge badge-warning" href="@Url.Action("Edit", "Colors", new {id = item.Id})">
+                                        <span class="mdi mdi-pencil-box-outline"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
