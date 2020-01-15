@@ -20,7 +20,7 @@ namespace Flora_Queen_Project.Controllers
         {
             var order = new Order
             {
-                Amount = 1000,
+                Amount = 10000000,
             };
             var vnPay = new VnPayLibrary();
             vnPay.AddRequestData("vnp_Version", "2.0.0");
@@ -37,10 +37,10 @@ namespace Flora_Queen_Project.Controllers
             vnPay.AddRequestData("vnp_OrderInfo", "Order test");
             vnPay.AddRequestData("vnp_OrderType", "other");
             if (Request.Url != null)
-                vnPay.AddRequestData("vnp_ReturnUrl", Url.Action("PaymentResult", "VNpay", null, Request.Url.Scheme));
+                vnPay.AddRequestData("vnp_ReturnUrl", Url.Action("Ipn", "VNpay", null, Request.Url.Scheme));
             vnPay.AddRequestData("vnp_TxnRef", order.Id);
             var paymentUrl = vnPay.CreateRequestUrl("http://sandbox.vnpayment.vn/paymentv2/vpcpay.html", "EAXOMHDGJEPMFEMDIXJZHHPPXEXMSGFD");
-            return RedirectToAction(paymentUrl);
+            return Redirect(paymentUrl);
 
         }
 

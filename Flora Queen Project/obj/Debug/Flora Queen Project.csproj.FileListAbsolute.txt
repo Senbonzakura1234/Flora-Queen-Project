@@ -107,3 +107,112 @@ E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora 
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.CopyComplete
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.dll
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.pdb
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Flora Queen Project.dll.config
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Flora Queen Project.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Flora Queen Project.pdb
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csc.exe
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csc.exe.config
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csc.rsp
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csi.exe
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csi.exe.config
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csi.rsp
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.Managed.Core.targets
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.AppContext.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Collections.Immutable.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Console.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Globalization.Calendars.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.Compression.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.Compression.ZipFile.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.FileSystem.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Net.Http.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Net.Sockets.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Reflection.Metadata.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Threading.Tasks.Extensions.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.ValueTuple.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.XmlDocument.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.XPath.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\vbc.exe
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\vbc.exe.config
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\vbc.rsp
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\VBCSCompiler.exe
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\roslyn\VBCSCompiler.exe.config
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Antlr3.Runtime.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.SqlServer.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Core.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Facebook.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Google.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.OAuth.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Twitter.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Web.Infrastructure.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Newtonsoft.Json.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Owin.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Helpers.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Mvc.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Optimization.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Razor.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Deployment.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Razor.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\WebGrease.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Core.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Facebook.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Google.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.OAuth.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Twitter.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Newtonsoft.Json.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Helpers.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Mvc.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Optimization.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Razor.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Deployment.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Razor.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Antlr3.Runtime.pdb
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.SqlServer.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csprojAssemblyReference.cache
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.Initial.resources
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.AddOrderTable.resources
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.ProductTypeOccasionColor.resources
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.GenerateResource.cache
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.CopyComplete
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.dll
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.pdb
