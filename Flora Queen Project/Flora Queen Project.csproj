@@ -194,6 +194,10 @@
     <Compile Include="Migrations\202001131615461_ProductTypeOccasionColor.Designer.cs">
       <DependentUpon>202001131615461_ProductTypeOccasionColor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001151233599_OrderTable.cs" />
+    <Compile Include="Migrations\202001151233599_OrderTable.Designer.cs">
+      <DependentUpon>202001151233599_OrderTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
@@ -695,6 +699,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001131615461_ProductTypeOccasionColor.resx">
       <DependentUpon>202001131615461_ProductTypeOccasionColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001151233599_OrderTable.resx">
+      <DependentUpon>202001151233599_OrderTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

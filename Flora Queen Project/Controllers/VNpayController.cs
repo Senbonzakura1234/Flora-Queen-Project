@@ -5,12 +5,42 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Flora_Queen_Project.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Flora_Queen_Project.Controllers
 {
+    [Authorize]
     public class VNpayController : Controller
     {
         // GET: VNpay
+
+        private ApplicationUserManager _userManager;
+        private ApplicationDbContext _db;
+
+        public VNpayController()
+        {
+        }
+
+        public VNpayController(
+            ApplicationUserManager userManager,
+            ApplicationDbContext dbContext
+        )
+        {
+            DbContext = dbContext;
+            UserManager = userManager;
+        }
+
+        public ApplicationDbContext DbContext
+        {
+            get => _db ?? ApplicationDbContext.Create();
+            private set => _db = value;
+        }
+        public ApplicationUserManager UserManager
+        {
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
+        }
         public ActionResult Index()
         {
             return View();
@@ -18,10 +48,15 @@ namespace Flora_Queen_Project.Controllers
 
         public ActionResult Checkout()
         {
+            var userId = User.Identity.GetUserId();
+
             var order = new Order
             {
+                ApplicationUserId = userId,
                 Amount = 10000000,
             };
+            DbContext.ApplicationOrders.Add(order);
+            DbContext.SaveChanges();
             var vnPay = new VnPayLibrary();
             vnPay.AddRequestData("vnp_Version", "2.0.0");
             vnPay.AddRequestData("vnp_Command", "pay");
@@ -30,7 +65,7 @@ namespace Flora_Queen_Project.Controllers
             vnPay.AddRequestData("vnp_BankCode", "NCB");
             vnPay.AddRequestData("vnp_BankTranNo", "9704198526191432198");
             vnPay.AddRequestData("vnp_CardType", "ATM");
-            vnPay.AddRequestData("vnp_CreateDate", order.CreatedDate.ToString("yyyyMMddHHmmss"));
+            vnPay.AddRequestData("vnp_CreateDate", order.CreatedAt.ToString("yyyyMMddHHmmss"));
             vnPay.AddRequestData("vnp_CurrCode", "VND");
             vnPay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress());
             vnPay.AddRequestData("vnp_Locale", "vn");

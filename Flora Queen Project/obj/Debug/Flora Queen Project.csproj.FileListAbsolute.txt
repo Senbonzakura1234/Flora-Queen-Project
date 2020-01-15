@@ -216,3 +216,4 @@ E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\D
 E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.CopyComplete
 E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.dll
 E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.pdb
+E:\web_app_net\Flora-Queen-Project\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.OrderTable.resources
