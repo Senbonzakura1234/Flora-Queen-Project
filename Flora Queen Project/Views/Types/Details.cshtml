@@ -1,0 +1,102 @@
+﻿@using Type = Flora_Queen_Project.Models.Type
+@model Flora_Queen_Project.Models.Type
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@* *@
+@* <h2>Details</h2> *@
+@* *@
+@* <div> *@
+@*     <h4>Type</h4> *@
+@*     <hr /> *@
+@*     <dl class="dl-horizontal"> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.Name) *@
+@*         </dt> *@
+@* *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.Name) *@
+@*         </dd> *@
+@* *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.CreatedAt) *@
+@*         </dt> *@
+@* *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.CreatedAt) *@
+@*         </dd> *@
+@* *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.UpdatedAt) *@
+@*         </dt> *@
+@* *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.UpdatedAt) *@
+@*         </dd> *@
+@* *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.DeletedAt) *@
+@*         </dt> *@
+@* *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.DeletedAt) *@
+@*         </dd> *@
+@* *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.TypeStatus) *@
+@*         </dt> *@
+@* *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.TypeStatus) *@
+@*         </dd> *@
+@* *@
+@*     </dl> *@
+@* </div> *@
+@* <p> *@
+@*     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | *@
+@*     @Html.ActionLink("Back to List", "Index") *@
+@* </p> *@
+
+<div class="row">
+    <div class="col-md-8 mx-auto grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <b>ID # @Html.DisplayFor(model => model.Id)</b>
+                </h5>
+                <p class="card-text">
+                    <b>@Html.DisplayNameFor(model => model.Name): </b>
+                    @Html.DisplayFor(model => model.Name)
+                </p>
+                <p class="card-text">
+                    <b>@Html.DisplayNameFor(model => model.CreatedAt): </b>
+                    @Html.DisplayFor(model => model.CreatedAt)
+                </p>
+                <p class="card-text">
+                    <b>@Html.DisplayNameFor(model => model.UpdatedAt): </b>
+                    @Html.DisplayFor(model => model.UpdatedAt)
+                </p>
+                <p class="card-text">
+                    <b>@Html.DisplayNameFor(model => model.DeletedAt): </b>
+                    @Html.DisplayFor(model => model.DeletedAt)
+                </p>
+
+                <p class="card-text">
+                    <b>@Html.DisplayNameFor(model => model.TypeStatus): </b>
+                    <span class="badge @(Model.TypeStatus == Type.TypeStatusEnum.Deleted ? "badge-gradient-secondary" : "badge-gradient-primary")">
+                        @Html.DisplayFor(model => model.TypeStatus)
+                    </span>
+                </p>
+
+                <div class="d-sm-flex">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-warning mr-3" })
+                    <a class="btn btn-light btn-sm mt-2 mt-sm-0" href="@Url.Action("Index")">
+                        Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
