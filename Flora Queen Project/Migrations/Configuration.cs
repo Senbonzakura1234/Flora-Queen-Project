@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.EnterpriseServices;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Remoting.Channels;
 using System.Web;
@@ -18,6 +21,7 @@ namespace Flora_Queen_Project.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<Flora_Queen_Project.Models.ApplicationDbContext>
     {
+        private static string URL = "https://api.myjson.com/bins/c5pwu";
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -25,6 +29,7 @@ namespace Flora_Queen_Project.Migrations
 
         protected override void Seed(Flora_Queen_Project.Models.ApplicationDbContext context)
         {
+            
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -34,8 +39,6 @@ namespace Flora_Queen_Project.Migrations
             context.Database.ExecuteSqlCommand("delete from dbo.colors;");
             context.Database.ExecuteSqlCommand("delete from dbo.types;");
             context.Database.ExecuteSqlCommand("delete from dbo.products;");
-            context.Database.ExecuteSqlCommand("delete from products where 1 = 1");
-
             //add Occasion
             List<Occasion> listOccasions = new List<Occasion>();
             listOccasions.Add(new Occasion()
@@ -131,22 +134,9 @@ namespace Flora_Queen_Project.Migrations
             context.SaveChanges();
 
             //add product
-            //string file = HttpContext.Current.Server.MapPath(@"~\App_Data\Cloudinary.json");
-            //string file = Path.Combine(HttpRuntime.AppDomainAppPath, "/App_Data/Cloudinary.json");
-            //string file = HostingEnvironment.MapPath(@"~/App_Data/Cloudinary.json");
-
-            Console.WriteLine("@@@111@@@@@@@@2");
-            
-            
-            
-            var content = Path.Combine(
-                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
-                , @"App_Data\Cloudinary.json"); ;
-            Debug.WriteLine("@@@@@@@@@@@2");
-            Debug.WriteLine(content);
-            Debug.WriteLine("@@@");
-            List<ProductItem> lsProductItems = JsonConvert.DeserializeObject<List<ProductItem>>(content);
-
+            var client = new HttpClient();
+            var responseContent = client.GetAsync(URL).Result.Content.ReadAsStringAsync().Result;
+            List<ProductItem> lsProductItems = JsonConvert.DeserializeObject<List<ProductItem>>(responseContent);
             List<Product> listProducts = new List<Product>();
             foreach (var f in lsProductItems)
             {
@@ -155,7 +145,8 @@ namespace Flora_Queen_Project.Migrations
                     Id = Guid.NewGuid().ToString(),
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    Description = f.imgUrl,
+                    Description = f.name,
+                    ImgUrl = f.imgUrl,
                     ColorId = context.Colors.FirstOrDefault(x => x.Name.Contains(f.Color))?.Id,
                     OccasionId = context.Occasions.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
                     TypeId = context.Types.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
