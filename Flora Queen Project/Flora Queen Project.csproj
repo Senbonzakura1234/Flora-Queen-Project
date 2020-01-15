@@ -182,17 +182,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001091435330_Initial.cs" />
-    <Compile Include="Migrations\202001091435330_Initial.Designer.cs">
-      <DependentUpon>202001091435330_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001131325520_AddOrderTable.cs" />
-    <Compile Include="Migrations\202001131325520_AddOrderTable.Designer.cs">
-      <DependentUpon>202001131325520_AddOrderTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001131615461_ProductTypeOccasionColor.cs" />
-    <Compile Include="Migrations\202001131615461_ProductTypeOccasionColor.Designer.cs">
-      <DependentUpon>202001131615461_ProductTypeOccasionColor.cs</DependentUpon>
+    <Compile Include="Migrations\202001151410478_Inital-Tables.cs" />
+    <Compile Include="Migrations\202001151410478_Inital-Tables.Designer.cs">
+      <DependentUpon>202001151410478_Inital-Tables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -689,14 +681,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001091435330_Initial.resx">
-      <DependentUpon>202001091435330_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001131325520_AddOrderTable.resx">
-      <DependentUpon>202001131325520_AddOrderTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001131615461_ProductTypeOccasionColor.resx">
-      <DependentUpon>202001131615461_ProductTypeOccasionColor.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001151410478_Inital-Tables.resx">
+      <DependentUpon>202001151410478_Inital-Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

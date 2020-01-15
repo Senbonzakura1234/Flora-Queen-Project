@@ -1,5 +1,16 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.EnterpriseServices;
+using System.IO;
+using System.Net.Http;
+using System.Reflection;
+using System.Runtime.Remoting.Channels;
+using System.Web;
+using System.Web.Hosting;
 using Flora_Queen_Project.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Flora_Queen_Project.Migrations
 {
@@ -10,6 +21,7 @@ namespace Flora_Queen_Project.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<Flora_Queen_Project.Models.ApplicationDbContext>
     {
+        private static string URL = "https://api.myjson.com/bins/c5pwu";
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -17,11 +29,15 @@ namespace Flora_Queen_Project.Migrations
 
         protected override void Seed(Flora_Queen_Project.Models.ApplicationDbContext context)
         {
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-
+            context.Database.ExecuteSqlCommand("delete from dbo.occasions;");
+            context.Database.ExecuteSqlCommand("delete from dbo.colors;");
+            context.Database.ExecuteSqlCommand("delete from dbo.types;");
+            context.Database.ExecuteSqlCommand("delete from dbo.products;");
             //add Occasion
             List<Occasion> listOccasions = new List<Occasion>();
             listOccasions.Add(new Occasion()
@@ -40,6 +56,22 @@ namespace Flora_Queen_Project.Migrations
                 Name = "Love and Romance",
                 OccasionStatus = Occasion.OccasionStatusEnum.Show
             });
+            listOccasions.Add(new Occasion()
+            {
+                Id = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Name = "New Baby",
+                OccasionStatus = Occasion.OccasionStatusEnum.Show
+            });
+            listOccasions.Add(new Occasion()
+            {
+                Id = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Name = "Sympathy",
+                OccasionStatus = Occasion.OccasionStatusEnum.Show
+            });
 
             //add Type
             List<Models.Type> listTypes = new List<Models.Type>();
@@ -56,7 +88,15 @@ namespace Flora_Queen_Project.Migrations
                 Id = Guid.NewGuid().ToString(),
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Name = "Red Rose",
+                Name = "Lilies",
+                TypeStatus = Models.Type.TypeStatusEnum.Show
+            });
+            listTypes.Add(new Models.Type()
+            {
+                Id = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Name = "Gerberas",
                 TypeStatus = Models.Type.TypeStatusEnum.Show
             });
 
@@ -78,6 +118,14 @@ namespace Flora_Queen_Project.Migrations
                 Name = "Yellow Flower",
                 ColorStatus = Color.ColorStatusEnum.Show
             });
+            listColors.Add(new Color()
+            {
+                Id = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Name = "White Flower",
+                ColorStatus = Color.ColorStatusEnum.Show
+            });
 
             context.Types.AddRange(listTypes);
             context.Occasions.AddRange(listOccasions);
@@ -85,35 +133,39 @@ namespace Flora_Queen_Project.Migrations
             context.SaveChanges();
 
             //add product
-            List<Product> lisrProducts = new List<Product>();
-            lisrProducts.Add(new Product()
+            var client = new HttpClient();
+            var responseContent = client.GetAsync(URL).Result.Content.ReadAsStringAsync().Result;
+            List<ProductItem> lsProductItems = JsonConvert.DeserializeObject<List<ProductItem>>(responseContent);
+            List<Product> listProducts = new List<Product>();
+            foreach (var f in lsProductItems)
             {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Description = "Flower",
-                ColorId = listColors[0].Id,
-                OccasionId = listOccasions[0].Id,
-                TypeId = listTypes[0].Id,
-                Name = "Flower 1",
-                InStock = 100,
-                Price = 100000,
-                ProductStatus = Product.ProductStatusEnum.Published
-            });
-            lisrProducts.Add(new Product()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Description = "Flower",
-                ColorId = listColors[1].Id,
-                OccasionId = listOccasions[1].Id,
-                TypeId = listTypes[1].Id,
-                Name = "Flower 2",
-                InStock = 100,
-                Price = 100000,
-                ProductStatus = Product.ProductStatusEnum.Published
-            });
+                listProducts.Add(new Product()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Description = f.name,
+                    ImgUrl = f.imgUrl,
+                    ColorId = context.Colors.FirstOrDefault(x => x.Name.Contains(f.Color))?.Id,
+                    OccasionId = context.Occasions.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
+                    TypeId = context.Types.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
+                    Name = f.name,
+                    InStock = 100,
+                    Price = 100000,
+                    ProductStatus = Product.ProductStatusEnum.Published
+                });
+            }
+
+            context.Products.AddRange(listProducts);
+            context.SaveChanges();
         }
+    }
+
+    public class ProductItem
+    {
+        public string name { get; set; }
+        public string Occasion { get; set; }
+        public string Color { get; set; }
+        public string imgUrl { get; set; }
     }
 }
