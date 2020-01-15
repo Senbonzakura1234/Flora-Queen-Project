@@ -107,3 +107,113 @@ E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora 
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.pdb
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csprojAssemblyReference.cache
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.ProductTypeOccasionColor.resources
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Flora Queen Project.dll.config
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Flora Queen Project.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Flora Queen Project.pdb
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csc.exe
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csc.exe.config
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csc.rsp
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csi.exe
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csi.exe.config
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\csi.rsp
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.Managed.Core.targets
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.AppContext.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Collections.Immutable.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Console.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Globalization.Calendars.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.Compression.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.Compression.ZipFile.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.FileSystem.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Net.Http.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Net.Sockets.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Reflection.Metadata.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Threading.Tasks.Extensions.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.ValueTuple.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.XmlDocument.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.XPath.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\vbc.exe
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\vbc.exe.config
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\vbc.rsp
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\VBCSCompiler.exe
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\roslyn\VBCSCompiler.exe.config
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Antlr3.Runtime.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.SqlServer.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Google.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Web.Infrastructure.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Newtonsoft.Json.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Owin.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Helpers.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Mvc.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Optimization.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Razor.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Deployment.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Razor.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\WebGrease.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Google.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Newtonsoft.Json.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Helpers.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Mvc.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Optimization.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.Razor.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Deployment.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\System.Web.WebPages.Razor.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Antlr3.Runtime.pdb
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\EntityFramework.SqlServer.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csprojAssemblyReference.cache
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.Initial.resources
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.AddOrderTable.resources
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.ProductTypeOccasionColor.resources
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.GenerateResource.cache
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.CopyComplete
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.dll
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\obj\Debug\Flora Queen Project.pdb
+E:\Aptech\SEM 3\6.Bài tập\Flora-Queen-Project\Flora Queen Project\bin\App_Data\Cloudinary.json

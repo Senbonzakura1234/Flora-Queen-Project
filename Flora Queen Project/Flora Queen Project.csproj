@@ -531,6 +531,9 @@
     <Content Include="Content\Boighor Homepage\fonts\slick.eot" />
     <Content Include="Content\Boighor Homepage\fonts\slick.ttf" />
     <Content Include="Content\Boighor Homepage\fonts\slick.woff" />
+    <Content Include="App_Data\Cloudinary.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\FloraQueen - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -668,9 +671,7 @@
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Admin\ChangeRole.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
