@@ -680,6 +680,7 @@
     <Content Include="Views\Occasions\Edit.cshtml" />
     <Content Include="Views\Occasions\Index.cshtml" />
     <Content Include="Views\VNpay\PaymentResult.cshtml" />
+    <Content Include="Views\VNpay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

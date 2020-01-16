@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -43,17 +44,20 @@ namespace Flora_Queen_Project.Controllers
         }
         public ActionResult Index()
         {
-            return null;
+            return View();
         }
-
-        public ActionResult Checkout()
+        [HttpPost]
+        public ActionResult Checkout(double amount)
         {
             var userId = User.Identity.GetUserId();
-
+            if (amount <= 0)
+            {
+                amount = 1000000;
+            }
             var order = new Order
             {
                 ApplicationUserId = userId,
-                Amount = 10000000,
+                Amount = amount,
             };
             DbContext.ApplicationOrders.Add(order);
             DbContext.SaveChanges();
@@ -85,6 +89,69 @@ namespace Flora_Queen_Project.Controllers
         }
         public ActionResult Ipn()
         {
+            string returnContent;
+            if (Request.QueryString.Count > 0)
+            {
+                const string vnpHashSecret = "EAXOMHDGJEPMFEMDIXJZHHPPXEXMSGFD"; //Secret key
+                var vnPayData = Request.QueryString;
+                var vnPay = new VnPayLibrary();
+
+
+                foreach (string s in vnPayData)
+                {
+                    //get all querystring data
+                    if (!string.IsNullOrEmpty(s) && s.StartsWith("vnp_"))
+                    {
+                        vnPay.AddResponseData(s, vnPayData[s]);
+                    }
+                }
+
+
+                var orderId = Convert.ToInt64(vnPay.GetResponseData("vnp_TxnRef"));
+                // ReSharper disable once UnusedVariable
+                var vnPayTranId = Convert.ToInt64(vnPay.GetResponseData("vnp_TransactionNo"));
+                var vnpResponseCode = vnPay.GetResponseData("vnp_ResponseCode");
+                var vnpSecureHash = Request.QueryString["vnp_SecureHash"];
+                var checkSignature = vnPay.ValidateSignature(vnpSecureHash, vnpHashSecret);
+
+                if (checkSignature)
+                {
+
+                    var order = DbContext.ApplicationOrders.Find(orderId);
+                    if (order != null)
+                    {
+                        if (order.OrderStatus == Order.OrderStatusEnum.Pending)
+                        {
+                            order.OrderStatus = vnpResponseCode == "00" ? Order.OrderStatusEnum.Paid : Order.OrderStatusEnum.Cancel;
+
+
+                            DbContext.SaveChanges();
+                            returnContent = "{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}";
+                        }
+                        else
+                        {
+                            returnContent = "{\"RspCode\":\"02\",\"Message\":\"Order already confirmed\"}";
+                        }
+                    }
+                    else
+                    {
+                        returnContent = "{\"RspCode\":\"01\",\"Message\":\"Order not found\"}";
+                    }
+                }
+                else
+                {
+                    returnContent = "{\"RspCode\":\"97\",\"Message\":\"Invalid signature\"}";
+                }
+            }
+            else
+            {
+                returnContent = "{\"RspCode\":\"99\",\"Message\":\"Input data required\"}";
+            }
+
+            ViewBag.Response = returnContent;
+            Response.ClearContent();
+            Response.Write(returnContent);
+            Response.End();
             return Redirect("PaymentResult");
         }
     }
