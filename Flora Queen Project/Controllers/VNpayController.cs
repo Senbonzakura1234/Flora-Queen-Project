@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Flora_Queen_Project.Models;
@@ -17,26 +14,21 @@ namespace Flora_Queen_Project.Controllers
         // GET: VNpay
 
         private ApplicationUserManager _userManager;
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        protected readonly string CurrentUserId;
 
         public VNpayController()
         {
+            CurrentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
         }
 
         public VNpayController(
-            ApplicationUserManager userManager,
-            ApplicationDbContext dbContext
+            ApplicationUserManager userManager
         )
         {
-            DbContext = dbContext;
             UserManager = userManager;
         }
 
-        public ApplicationDbContext DbContext
-        {
-            get => _db ?? ApplicationDbContext.Create();
-            private set => _db = value;
-        }
         public ApplicationUserManager UserManager
         {
             get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -47,20 +39,16 @@ namespace Flora_Queen_Project.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Checkout(double amount)
+        public ActionResult Checkout()
         {
-            var userId = User.Identity.GetUserId();
-            if (amount <= 0)
-            {
-                amount = 1000000;
-            }
+            Debug.WriteLine(CurrentUserId);
             var order = new Order
             {
-                ApplicationUserId = userId,
-                Amount = amount,
+                ApplicationUserId = CurrentUserId,
+                Amount = 1000000,
             };
-            DbContext.ApplicationOrders.Add(order);
-            DbContext.SaveChanges();
+            _db.ApplicationOrders.Add(order);
+            _db.SaveChanges();
             var vnPay = new VnPayLibrary();
             vnPay.AddRequestData("vnp_Version", "2.0.0");
             vnPay.AddRequestData("vnp_Command", "pay");
@@ -83,13 +71,18 @@ namespace Flora_Queen_Project.Controllers
 
         }
 
-        public ActionResult PaymentResult()
+        public ActionResult PaymentResult(PaymentResultViewModel paymentResult)
         {
-            return View();
+            if (paymentResult == null)
+            {
+                return HttpNotFound();
+            }
+            return View(paymentResult);
         }
         public ActionResult Ipn()
         {
             string returnContent;
+            var paymentResult = new PaymentResultViewModel();
             if (Request.QueryString.Count > 0)
             {
                 const string vnpHashSecret = "EAXOMHDGJEPMFEMDIXJZHHPPXEXMSGFD"; //Secret key
@@ -107,25 +100,36 @@ namespace Flora_Queen_Project.Controllers
                 }
 
 
-                var orderId = Convert.ToInt64(vnPay.GetResponseData("vnp_TxnRef"));
+                var orderId = vnPay.GetResponseData("vnp_TxnRef");
                 // ReSharper disable once UnusedVariable
-                var vnPayTranId = Convert.ToInt64(vnPay.GetResponseData("vnp_TransactionNo"));
+                var vnPayTranId = vnPay.GetResponseData("vnp_TransactionNo");
                 var vnpResponseCode = vnPay.GetResponseData("vnp_ResponseCode");
                 var vnpSecureHash = Request.QueryString["vnp_SecureHash"];
                 var checkSignature = vnPay.ValidateSignature(vnpSecureHash, vnpHashSecret);
-
+                
                 if (checkSignature)
                 {
 
-                    var order = DbContext.ApplicationOrders.Find(orderId);
+                    var order = _db.ApplicationOrders.Find(orderId);
                     if (order != null)
                     {
                         if (order.OrderStatus == Order.OrderStatusEnum.Pending)
                         {
-                            order.OrderStatus = vnpResponseCode == "00" ? Order.OrderStatusEnum.Paid : Order.OrderStatusEnum.Cancel;
+                            if (vnpResponseCode == "00")
+                            {
+                                order.OrderStatus = Order.OrderStatusEnum.Paid;
+                                paymentResult.PaymentStatus = PaymentResultViewModel.PaymentStatusEnum.Success;
+                                paymentResult.Amount = order.Amount;
+                            }
+                            else
+                            {
+                                order.OrderStatus = Order.OrderStatusEnum.Cancel;
+                                paymentResult.PaymentStatus = PaymentResultViewModel.PaymentStatusEnum.Fail;
+                                paymentResult.Amount = order.Amount;
+                            }
 
 
-                            DbContext.SaveChanges();
+                            _db.SaveChanges();
                             returnContent = "{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}";
                         }
                         else
@@ -150,9 +154,7 @@ namespace Flora_Queen_Project.Controllers
 
             ViewBag.Response = returnContent;
             Response.ClearContent();
-            Response.Write(returnContent);
-            Response.End();
-            return Redirect("PaymentResult");
+            return RedirectToAction("PaymentResult", paymentResult);
         }
     }
 }
