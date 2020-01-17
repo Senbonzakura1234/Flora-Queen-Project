@@ -100,6 +100,7 @@ namespace Flora_Queen_Project.Models
         public DbSet<Occasion> Occasions { get; set; }
         public DbSet<Type> Types { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         //public System.Data.Entity.DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

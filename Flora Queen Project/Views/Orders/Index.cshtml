@@ -1,0 +1,81 @@
+﻿@using Flora_Queen_Project.Models
+@model IEnumerable<Flora_Queen_Project.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    int indexSo = 1;
+}
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <h3>Tìm kiếm theo ngày</h3>
+                    <input type="text" name="datefilter" value="" class="form-control" />
+                    <h4 class="card-title" style="margin-top: 50px;">Danh sách đơn hàng</h4>
+
+                    <table class="table" id="update-student">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.ApplicationUser)
+                                </th>
+                                <th class="text-center"> 
+                                    @Html.DisplayNameFor(model => model.Amount)
+                                </th>
+                                <th class="text-center d-none d-sm-table-cell ">
+                                    @Html.DisplayNameFor(model => model.CreatedAt)
+                                </th>
+                                <th class="text-center d-none d-xl-table-cell">
+                                    @Html.DisplayNameFor(model => model.OrderStatus)
+                                </th>
+                                <th class="text-center d-none d-lg-table-cell">
+                                    Edit
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <b class="text-small">@indexSo</b>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Details","Orders", new{id = item.Id})" class="badge w-100 badge-gradient-primary w-100">
+                                            @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <b class="text-small">@Html.DisplayFor(modelItem => item.Amount)</b>
+                                    </td>
+                                    <td class="text-center d-none d-sm-table-cell ">
+                                        <b class="text-small">@Html.DisplayFor(modelItem => item.CreatedAt)</b>
+                                    </td>
+                                    <td class="d-none d-xl-table-cell text-center">
+                                        <span class="badge w-100 @(item.OrderStatus == Order.OrderStatusEnum.Done ? "badge-gradient-primary"
+                                                              : item.OrderStatus == Order.OrderStatusEnum.Shipping ? "badge-gradient-warning"
+                                                                  : "badge-gradient-secondary")">
+                                            @Html.DisplayFor(modelItem => item.OrderStatus)
+                                        </span>
+                                    </td>
+                                    <td class="text-center d-none d-lg-table-cell">
+                                        <a class="badge badge-warning" href="#">
+                                            <span class="mdi mdi-pencil-box-outline"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {
+                                    indexSo++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

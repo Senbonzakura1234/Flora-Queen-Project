@@ -1,0 +1,128 @@
+﻿@using Flora_Queen_Project.Models
+@model Flora_Queen_Project.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    var listOrderDetails = ViewBag.listOrderDetails as List<OrderItem>;
+    int indexSo = 1;
+}
+
+    <div class="row">
+        <div class="col-lg-6 col-xl-4 grid-margin stretch-card">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="card-title">Order</h4>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.ApplicationUser.UserName): </b>
+                        @Html.DisplayFor(model => model.ApplicationUser.UserName)
+                    </p>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.OrderDescription): </b>
+                        @Html.DisplayFor(model => model.OrderDescription)
+                    </p>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.Amount): </b>
+                        @Html.DisplayFor(model => model.Amount)
+                    </p>
+
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.CreatedAt): </b>
+                        @Html.DisplayFor(model => model.CreatedAt)
+                    </p>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.BankCode): </b>
+                        @Html.DisplayFor(model => model.BankCode)
+                    </p>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.vnp_TransactionNo): </b>
+                        @Html.DisplayFor(model => model.vnp_TransactionNo)
+                    </p>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.vpn_Message): </b>
+                        @Html.DisplayFor(model => model.vpn_Message)
+                    </p>
+                    <p class="card-text">
+                        <b class="text-primary">@Html.DisplayNameFor(model => model.vpn_TxnResponseCode): </b>
+                        @Html.DisplayFor(model => model.vpn_TxnResponseCode)
+                    </p>
+                    @using (Html.BeginForm("Edit", "Orders", FormMethod.Post, new { @class = "mt-3"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus, new { @class = "text-primary"})
+                            @Html.EnumDropDownListFor(model => model.OrderStatus, new { @class = "form-control"})
+                        </div>
+                        <input type="submit" value="Update" class="btn btn-gradient-success"/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <h4 class="card-title mb-2">Order List</h4>
+                    <table class="table" id="update-student">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th class="text-center d-none d-xl-table-cell">
+                                    Image
+                                </th>
+                                <th class="text-center d-none d-xl-table-cell">
+                                    Quantity order
+                                </th>
+                                <th class="text-center d-none d-xl-table-cell">
+                                    Unit Price
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (listOrderDetails != null)
+                            {
+                                foreach (var item in listOrderDetails)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            <b class="text-small">@indexSo</b>
+                                        </td>
+                                        <td>
+                                            <a href="#)" class="badge w-100 badge-gradient-primary w-100">
+                                                @Html.DisplayFor(modelItem => item.Product.Name)
+                                            </a>
+                                        </td>
+                                        <td class="text-center d-none d-xl-table-cell">
+                                            <img src="@Html.DisplayFor(modelItem => item.Product.ImgUrl)" width="100px" height="120px" />
+                                        </td>
+                                        <td>
+                                            <b class="text-small">@Html.DisplayFor(modelItem => item.Quantity)</b>
+                                        </td>
+                                        <td>
+                                            <b class="text-small">@Html.DisplayFor(modelItem => item.UnitPrice)</b>
+                                        </td>
+
+                                    </tr>
+
+                                    {
+                                        indexSo++;
+                                    }
+
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
