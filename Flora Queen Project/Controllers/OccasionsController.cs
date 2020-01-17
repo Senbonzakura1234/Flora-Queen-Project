@@ -24,7 +24,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Occasion occasion = db.Occasions.Find(id);
+            var occasion = db.Occasions.Find(id);
             if (occasion == null)
             {
                 return HttpNotFound();
@@ -62,7 +62,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Occasion occasion = db.Occasions.Find(id);
+            var occasion = db.Occasions.Find(id);
             if (occasion == null)
             {
                 return HttpNotFound();
@@ -93,7 +93,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Occasion occasion = db.Occasions.Find(id);
+            var occasion = db.Occasions.Find(id);
             if (occasion == null)
             {
                 return HttpNotFound();
@@ -106,7 +106,7 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Occasion occasion = db.Occasions.Find(id);
+            var occasion = db.Occasions.Find(id);
             occasion.DeletedAt = DateTime.Now;
             occasion.OccasionStatus = 0;
             db.Entry(occasion).State = EntityState.Modified;

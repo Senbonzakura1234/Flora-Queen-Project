@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-    Dictionary<String, String> errors = new Dictionary<string, string>();
+    var errors = new Dictionary<string, string>();
     if (ViewBag.Errors != null)
     {
         errors = ViewBag.Errors as Dictionary<string, string>;

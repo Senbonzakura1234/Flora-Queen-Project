@@ -25,7 +25,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -69,7 +69,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -106,7 +106,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -119,7 +119,7 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             product.DeletedAt = DateTime.Now;
             product.ProductStatus = 0;
             db.Entry(product).State = EntityState.Modified;

@@ -25,7 +25,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();
@@ -67,7 +67,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();
@@ -104,7 +104,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();
@@ -117,7 +117,7 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();

@@ -101,6 +101,7 @@ namespace Flora_Queen_Project.Models
         public DbSet<Type> Types { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
         //public System.Data.Entity.DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
