@@ -10,12 +10,12 @@ namespace Flora_Queen_Project
 {
     public class VnPayLibrary
     {
-        private SortedList<String, String> _requestData = new SortedList<String, String>(new VnPayCompare());
-        private SortedList<String, String> _responseData = new SortedList<String, String>(new VnPayCompare());
+        private readonly SortedList<string, string> _requestData = new SortedList<string, string>(new VnPayCompare());
+        private readonly SortedList<string, string> _responseData = new SortedList<string, string>(new VnPayCompare());
 
         public void AddRequestData(string key, string value)
         {
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 _requestData.Add(key, value);
             }
@@ -23,7 +23,7 @@ namespace Flora_Queen_Project
 
         public void AddResponseData(string key, string value)
         {
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 _responseData.Add(key, value);
             }
@@ -31,46 +31,32 @@ namespace Flora_Queen_Project
 
         public string GetResponseData(string key)
         {
-            string retValue;
-            if (_responseData.TryGetValue(key, out retValue))
-            {
-                return retValue;
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return _responseData.TryGetValue(key, out var retValue) ? retValue : string.Empty;
         }
 
         #region Request
 
-        public string CreateRequestUrl(string baseUrl, string vnp_HashSecret)
+        public string CreateRequestUrl(string baseUrl, string vnpHashSecret)
         {
-            StringBuilder data = new StringBuilder();
-            foreach (KeyValuePair<string, string> kv in _requestData)
+            var data = new StringBuilder();
+            foreach (var kv in _requestData.Where(kv => !string.IsNullOrEmpty(kv.Value)))
             {
-                if (!String.IsNullOrEmpty(kv.Value))
-                {
-                    data.Append(kv.Key + "=" + HttpUtility.UrlEncode(kv.Value) + "&");
-                }
+                data.Append(kv.Key + "=" + HttpUtility.UrlEncode(kv.Value) + "&");
             }
-            string queryString = data.ToString();
-            string rawData = GetRequestRaw();
+            var queryString = data.ToString();
+            var rawData = GetRequestRaw();
             baseUrl += "?" + queryString;
-            string vnp_SecureHash = Utils.Sha256(vnp_HashSecret + rawData);
-            baseUrl += "vnp_SecureHash=" + vnp_SecureHash;
+            var vnpSecureHash = Utils.Sha256(vnpHashSecret + rawData);
+            baseUrl += "vnp_SecureHash=" + vnpSecureHash;
             return baseUrl;
         }
 
         private string GetRequestRaw()
         {
-            StringBuilder data = new StringBuilder();
-            foreach (KeyValuePair<string, string> kv in _requestData)
+            var data = new StringBuilder();
+            foreach (var kv in _requestData.Where(kv => !string.IsNullOrEmpty(kv.Value)))
             {
-                if (!String.IsNullOrEmpty(kv.Value))
-                {
-                    data.Append(kv.Key + "=" + kv.Value + "&");
-                }
+                data.Append(kv.Key + "=" + kv.Value + "&");
             }
             //remove last '&'
             if (data.Length > 0)
@@ -86,14 +72,14 @@ namespace Flora_Queen_Project
 
         public bool ValidateSignature(string inputHash, string secretKey)
         {
-            string rspRaw = GetResponseRaw();
-            string myChecksum = Utils.Sha256(secretKey + rspRaw);
+            var rspRaw = GetResponseRaw();
+            var myChecksum = Utils.Sha256(secretKey + rspRaw);
             return myChecksum.Equals(inputHash, StringComparison.InvariantCultureIgnoreCase);
         }
         private string GetResponseRaw()
         {
 
-            StringBuilder data = new StringBuilder();
+            var data = new StringBuilder();
             if (_responseData.ContainsKey("vnp_SecureHashType"))
             {
                 _responseData.Remove("vnp_SecureHashType");
@@ -102,9 +88,9 @@ namespace Flora_Queen_Project
             {
                 _responseData.Remove("vnp_SecureHash");
             }
-            foreach (KeyValuePair<string, string> kv in _responseData)
+            foreach (var kv in _responseData)
             {
-                if (!String.IsNullOrEmpty(kv.Value))
+                if (!string.IsNullOrEmpty(kv.Value))
                 {
                     data.Append(kv.Key + "=" + kv.Value + "&");
                 }
@@ -122,18 +108,21 @@ namespace Flora_Queen_Project
 
     public class Utils
     {
+        // ReSharper disable once UnusedMember.Global
         public static string Md5(string sInput)
         {
-            HashAlgorithm algorithmType = default(HashAlgorithm);
-            ASCIIEncoding enCoder = new ASCIIEncoding();
-            byte[] valueByteArr = enCoder.GetBytes(sInput);
+            // ReSharper disable once RedundantAssignment
+            var algorithmType = default(HashAlgorithm);
+            var enCoder = new ASCIIEncoding();
+            var valueByteArr = enCoder.GetBytes(sInput);
+            // ReSharper disable once RedundantAssignment
             byte[] hashArray = null;
             // Encrypt Input string 
             algorithmType = new MD5CryptoServiceProvider();
             hashArray = algorithmType.ComputeHash(valueByteArr);
             //Convert byte hash to HEX
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in hashArray)
+            var sb = new StringBuilder();
+            foreach (var b in hashArray)
             {
                 sb.AppendFormat("{0:x2}", b);
             }
