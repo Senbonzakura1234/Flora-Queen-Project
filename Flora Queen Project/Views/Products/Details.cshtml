@@ -1,0 +1,76 @@
+﻿@model Flora_Queen_Project.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-6 col-xl-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <b>Product</b>
+                </h5>
+                <p class="card-text">
+                    <b>@Html.DisplayNameFor(model => model.Name): </b>
+                    @Html.DisplayFor(model => model.Name)
+                    <br />
+                    <b>@Html.DisplayNameFor(model => model.Description): </b>
+                    @Html.DisplayFor(model => model.Description)
+                    <br />
+                    <b>@Html.DisplayName("Color"): </b>
+                    @Html.DisplayFor(model => model.Color.Name)
+                    <br />
+                    <b>@Html.DisplayName("Occasion"): </b>
+                    @Html.DisplayFor(model => model.Occasion.Name)
+                    <br />
+                    <b>@Html.DisplayNameFor(model => model.InStock): </b>
+                    @Html.DisplayFor(model => model.InStock)
+                    <br />
+                    <b>@Html.DisplayNameFor(model => model.Price): </b>
+                    @Html.DisplayFor(model => model.Price)
+                    <br />
+                    <b>@Html.DisplayName("Image"): </b>
+                    <br />
+                    <img class="text-center" src="@Model.ImgUrl" height="240" width="240" />
+
+                </p>
+                <div class="d-sm-flex">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-warning mr-3" })
+                    <button type="button" class="btn btn-danger btn-sm mr-3" data-toggle="modal" data-target="#exampleModal">
+                        Delete
+                    </button>
+                    <a class="btn btn-light btn-sm mt-2 mt-sm-0" href="@Url.Action("Index")">
+                        Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-white">
+            <div class="modal-header border-0">
+                <h4 class="modal-title" id="exampleModalLabel">Confirm Delete</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure to delete this product?
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                @using (Html.BeginForm("Delete", "Products", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
