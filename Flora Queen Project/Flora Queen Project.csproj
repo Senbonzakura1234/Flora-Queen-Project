@@ -197,6 +197,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -679,6 +680,7 @@
     <Content Include="Views\Occasions\Details.cshtml" />
     <Content Include="Views\Occasions\Edit.cshtml" />
     <Content Include="Views\Occasions\Index.cshtml" />
+    <Content Include="Views\VNpay\Index.cshtml" />
     <Content Include="Views\VNpay\PaymentResult.cshtml" />
   </ItemGroup>
   <ItemGroup>

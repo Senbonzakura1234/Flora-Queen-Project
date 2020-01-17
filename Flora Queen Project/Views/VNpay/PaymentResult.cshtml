@@ -1,8 +1,36 @@
-﻿@model dynamic
+﻿@using Flora_Queen_Project.Models
+@model Flora_Queen_Project.Models.PaymentResultViewModel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "PaymentResult";
 }
 
-<h2>Payment Result</h2>
+
+<div>
+    <h4>PaymentResult</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentStatus)
+        </dt>
+
+        <dd>
+            @if (Model.PaymentStatus == PaymentResultViewModel.PaymentStatusEnum.Success)
+            {
+                <span class="badge badge-gradient-success">Payment Success</span>
+            }
+            else
+            {
+                <span class="badge badge-gradient-secondary">Payment Failed</span>
+
+            }
+        </dd>
+    </dl>
+</div>
