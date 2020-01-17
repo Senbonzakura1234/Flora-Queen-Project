@@ -5,7 +5,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
     var listOrderDetails = ViewBag.listOrderDetails as List<OrderItem>;
-    int indexSo = 1;
+    var indexSo = 1;
 }
 
     <div class="row">
@@ -95,7 +95,8 @@
                                             <b class="text-small">@indexSo</b>
                                         </td>
                                         <td>
-                                            <a href="#)" class="badge w-100 badge-gradient-primary w-100">
+                                            @* ReSharper disable once Html.IdNotResolved *@
+                                            <a href="#/" class="badge w-100 badge-gradient-primary w-100">
                                                 @Html.DisplayFor(modelItem => item.Product.Name)
                                             </a>
                                         </td>

@@ -187,9 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001171309596_InitialTable.cs" />
-    <Compile Include="Migrations\202001171309596_InitialTable.Designer.cs">
-      <DependentUpon>202001171309596_InitialTable.cs</DependentUpon>
+    <Compile Include="Migrations\202001171349548_InitialTable.cs" />
+    <Compile Include="Migrations\202001171349548_InitialTable.Designer.cs">
+      <DependentUpon>202001171349548_InitialTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -201,6 +201,7 @@
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Wishlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="VnPayLibrary.cs" />
@@ -710,8 +711,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001171309596_InitialTable.resx">
-      <DependentUpon>202001171309596_InitialTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001171349548_InitialTable.resx">
+      <DependentUpon>202001171349548_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

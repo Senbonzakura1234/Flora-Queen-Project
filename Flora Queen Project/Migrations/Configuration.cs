@@ -9,15 +9,17 @@ namespace Flora_Queen_Project.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Flora_Queen_Project.Models.ApplicationDbContext>
+    // ReSharper disable once UnusedMember.Global
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
-        private static string URL = "https://api.myjson.com/bins/c5pwu";
+        private const string Url = "https://api.myjson.com/bins/c5pwu";
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Flora_Queen_Project.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
 
             //  This method will be called after migrating to the latest version.
@@ -29,93 +31,99 @@ namespace Flora_Queen_Project.Migrations
             context.Database.ExecuteSqlCommand("delete from dbo.types;");
             context.Database.ExecuteSqlCommand("delete from dbo.products;");
             //add Occasion
-            List<Occasion> listOccasions = new List<Occasion>();
-            listOccasions.Add(new Occasion()
+            var listOccasions = new List<Occasion>
             {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Birthday",
-                OccasionStatus = Occasion.OccasionStatusEnum.Show
-            });
-            listOccasions.Add(new Occasion()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Love and Romance",
-                OccasionStatus = Occasion.OccasionStatusEnum.Show
-            });
-            listOccasions.Add(new Occasion()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "New Baby",
-                OccasionStatus = Occasion.OccasionStatusEnum.Show
-            });
-            listOccasions.Add(new Occasion()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Sympathy",
-                OccasionStatus = Occasion.OccasionStatusEnum.Show
-            });
+                new Occasion()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Birthday",
+                    OccasionStatus = Occasion.OccasionStatusEnum.Show
+                },
+                new Occasion()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Love and Romance",
+                    OccasionStatus = Occasion.OccasionStatusEnum.Show
+                },
+                new Occasion()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "New Baby",
+                    OccasionStatus = Occasion.OccasionStatusEnum.Show
+                },
+                new Occasion()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Sympathy",
+                    OccasionStatus = Occasion.OccasionStatusEnum.Show
+                }
+            };
 
             //add Type
-            List<Models.Type> listTypes = new List<Models.Type>();
-            listTypes.Add(new Models.Type()
+            var listTypes = new List<Models.Type>
             {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Rose",
-                TypeStatus = Models.Type.TypeStatusEnum.Show
-            });
-            listTypes.Add(new Models.Type()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Lilies",
-                TypeStatus = Models.Type.TypeStatusEnum.Show
-            });
-            listTypes.Add(new Models.Type()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Gerberas",
-                TypeStatus = Models.Type.TypeStatusEnum.Show
-            });
+                new Models.Type()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Rose",
+                    TypeStatus = Models.Type.TypeStatusEnum.Show
+                },
+                new Models.Type()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Lilies",
+                    TypeStatus = Models.Type.TypeStatusEnum.Show
+                },
+                new Models.Type()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Gerberas",
+                    TypeStatus = Models.Type.TypeStatusEnum.Show
+                }
+            };
 
             //add Color
-            List<Color> listColors = new List<Color>();
-            listColors.Add(new Color()
+            var listColors = new List<Color>
             {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Red Flower",
-                ColorStatus = Color.ColorStatusEnum.Show
-            });
-            listColors.Add(new Color()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "Yellow Flower",
-                ColorStatus = Color.ColorStatusEnum.Show
-            });
-            listColors.Add(new Color()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Name = "White Flower",
-                ColorStatus = Color.ColorStatusEnum.Show
-            });
+                new Color()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Red Flower",
+                    ColorStatus = Color.ColorStatusEnum.Show
+                },
+                new Color()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "Yellow Flower",
+                    ColorStatus = Color.ColorStatusEnum.Show
+                },
+                new Color()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Name = "White Flower",
+                    ColorStatus = Color.ColorStatusEnum.Show
+                }
+            };
 
             context.Types.AddRange(listTypes);
             context.Occasions.AddRange(listOccasions);
@@ -124,27 +132,24 @@ namespace Flora_Queen_Project.Migrations
 
             //add product
             var client = new HttpClient();
-            var responseContent = client.GetAsync(URL).Result.Content.ReadAsStringAsync().Result;
-            List<ProductItem> lsProductItems = JsonConvert.DeserializeObject<List<ProductItem>>(responseContent);
-            List<Product> listProducts = new List<Product>();
-            foreach (var f in lsProductItems)
-            {
-                listProducts.Add(new Product()
+            var responseContent = client.GetAsync(Url).Result.Content.ReadAsStringAsync().Result;
+            var lsProductItems = JsonConvert.DeserializeObject<List<ProductItem>>(responseContent);
+            var listProducts = lsProductItems.Select(f => new Product()
                 {
                     Id = Guid.NewGuid().ToString(),
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    Description = f.name,
-                    ImgUrl = f.imgUrl,
+                    Description = f.Name,
+                    ImgUrl = f.ImgUrl,
                     ColorId = context.Colors.FirstOrDefault(x => x.Name.Contains(f.Color))?.Id,
                     OccasionId = context.Occasions.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
                     TypeId = context.Types.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
-                    Name = f.name,
+                    Name = f.Name,
                     InStock = 100,
                     Price = 100000,
                     ProductStatus = Product.ProductStatusEnum.Published
-                });
-            }
+                })
+                .ToList();
 
             context.Products.AddRange(listProducts);
             context.SaveChanges();
@@ -153,9 +158,9 @@ namespace Flora_Queen_Project.Migrations
 
     public class ProductItem
     {
-        public string name { get; set; }
+        public string Name { get; set; }
         public string Occasion { get; set; }
         public string Color { get; set; }
-        public string imgUrl { get; set; }
+        public string ImgUrl { get; set; }
     }
 }

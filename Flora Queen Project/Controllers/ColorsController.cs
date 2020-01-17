@@ -24,7 +24,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Color color = db.Colors.Find(id);
+            var color = db.Colors.Find(id);
             if (color == null)
             {
                 return HttpNotFound();
@@ -62,7 +62,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Color color = db.Colors.Find(id);
+            var color = db.Colors.Find(id);
             if (color == null)
             {
                 return HttpNotFound();
@@ -93,7 +93,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Color color = db.Colors.Find(id);
+            var color = db.Colors.Find(id);
             if (color == null)
             {
                 return HttpNotFound();
@@ -106,7 +106,7 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Color color = db.Colors.Find(id);
+            var color = db.Colors.Find(id);
             color.DeletedAt = DateTime.Now;
             color.ColorStatus = 0;
             db.Entry(color).State = EntityState.Modified;

@@ -315,7 +315,6 @@ E:\visual studio\Source\Flora Queen Project\Flora Queen Project\bin\Antlr3.Runti
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\bin\EntityFramework.xml
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\bin\EntityFramework.SqlServer.xml
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csprojAssemblyReference.cache
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora_Queen_Project.Migrations.InitialTable.resources
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.GenerateResource.cache
 E:\visual studio\Source\Flora Queen Project\Flora Queen Project\obj\Debug\Flora Queen Project.csproj.CopyComplete
