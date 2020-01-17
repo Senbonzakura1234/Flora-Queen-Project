@@ -1,21 +1,11 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.EnterpriseServices;
-using System.IO;
 using System.Net.Http;
-using System.Reflection;
-using System.Runtime.Remoting.Channels;
-using System.Web;
-using System.Web.Hosting;
 using Flora_Queen_Project.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Flora_Queen_Project.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 

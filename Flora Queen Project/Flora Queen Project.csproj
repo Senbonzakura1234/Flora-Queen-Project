@@ -180,7 +180,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OccasionsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
@@ -188,9 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001151410478_Inital-Tables.cs" />
-    <Compile Include="Migrations\202001151410478_Inital-Tables.Designer.cs">
-      <DependentUpon>202001151410478_Inital-Tables.cs</DependentUpon>
+    <Compile Include="Migrations\202001171309596_InitialTable.cs" />
+    <Compile Include="Migrations\202001171309596_InitialTable.Designer.cs">
+      <DependentUpon>202001171309596_InitialTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -711,8 +710,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001151410478_Inital-Tables.resx">
-      <DependentUpon>202001151410478_Inital-Tables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001171309596_InitialTable.resx">
+      <DependentUpon>202001171309596_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

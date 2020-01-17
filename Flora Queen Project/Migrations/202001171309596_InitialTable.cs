@@ -1,9 +1,8 @@
 namespace Flora_Queen_Project.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitalTables : DbMigration
+    public partial class InitialTable : DbMigration
     {
         public override void Up()
         {
@@ -15,7 +14,7 @@ namespace Flora_Queen_Project.Migrations
                         Amount = c.Double(nullable: false),
                         OrderDescription = c.String(),
                         BankCode = c.String(),
-                        vnp_TransactionNo = c.Int(nullable: false),
+                        vnp_TransactionNo = c.String(),
                         vpn_Message = c.String(),
                         vpn_TxnResponseCode = c.String(),
                         ApplicationUserId = c.String(maxLength: 128),
