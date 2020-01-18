@@ -51,15 +51,21 @@ namespace Flora_Queen_Project.Controllers
             return View();
         }
 
+        // ReSharper disable once InconsistentNaming
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+
         public ActionResult NewProduct()
         {
-            var data = DbContext.Products.OrderByDescending(t => t.CreatedAt).Take(6).ToList();
+            var data = DbContext.Products.OrderByDescending(t => t.CreatedAt).Take(5).ToList();
             return PartialView(data);
         }
 
         public ActionResult BestSales()
         {
-            var data = DbContext.Products.OrderBy(t => t.CreatedAt).Take(9).ToList();
+            var data = DbContext.Products.OrderBy(t => t.CreatedAt).Take(8).ToList();
             return PartialView(data);
         }
 
@@ -81,20 +87,14 @@ namespace Flora_Queen_Project.Controllers
             return PartialView(data);
         }
 
-        // ReSharper disable once InconsistentNaming
-        public ActionResult FAQ()
-        {
-            return View();
-        }
-        
-        public ActionResult QuickView(string id)
+        public async Task<ActionResult> QuickView(string id)
         {
             Debug.WriteLine(id);
             if (id == null)
             {
                 return null;
             }
-            var product = DbContext.Products.Find(id);
+            var product = await DbContext.Products.FindAsync(id);
             return product == null ? null : PartialView("_AjaxQuickView", product);
         }
     }
