@@ -652,10 +652,11 @@ a {
     background-position: center center;
 }
 .bg-image--3 {
-  background-image: url(images/bg/3.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center; }
+    background-image: url(https://res.cloudinary.com/leduc911/image/upload/v1579367962/floraqueen/mbr-1920x1281_sgbdp4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 .bg-image--4 {
     background-image: url(https://res.cloudinary.com/senbonzakura/image/upload/v1579330756/images/ImagePlaceHolder/banner/rose_flower_red_bud_close-up_22696_1920x1285_lj5v83.jpg);
     background-repeat: no-repeat;

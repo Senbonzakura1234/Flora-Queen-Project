@@ -78,5 +78,10 @@ namespace Flora_Queen_Project.Controllers
             var data = DbContext.Colors.ToList();
             return PartialView(data);
         }
+
+        public ActionResult FAQ()
+        {
+            return View();
+        }
     }
 }
