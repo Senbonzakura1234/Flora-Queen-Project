@@ -3,9 +3,9 @@
 }
 
 
-
 @* ReSharper disable Html.IdNotResolved *@
-
+@section logo_head_class
+{col-md-6 col-sm-5 col-6}
 <!-- Start Slider area -->
 <div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
     <!-- Start Single Slide -->
@@ -59,7 +59,7 @@
         </div>
         <!-- Start Single Tab Content -->
         <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
-            @for(var i = 0; i < 10; i++)
+            @for (var i = 0; i < 10; i++)
             {
                 <!-- Start Single Product -->
                 <div class="product product__style--3 @(i%2 == 0 ? "outOfStoke" : "")">
@@ -71,7 +71,8 @@
                             <a class="second__img animation1" href="#/">
                                 <img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image">
                             </a>
-                            <div class="hot__box">"
+                            <div class="hot__box">
+                                "
                                 <span class="hot-label">BEST SELLER</span>
                             </div>
                         </div>
@@ -89,7 +90,7 @@
                                 <div class="actions_inner">
                                     <ul class="add_to_links">
                                         <li>
-                                            @if (i%2 == 0)
+                                            @if (i % 2 == 0)
                                             {
                                                 <a class="cart d-none">
                                                     <i class="bi bi-shopping-bag4"></i>
@@ -128,23 +129,23 @@
             }
         </div>
         @*<div class="row">
-            <div class="col-lg-12">
-                @if (Model.PageCount > 1 && Model.PageNumber <= Model.PageCount)
-                {
-                    <div class="row">
-                        <div class="col mx-auto text-center">
-                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                <div class="col-lg-12">
+                    @if (Model.PageCount > 1 && Model.PageNumber <= Model.PageCount)
+                    {
+                        <div class="row">
+                            <div class="col mx-auto text-center">
+                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                            </div>
                         </div>
-                    </div>
-                    <div class="row paging-control mt-2">
-                        <div class="mx-auto text-center">
-                            @Html.PagedListPager(Model, page => Url.Action("Index",
-                                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                        <div class="row paging-control mt-2">
+                            <div class="mx-auto text-center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                            </div>
                         </div>
-                    </div>
-                }
-            </div>
-        </div>*@
+                    }
+                </div>
+            </div>*@
         <!-- End Single Tab Content -->
     </div>
 </section>

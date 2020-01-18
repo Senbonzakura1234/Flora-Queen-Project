@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" style="overflow-y: hidden">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860479/images/ImagePlaceHolder/favicon_bemdjr.ico">
-    <link rel="apple-touch-icon" href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860479/images/ImagePlaceHolder/icon_zpj2gk.png">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/senbonzakura/image/upload/v1579329139/images/ImagePlaceHolder/logo/floraqueen-small-logo_ice1ul.png">
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/senbonzakura/image/upload/v1579329139/images/ImagePlaceHolder/logo/floraqueen-small-logo_ice1ul.png">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -19,6 +19,7 @@
     <!-- Stylesheets -->
     @Styles.Render("~/Content/bootstrap.min.css")
     @Styles.Render("~/Content/Boighor Homepage/css/plugins.css")
+    <script src="https://kit.fontawesome.com/f4bb5974c6.js" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/Boighor Homepage/style.css")
 
 
@@ -31,17 +32,34 @@
     <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
+
+    <!-- Loader start -->
+
+    <div class="position-fixed loader-wrapper">
+        <i class="fas fa-circle-notch fa-spin mx-auto d-flex loader"></i>
+        <img class="logo-loader mx-auto d-flex mt-3"
+             src="https://res.cloudinary.com/senbonzakura/image/upload/v1578992839/images/ImagePlaceHolder/logo/floraqueen-logo_itq82z.svg"
+             alt="logo images">
+    </div>
+
+    <!-- Loader end -->
+
     <!-- Main wrapper -->
     <div class="wrapper" id="wrapper">
         <!-- Header -->
-        <header id="wn__header" class="header__area header__absolute sticky__header">
+        <header id="wn__header" class="@RenderSection("header_class", required: false) header__area header__absolute sticky__header">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <div class="@RenderSection("logo_head_class", required: false) col-lg-2">
                         <div class="logo">
                             @* ReSharper disable Html.IdNotResolved *@
                             <a href="#/">
-                                <img src="https://res.cloudinary.com/senbonzakura/image/upload/v1578996462/images/ImagePlaceHolder/logo/floraqueen-logo_s8xu3a.png" alt="logo images">
+                                <img class="d-none d-lg-block mt-3" style="max-height: 45px"
+                                    src="https://res.cloudinary.com/senbonzakura/image/upload/v1578996462/images/ImagePlaceHolder/logo/floraqueen-logo_s8xu3a.png"
+                                     alt="logo images">
+                                <img class="d-lg-none" style="max-height: 30px"
+                                    src="https://res.cloudinary.com/senbonzakura/image/upload/v1578996462/images/ImagePlaceHolder/logo/floraqueen-logo_s8xu3a.png"
+                                    alt="logo images">
                                 @*<img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860464/images/ImagePlaceHolder/logo/logo_zlvcsk.png" alt="logo images">*@
                             </a>
                         </div>
@@ -123,10 +141,21 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                         <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-                            <li class="shop_search"><a class="search__active" href="#/"></a></li>
-                            <li class="wishlist"><a href="#/"></a></li>
+                            <li class="shop_search">
+                                <a class="search__active" href="#/">
+                                    <i class="fas fa-search text-white" style="height: 100%"></i>
+                                </a>
+                            </li>
+                            <li class="wishlist">
+                                <a href="#/">
+                                    <i class="fas fa-heart text-white" style="height: 100%"></i>
+                                </a>
+                            </li>
                             <li class="shopcart">
-                                <a class="cartbox_active" href="#/"><span class="product_qun total-count">0</span></a>
+                                <a class="cartbox_active" href="#/">
+                                    <i class="fas fa-shopping-cart text-white" style="height: 100%"></i>
+                                    <span class="product_qun total-count">0</span>
+                                </a>
                                 <!-- Start Shopping Cart -->
                                 <div class="block-minicart minicart__active">
                                     <div class="minicart-content-wrapper">
@@ -156,7 +185,9 @@
                                 <!-- End Shopping Cart -->
                             </li>
                             <li class="setting__bar__icon">
-                                <a class="setting__active" href="#/"></a>
+                                <a class="setting__active" href="#/">
+                                    <i class="fas fa-cog text-white" style="height: 100%"></i>
+                                </a>
                                 <div class="searchbar__content setting__block">
                                     <div class="content-inner">
                                         <div class="switcher-currency">
@@ -275,7 +306,6 @@
             </div>
         </header>
         <!-- //Header -->
-        @RenderBody()
         <!-- Start Search Popup -->
         <div class="brown--color box-search-content search_active block-bg close__top">
             <form id="search_mini_form" class="minisearch" action="#">
@@ -291,6 +321,9 @@
             </div>
         </div>
         <!-- End Search Popup -->
+
+        @RenderBody()
+
         <!-- Footer Area -->
         <footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
             <div class="footer-static-top">
@@ -374,12 +407,8 @@
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Content/Boighor Homepage/js/plugins.js")
     @Scripts.Render("~/Content/Boighor Homepage/js/active.js")
+    @Scripts.Render("~/Content/Boighor Homepage/js/custom.js")
     @RenderSection("scripts", required: false)
 
-    <style type="text/css">
-        .owl-carousel {
-            touch-action: manipulation !important;
-        }
-    </style>
 </body>
 </html>

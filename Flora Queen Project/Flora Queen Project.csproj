@@ -182,6 +182,7 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\VNpayController.cs" />
     <Compile Include="Global.asax.cs">
@@ -400,6 +401,7 @@
     <Content Include="Content\Boighor Homepage\images\testimonial\3.png" />
     <Content Include="Content\Boighor Homepage\js\active.js" />
     <Content Include="Content\Boighor Homepage\js\bootstrap.min.js" />
+    <Content Include="Content\Boighor Homepage\js\custom.js" />
     <Content Include="Content\Boighor Homepage\js\plugins.js" />
     <Content Include="Content\Boighor Homepage\js\popper.min.js" />
     <Content Include="Content\Boighor Homepage\js\vendor\jquery-3.2.1.min.js" />
@@ -695,6 +697,9 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Shop\Single.cshtml" />
+    <Content Include="Views\Shared\_ShopSidebar.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
