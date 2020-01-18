@@ -705,6 +705,10 @@
     <Content Include="Views\Home\ColorMenu.cshtml" />
     <Content Include="Views\Home\NewProduct.cshtml" />
     <Content Include="Views\Home\BestSales.cshtml" />
+    <Content Include="Views\Shop\OccasionsSideBar.cshtml" />
+    <Content Include="Views\Shop\TypesSideBar.cshtml" />
+    <Content Include="Views\Shop\ColorsSideBar.cshtml" />
+    <Content Include="Views\Shop\HotDeal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
