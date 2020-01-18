@@ -12,25 +12,13 @@
 <!-- end product images -->
 <div class="product-info">
     <h1>@Html.DisplayFor(model => model.Name)</h1>
-    <div class="rating__and__review">
-        <ul class="rating">
-            <li><span class="ti-star"></span></li>
-            <li><span class="ti-star"></span></li>
-            <li><span class="ti-star"></span></li>
-            <li><span class="ti-star"></span></li>
-            <li><span class="ti-star"></span></li>
-        </ul>
-        <div class="review">
-            <a href="#/">4 customer reviews</a>
-        </div>
-    </div>
     <div class="price-box-3">
         <div class="s-price-box">
-            <span class="new-price">@(Model.Price/100)K VND</span>
-            <span class="old-price">@(Model.Price*1.5/100)K VND</span>
+            <span class="new-price">@(Model.Price/1000)K VND</span>
+            <span class="old-price">@(Model.Price*1.5/1000)K VND</span>
         </div>
     </div>
-    <div class="quick-desc">
+    <div class="quick-desc d-none d-sm-block">
         @Html.DisplayFor(model => model.Description)
     </div>
     <div class="select__size">
