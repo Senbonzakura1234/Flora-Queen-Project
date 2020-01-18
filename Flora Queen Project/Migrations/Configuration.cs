@@ -148,7 +148,7 @@ namespace Flora_Queen_Project.Migrations
                     ImgUrl = f.imgUrl,
                     ColorId = context.Colors.FirstOrDefault(x => x.Name.Contains(f.Color))?.Id,
                     OccasionId = context.Occasions.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
-                    TypeId = context.Types.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
+                    TypeId = context.Types.FirstOrDefault(x => x.Name.Contains(f.Type))?.Id,
                     Name = f.name,
                     InStock = 100,
                     Price = 100000,
@@ -166,6 +166,7 @@ namespace Flora_Queen_Project.Migrations
         public string name { get; set; }
         public string Occasion { get; set; }
         public string Color { get; set; }
+        public string  Type { get; set; }
         public string imgUrl { get; set; }
     }
 }
