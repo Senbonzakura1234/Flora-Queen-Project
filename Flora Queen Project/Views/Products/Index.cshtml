@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Flora_Queen_Project.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 mx-auto grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body table-responsive">
+                <h4 class="card-title">Products</h4>
+                <p class="card-description d-sm-flex">
+                    <span class="text-muted text-small my-auto">Click product name to see detail</span>
+                    <br class="d-sm-none" />
+
+                    <a class="btn btn-sm btn-primary ml-auto mr-2 mt-2 mt-sm-0" href="@Url.Action("Create", "Occasions")">
+                        Create New <span class="mdi mdi-plus-circle"></span>
+                    </a>
+                </p>
+                <table class="table" id="update-customer">
+                    <thead class="text-primary">
+                        <tr>
+                            <th class="text-center">
+                                @Html.DisplayName("Image")
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.InStock)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+                            <th class="text-right d-none d-lg-table-cell">
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                        <tr>
+                            <td class="text-center">
+                                <img src="@item.ImgUrl" alt="@item.Name" height="160" width="160"/>
+                            </td>
+                            <td>
+                                <a class="badge w-100 badge-gradient-primary w-100"
+                                   href="@Url.Action("Details", "Products", new {id = item.Id})">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.InStock)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td class="text-right d-none d-lg-table-cell">
+                                <a class="badge badge-warning" href="@Url.Action("Edit", "Products", new {id = item.Id})">
+                                    <span class="mdi mdi-pencil-box-outline"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

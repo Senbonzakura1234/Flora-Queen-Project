@@ -6,3 +6,29 @@
 	Note: This is custom css. All custom styles (user styles) declare here.
 
 **********************************************************************************/
+
+
+.owl-carousel {
+    touch-action: manipulation !important;
+}
+.loader {
+    font-size: 80px;
+    margin-top: calc(50vh - 40px);
+}
+.logo-loader {
+    max-width: 200px;
+}
+.loader-wrapper {
+    background: white;
+    z-index: 2147483647;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0
+}
+@media only screen and (min-width: 576px) {
+    .loader {
+        font-size: 60px;
+        margin-top: calc(50vh - 30px);
+    }
+}

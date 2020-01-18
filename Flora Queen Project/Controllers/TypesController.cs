@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Flora_Queen_Project.Models;
 using Type = Flora_Queen_Project.Models.Type;
@@ -28,7 +25,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();
@@ -70,7 +67,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();
@@ -107,7 +104,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();
@@ -120,7 +117,7 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Type type = db.Types.Find(id);
+            var type = db.Types.Find(id);
             if (type == null)
             {
                 return HttpNotFound();

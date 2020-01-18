@@ -3,7 +3,7 @@ namespace Flora_Queen_Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitalTables : DbMigration
+    public partial class InitialTable : DbMigration
     {
         public override void Up()
         {
@@ -15,7 +15,7 @@ namespace Flora_Queen_Project.Migrations
                         Amount = c.Double(nullable: false),
                         OrderDescription = c.String(),
                         BankCode = c.String(),
-                        vnp_TransactionNo = c.Int(nullable: false),
+                        vnp_TransactionNo = c.String(),
                         vpn_Message = c.String(),
                         vpn_TxnResponseCode = c.String(),
                         ApplicationUserId = c.String(maxLength: 128),
@@ -190,10 +190,29 @@ namespace Flora_Queen_Project.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.Wishlists",
+                c => new
+                    {
+                        ProductId = c.String(nullable: false, maxLength: 128),
+                        ApplicationUserId = c.String(nullable: false, maxLength: 128),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(),
+                        WishlistStatus = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.ProductId, t.ApplicationUserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .Index(t => t.ProductId)
+                .Index(t => t.ApplicationUserId);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Wishlists", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.Wishlists", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Products", "TypeId", "dbo.Types");
             DropForeignKey("dbo.OrderItems", "ProductId", "dbo.Products");
@@ -204,6 +223,8 @@ namespace Flora_Queen_Project.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropIndex("dbo.Wishlists", new[] { "ApplicationUserId" });
+            DropIndex("dbo.Wishlists", new[] { "ProductId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Products", new[] { "ColorId" });
             DropIndex("dbo.Products", new[] { "OccasionId" });
@@ -216,6 +237,7 @@ namespace Flora_Queen_Project.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Orders", new[] { "ApplicationUserId" });
+            DropTable("dbo.Wishlists");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Types");
             DropTable("dbo.Occasions");

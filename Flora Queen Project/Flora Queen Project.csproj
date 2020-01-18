@@ -179,14 +179,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OccasionsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
+    <Compile Include="Controllers\VNpayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001151410478_Inital-Tables.cs" />
-    <Compile Include="Migrations\202001151410478_Inital-Tables.Designer.cs">
-      <DependentUpon>202001151410478_Inital-Tables.cs</DependentUpon>
+    <Compile Include="Migrations\202001171349548_InitialTable.cs" />
+    <Compile Include="Migrations\202001171349548_InitialTable.Designer.cs">
+      <DependentUpon>202001171349548_InitialTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -196,9 +200,12 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Wishlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="VnPayLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Boighor Homepage\css\bootstrap.min.css" />
@@ -394,6 +401,7 @@
     <Content Include="Content\Boighor Homepage\images\testimonial\3.png" />
     <Content Include="Content\Boighor Homepage\js\active.js" />
     <Content Include="Content\Boighor Homepage\js\bootstrap.min.js" />
+    <Content Include="Content\Boighor Homepage\js\custom.js" />
     <Content Include="Content\Boighor Homepage\js\plugins.js" />
     <Content Include="Content\Boighor Homepage\js\popper.min.js" />
     <Content Include="Content\Boighor Homepage\js\vendor\jquery-3.2.1.min.js" />
@@ -677,6 +685,30 @@
     <Content Include="Views\Occasions\Details.cshtml" />
     <Content Include="Views\Occasions\Edit.cshtml" />
     <Content Include="Views\Occasions\Index.cshtml" />
+    <Content Include="Views\VNpay\Index.cshtml" />
+    <Content Include="Views\VNpay\PaymentResult.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Shop\Single.cshtml" />
+    <Content Include="Views\Shared\_ShopSidebar.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Home\OccasionMenu.cshtml" />
+    <Content Include="Views\Home\TypeMenu.cshtml" />
+    <Content Include="Views\Home\ColorMenu.cshtml" />
+    <Content Include="Views\Home\NewProduct.cshtml" />
+    <Content Include="Views\Home\BestSales.cshtml" />
+    <Content Include="Views\Shop\OccasionsSideBar.cshtml" />
+    <Content Include="Views\Shop\TypesSideBar.cshtml" />
+    <Content Include="Views\Shop\ColorsSideBar.cshtml" />
+    <Content Include="Views\Shop\HotDeal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -693,8 +725,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001151410478_Inital-Tables.resx">
-      <DependentUpon>202001151410478_Inital-Tables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001171349548_InitialTable.resx">
+      <DependentUpon>202001171349548_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Flora_Queen_Project.Models.Type>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="#">
+                @Html.DisplayFor(modelItem => item.Name)
+                <span>
+                    @Html.DisplayFor(modelItem => item.Products.Count)
+                </span>
+            </a>
+        </li>
+    }
+</ul>

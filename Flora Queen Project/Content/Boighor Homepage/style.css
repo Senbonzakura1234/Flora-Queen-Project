@@ -646,30 +646,33 @@ a {
   background-size: cover;
   background-position: center center; }
 .bg-image--2 {
-  background-image: url(images/bg/2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center; }
+    background-image: url(https://res.cloudinary.com/senbonzakura/image/upload/v1579355852/images/ImagePlaceHolder/banner/bg-nl_xefjd5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 .bg-image--3 {
   background-image: url(images/bg/3.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center; }
 .bg-image--4 {
-  background-image: url(images/bg/4.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center; }
+    background-image: url(https://res.cloudinary.com/senbonzakura/image/upload/v1579330756/images/ImagePlaceHolder/banner/rose_flower_red_bud_close-up_22696_1920x1285_lj5v83.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 .bg-image--5 {
   background-image: url(images/bg/5.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center; }
 .bg-image--6 {
-  background-image: url(images/bg/6.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center; }
+    background-image: url(https://res.cloudinary.com/senbonzakura/image/upload/v1579330514/images/ImagePlaceHolder/banner/773017_e8kwku.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 .bg-image--7 {
   background-image: url(images/bg/7.jpg);
   background-repeat: no-repeat;
@@ -1804,17 +1807,17 @@ Header Styles
     align-self: stretch;
     display: flex; }
     .header__area .header__sidebar__right > li.shop_search > a {
-      background: rgba(0, 0, 0, 0) url("images/icons/search.png") no-repeat scroll 0 center;
+      /*background: rgba(0, 0, 0, 0) url("images/icons/search.png") no-repeat scroll 0 center;*/
       height: 100%;
       line-height: 35px;
       width: 24px; }
     .header__area .header__sidebar__right > li.shopcart > a {
-      background: rgba(0, 0, 0, 0) url("images/icons/cart.png") no-repeat scroll 0 center;
+      /*background: rgba(0, 0, 0, 0) url("images/icons/cart.png") no-repeat scroll 0 center;*/
       height: 100%;
       line-height: 35px;
       width: 24px; }
 	  .header__area .header__sidebar__right > li.wishlist > a {
-      background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist.png") no-repeat scroll 0 center;
+      /*background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist.png") no-repeat scroll 0 center;*/
       height: 100%;
       line-height: 35px;
       width: 24px; }
@@ -1857,9 +1860,9 @@ Header Styles
 	  position: relative;
 	}
       .header__area .header__sidebar__right > li.setting__bar__icon > a {
-        background: transparent url("images/icons/icon_setting.png") no-repeat scroll left center;
+        /*background: transparent url("images/icons/icon_setting.png") no-repeat scroll left center;*/
         cursor: pointer;
-        font-size: 0;
+        font-size: 15px;
         height: 35px;
         position: relative;
         width: 30px; }
@@ -1901,16 +1904,16 @@ Header Styles
 		  color: #fff;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shop_search > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;
+		  /*background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;*/
 		}
 		.is-sticky.header__area .header__sidebar__right > li.wishlist > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
+		  /*background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;*/
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shopcart > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+		  /*background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;*/
 		}
 		.is-sticky.header__area .header__sidebar__right > li.setting__bar__icon > a {
-		  background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;
+		  /*background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;*/
 		}
 .mainmenu__nav .meninmenu li:first-child a {
   padding-left: 0;
@@ -1919,16 +1922,16 @@ Header Styles
   color: #fff;
 }
 .oth-page.header__area .header__sidebar__right > li.shop_search > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;
+  /*background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;*/
 }
 .oth-page.header__area .header__sidebar__right > li.wishlist > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
+  /*background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;*/
 }
 .oth-page.header__area .header__sidebar__right > li.setting__bar__icon > a {
-  background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;
+  /*background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;*/
 }
 .oth-page.header__area .header__sidebar__right > li.shopcart > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+  /*background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;*/
 }
 .oth-page.header__absolute {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -2121,7 +2124,9 @@ Header Styles
   line-height: 35px;
   width: 24px; }
 .bread__header.header__area .header__sidebar__right > li.shopcart > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/cart3.png") no-repeat scroll 100% center; }
+  /*background: rgba(0, 0, 0, 0) url("images/icons/cart3.png") no-repeat scroll 100% center;*/ 
+
+}
 .bread__header.header__area .header__sidebar__right > li.shopcart {
   padding-left: 20px; }
 .mainmenu__nav .meninmenu li.drop .megamenu .item > li.title {

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Flora_Queen_Project.Models
 {
@@ -15,7 +13,7 @@ namespace Flora_Queen_Project.Models
         public string OrderDescription  { get; set; }
         public string BankCode { get; set; }
         // ReSharper disable InconsistentNaming
-        public int vnp_TransactionNo { get; set; }
+        public string vnp_TransactionNo { get; set; }
         public string vpn_Message { get; set; }
         public string vpn_TxnResponseCode { get; set; }
 
