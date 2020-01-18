@@ -81,6 +81,11 @@ namespace Flora_Queen_Project.Controllers
             return PartialView(data);
         }
 
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+        
         public ActionResult QuickView(string id)
         {
             Debug.WriteLine(id);
