@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Flora_Queen_Project.Models.Type>
+
+    <ul class="item item03">
+        <li class="title">FLOWER TYPE</li>
+        @* ReSharper disable once Html.IdNotResolved *@
+        @foreach (var item in Model)
+        {
+            <li><a href="#/">@Html.DisplayFor(modelItem => item.Name)</a></li>
+        }
+    </ul>
