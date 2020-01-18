@@ -71,26 +71,10 @@
                                 <li class="drop">
                                     <a href="#/">Flower</a>
                                     <div class="megamenu mega03">
-                                        <ul class="item item03">
-                                            <li class="title">OCCASIONS</li>
-                                            <li><a href="#/">Birthday </a></li>
-                                            <li><a href="#/">Love and Romance </a></li>
-                                            <li><a href="#/">New Baby </a></li>
-                                            <li><a href="#/">Sympathy </a></li>
-                                        </ul>
-                                        <ul class="item item03">
-                                            <li class="title">FLOWER TYPE</li>
-                                            <li><a href="#/">Roses</a></li>
-                                            <li><a href="#/">Red Roses</a></li>
-                                            <li><a href="#/">Lillies</a></li>
-                                            <li><a href="#/">Gerberas</a></li>
-                                        </ul>
-                                        <ul class="item item03">
-                                            <li class="title">BOUQUEST COLOR</li>
-                                            <li><a href="#/">Red Flowers </a></li>
-                                            <li><a href="#/">White Flower</a></li>
-                                            <li><a href="#/">Pink Flower</a></li>
-                                        </ul>
+                                        @Html.Action("OccasionMenu","Home")
+                                        @Html.Action("TypeMenu","Home")
+                                        @Html.Action("ColorMenu","Home")
+
                                     </div>
                                 </li>
                                 <li class="drop">
@@ -333,7 +317,9 @@
                             <div class="footer__widget footer__menu">
                                 <div class="ft__logo">
                                     <a href="#/">
-                                        <img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860464/images/ImagePlaceHolder/logo/3_hkug8o.png" alt="logo">
+                                        <img style="max-height: 160px"
+                                            src="https://res.cloudinary.com/senbonzakura/image/upload/v1579329139/images/ImagePlaceHolder/logo/floraqueen-small-logo_ice1ul.png"
+                                            alt="logo">
                                     </a>
                                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered dusk alteration variations of passages</p>
                                 </div>

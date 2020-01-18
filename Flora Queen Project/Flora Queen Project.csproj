@@ -700,6 +700,11 @@
     <Content Include="Views\Shop\Single.cshtml" />
     <Content Include="Views\Shared\_ShopSidebar.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Home\OccasionMenu.cshtml" />
+    <Content Include="Views\Home\TypeMenu.cshtml" />
+    <Content Include="Views\Home\ColorMenu.cshtml" />
+    <Content Include="Views\Home\NewProduct.cshtml" />
+    <Content Include="Views\Home\BestSales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
