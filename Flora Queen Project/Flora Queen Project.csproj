@@ -710,6 +710,7 @@
     <Content Include="Views\Shop\ColorsSideBar.cshtml" />
     <Content Include="Views\Shop\HotDeal.cshtml" />
     <Content Include="Views\Home\_AjaxQuickView.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

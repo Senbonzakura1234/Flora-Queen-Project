@@ -8,6 +8,9 @@
 **********************************************************************************/
 
 
+body {
+    padding-right: 0 !important;
+}
 .owl-carousel {
     touch-action: manipulation !important;
 }
@@ -15,7 +18,13 @@
     font-size: 80px;
     margin-top: calc(50vh - 40px);
 }
+.quickview-loader {
+    font-size: 60px;
+}
 .logo-loader {
+    max-width: 200px;
+}
+.quickview-logo-loader {
     max-width: 200px;
 }
 .loader-wrapper {
@@ -26,9 +35,30 @@
     top: 0;
     left: 0
 }
+.quickview-loader-wrapper {
+    display: none;
+    background: white;
+    z-index: 2147483647;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0
+}
 @media only screen and (min-width: 576px) {
     .loader {
         font-size: 60px;
         margin-top: calc(50vh - 30px);
     }
+    .quickview-loader {
+        font-size: 40px;
+    }
+}
+#update-quick-view {
+    min-height: 330px;
+}
+.modal {
+    max-height: 100vh;
+}
+.modal-body {
+    position: relative;
 }

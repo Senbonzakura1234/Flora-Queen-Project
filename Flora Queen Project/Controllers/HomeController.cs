@@ -81,6 +81,7 @@ namespace Flora_Queen_Project.Controllers
             return PartialView(data);
         }
 
+        // ReSharper disable once InconsistentNaming
         public ActionResult FAQ()
         {
             return View();

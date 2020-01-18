@@ -19,6 +19,7 @@ $(function () {
 
     $(".quickview").click(function () {
         const data = $(this).data("id");
+        $(".quickview-loader-wrapper").show();
         $.ajax({
             url: "/Home/QuickView",
             type: "GET",
@@ -27,6 +28,10 @@ $(function () {
             },
             success: function (res) {
                 $("#update-quick-view").html(res);
+                setTimeout(
+                    function () {
+                        $(".quickview-loader-wrapper").fadeOut();
+                    }, 500);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
@@ -34,4 +39,12 @@ $(function () {
             }
         });
     });
+
+    $(".modal").on("hide.bs.modal", function () {
+        $("#update-quick-view").empty();
+    });
+
+
+
+    $(".quickview-loader").css({ "margin-top": (350 - parseFloat($(".quickview-loader").css("font-size"))) / 2 + "px"});
 });
