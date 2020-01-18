@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Flora_Queen_Project.Models;
 
@@ -77,6 +79,17 @@ namespace Flora_Queen_Project.Controllers
         {
             var data = DbContext.Colors.ToList();
             return PartialView(data);
+        }
+
+        public ActionResult QuickView(string id)
+        {
+            Debug.WriteLine(id);
+            if (id == null)
+            {
+                return null;
+            }
+            var product = DbContext.Products.Find(id);
+            return product == null ? null : PartialView("_AjaxQuickView", product);
         }
     }
 }
