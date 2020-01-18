@@ -3,7 +3,7 @@ namespace Flora_Queen_Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialTable : DbMigration
+    public partial class InitalTable : DbMigration
     {
         public override void Up()
         {

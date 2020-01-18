@@ -7,13 +7,13 @@ namespace Flora_Queen_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialTable : IMigrationMetadata
+    public sealed partial class InitalTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitalTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001171349548_InitialTable"; }
+            get { return "202001181621038_InitalTable"; }
         }
         
         string IMigrationMetadata.Source
