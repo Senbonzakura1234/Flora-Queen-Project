@@ -6,15 +6,15 @@ $(function () {
             $(".loader-wrapper").fadeOut();
             $("html").css("overflow-y", "scroll");
         }, 1500);
-    //$(".product__nav .nav-item.nav-link").click(function () {
-    //    $(".loader-wrapper").fadeIn();
+        $(".product__nav .nav-item.nav-link").click(function () {
+            $(".tab__container").css("opacity", "0");
 
-    //    setTimeout(
-    //        function () {
-    //            $(".loader-wrapper").fadeOut();
-    //            $("html").css("overflow-y", "scroll");
-    //        }, 1000);
-    //});
+            setTimeout(
+                function () {
+                    $(".tab__container").fadeTo("fast", 1);
+                }, 1000);
+        });
+
 
 
     $(".quickview").click(function () {
