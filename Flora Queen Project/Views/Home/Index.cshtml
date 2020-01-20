@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Flora_Queen_Project.Models.Product>
+﻿@using Flora_Queen_Project.Models
+@model IEnumerable<Flora_Queen_Project.Models.Product>
 
 @{
     ViewBag.Title = "Home";
+    var occasionList = ViewBag.OccasionList as List<Occasion>;
 }
 
 
@@ -63,24 +65,6 @@
         <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
             @Html.Action("NewProduct", "Home")
         </div>
-        @*<div class="row">
-                <div class="col-lg-12">
-                    @if (Model.PageCount > 1 && Model.PageNumber <= Model.PageCount)
-                    {
-                        <div class="row">
-                            <div class="col mx-auto text-center">
-                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                            </div>
-                        </div>
-                        <div class="row paging-control mt-2">
-                            <div class="mx-auto text-center">
-                                @Html.PagedListPager(Model, page => Url.Action("Index",
-                                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>*@
         <!-- End Single Tab Content -->
     </div>
 </section>
@@ -113,7 +97,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section__title text-center">
-                    <h2 class="title__be--2">All <span class="color--theme">Products</span></h2>
+                    <h2 class="title__be--2">Hot <span class="color--theme">Products</span></h2>
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
                 </div>
             </div>
@@ -184,66 +168,69 @@
                 </div>
             </div>
             <!-- End Single Tab Content -->
-            @foreach (var item in ViewBag.OccasionList)
+            @if (occasionList != null && occasionList.Count >= 0)
             {
+                foreach (var item in occasionList)
+                {
 
-                <!-- Start Single Tab Content -->
-                <div class="row single__tab tab-pane fade" id="nav-@item.Id" role="tabpanel">
-                    <div class="product__indicator--4 arrows_style owl-carousel owl-theme">
-                        @foreach (var itemInside in Model)
-                        {
-                            if (itemInside.OccasionId == item.Id)
+                    <!-- Start Single Tab Content -->
+                    <div class="row single__tab tab-pane fade" id="nav-@item.Id" role="tabpanel">
+                        <div class="product__indicator--4 arrows_style owl-carousel owl-theme">
+                            @foreach (var itemInside in Model)
                             {
-                                <div class="single__product">
-                                    <!-- Start Single Product -->
-                                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                                        <div class="product product__style--3">
-                                            <div class="product__thumb">
-                                                <a class="first__img" href="#/"><img src="@itemInside.ImgUrl" alt="product image"></a>
-                                                <a class="second__img animation1" href="#/"><img src="@itemInside.ImgUrl" alt="product image"></a>
-                                                <div class="hot__box">
-                                                    <span class="hot-label">Hot</span>
+                                if (itemInside.OccasionId == item.Id)
+                                {
+                                    <div class="single__product">
+                                        <!-- Start Single Product -->
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                            <div class="product product__style--3">
+                                                <div class="product__thumb">
+                                                    <a class="first__img" href="#/"><img src="@itemInside.ImgUrl" alt="product image"></a>
+                                                    <a class="second__img animation1" href="#/"><img src="@itemInside.ImgUrl" alt="product image"></a>
+                                                    <div class="hot__box">
+                                                        <span class="hot-label">Hot</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="product__content content--center content--center">
-                                                <h4>
-                                                    <a href="#/">
-                                                        @Html.DisplayFor(modelItem => itemInside.Name)
-                                                    </a>
-                                                </h4>
-                                                <ul class="prize d-flex">
-                                                    <li>@(itemInside.Price / 1000)K VND</li>
-                                                    <li class="old_prize">@(itemInside.Price * 1.5 / 1000)K VND</li>
-                                                </ul>
-                                                <div class="action">
-                                                    <div class="actions_inner">
-                                                        <ul class="add_to_links">
-                                                            <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                            <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                            <li><a class="compare" href="#/"><i class="bi bi-heart-beat"></i></a></li>
-                                                            <li><a data-toggle="modal" data-id="@item.Id" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                <div class="product__content content--center content--center">
+                                                    <h4>
+                                                        <a href="#/">
+                                                            @Html.DisplayFor(modelItem => itemInside.Name)
+                                                        </a>
+                                                    </h4>
+                                                    <ul class="prize d-flex">
+                                                        <li>@(itemInside.Price / 1000)K VND</li>
+                                                        <li class="old_prize">@(itemInside.Price * 1.5 / 1000)K VND</li>
+                                                    </ul>
+                                                    <div class="action">
+                                                        <div class="actions_inner">
+                                                            <ul class="add_to_links">
+                                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                                <li><a class="compare" href="#/"><i class="bi bi-heart-beat"></i></a></li>
+                                                                <li><a data-toggle="modal" data-id="@item.Id" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product__hover--content">
+                                                        <ul class="rating d-flex">
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="product__hover--content">
-                                                    <ul class="rating d-flex">
-                                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                </div>
                                             </div>
                                         </div>
+                                        <!-- Start Single Product -->
                                     </div>
-                                    <!-- Start Single Product -->
-                                </div>
+                                }
                             }
-                        }
+                        </div>
                     </div>
-                </div>
-                <!-- End Single Tab Content -->
+                    <!-- End Single Tab Content -->
+                }
             }
         </div>
     </div>
@@ -317,19 +304,22 @@
 </section>
 <!-- End Recent Post Area -->
 <!-- Best Sale Area -->
-<section class="best-seel-area pt--80 pb--60">
+
+<section class="wn__product__area brown--color pt--80  pb--30">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section__title text-center pb--50">
+                <div class="section__title text-center">
                     <h2 class="title__be--2">Best <span class="color--theme">Seller </span></h2>
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="slider center">
-        @Html.Action("BestSales","Home")
+        <!-- Start Single Tab Content -->
+        <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+            @Html.Action("BestSales", "Home")
+        </div>
+        <!-- End Single Tab Content -->
     </div>
 </section>
 <!-- Best Sale Area Area -->
