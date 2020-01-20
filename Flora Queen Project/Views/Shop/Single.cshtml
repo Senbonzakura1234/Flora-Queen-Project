@@ -1,5 +1,10 @@
-﻿@{
+﻿@using Flora_Queen_Project.Models
+@model Flora_Queen_Project.Models.Product
+
+@{
     ViewBag.Title = "Single";
+    var listdata = ViewBag.listdata as List<Product>;
+    var listSale = ViewBag.listSale as List<Product>;
 }
 
 @section header_class
@@ -38,20 +43,20 @@
                         <div class="col-lg-6 col-12">
                             <div class="wn__fotorama__wrapper">
                                 <div class="fotorama wn__fotorama__action" data-nav="thumbs">
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
-                                    <a href="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860468/images/ImagePlaceHolder/product/1_ikq16t.jpg" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
+                                    <a href="@Html.DisplayFor(model => model.ImgUrl)"><img src="@Html.DisplayFor(model => model.ImgUrl)" alt=""></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="product__info__main">
-                                <h1>Chaz Kangeroo Hoodie</h1>
+                                <h1>@Html.DisplayFor(model => model.Name)</h1>
                                 <div class="product-reviews-summary d-flex">
                                     <ul class="rating-summary d-flex">
                                         <li><i class="zmdi zmdi-star-outline"></i></li>
@@ -62,7 +67,7 @@
                                     </ul>
                                 </div>
                                 <div class="price-box">
-                                    <span>$52.00</span>
+                                    <span>$@Html.DisplayFor(model => model.Price)</span>
                                 </div>
                                 <div class="product__overview">
                                     <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
@@ -80,11 +85,18 @@
                                     </div>
                                 </div>
                                 <div class="product_meta">
-                                    <span class="posted_in">
-                                        Categories:
-                                        <a href="#">Adventure</a>,
-                                        <a href="#">Kids' Music</a>
-                                    </span>
+                                    <div class="posted_in">
+                                        Color:
+                                        <a href="#">@Html.DisplayFor(model => model.Color.Name)</a>,
+                                    </div>
+                                    <div class="posted_in">
+                                        Occasion:
+                                        <a href="#">@Html.DisplayFor(model => model.Occasion.Name)</a>,
+                                    </div>
+                                    <div class="posted_in">
+                                        Type:
+                                        <a href="#">@Html.DisplayFor(model => model.Type.Name)</a>,
+                                    </div>
                                 </div>
                                 <div class="product-share">
                                     <ul>
@@ -124,12 +136,13 @@
                         <!-- Start Single Tab Content -->
                         <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
                             <div class="description__attribute">
-                                <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-                                <ul>
-                                    <li>• Two-tone gray heather hoodie.</li>
-                                    <li>• Drawstring-adjustable hood. </li>
-                                    <li>• Machine wash/dry.</li>
-                                </ul>
+                                <p>@Html.DisplayFor(model => model.Description)</p>
+                                @* <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p> *@
+                                @* <ul> *@
+                                @*     <li>• Two-tone gray heather hoodie.</li> *@
+                                @*     <li>• Drawstring-adjustable hood. </li> *@
+                                @*     <li>• Machine wash/dry.</li> *@
+                                @* </ul> *@
                             </div>
                         </div>
                         <!-- End Single Tab Content -->
@@ -244,57 +257,24 @@
                     </div>
                     <div class="row mt--60">
                         <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
-                            <!-- Start Single Product -->
+                        <!-- Start Single Product -->
+                        @if (listdata != null && listdata.Count > 0)
+                        {
+                            for (int i = 0; i < listdata.Count; i++)
+                            {
                             <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
+                                    <a class="first__img" href="#/"><img src="@listdata[i].ImgUrl" alt="product image"></a>
+                                    <a class="second__img animation1" href="#/"><img src="@listdata[i].ImgUrl" alt="product image"></a>
                                     <div class="hot__box">
                                         <span class="hot-label">BEST SELLER</span>
                                     </div>
                                 </div>
                                 <div class="product__content content--center">
-                                    <h4><a href="#/">robin parrish</a></h4>
+                                    <h4><a href="#/">@listdata[i].Name</a></h4>
                                     <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal"  title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box color--2">
-                                        <span class="hot-label">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">The Remaining</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$35.00</li>
+                                        <li>$@listdata[i].Price</li>
+                                        <li class="old_prize">$@listdata[i].Price</li>
                                     </ul>
                                     <div class="action">
                                         <div class="actions_inner">
@@ -317,155 +297,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">Lando</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$50.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">Doctor Wldo</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">BEST SELLER</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center content--center">
-                                    <h4><a href="#/">Animals Life</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$50.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">BEST SELLER</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center content--center">
-                                    <h4><a href="#/">Olio Madu</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$50.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
+                            }
+                        }
+                        <!-- Start Single Product -->
                         </div>
                     </div>
                 </div>
@@ -476,226 +310,47 @@
                     <div class="row mt--60">
                         <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
                             <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">BEST SELLER</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">robin parrish</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                            @if (listSale != null && listSale.Count > 0)
+                            {
+                                for (int i = 0; i < listSale.Count; i++)
+                                {
+                                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <div class="product__thumb">
+                                            <a class="first__img" href="#/"><img src="@listSale[i].ImgUrl" alt="product image"></a>
+                                            <a class="second__img animation1" href="#/"><img src="@listSale[i].ImgUrl" alt="product image"></a>
+                                            <div class="hot__box">
+                                                <span class="hot-label">BEST SELLER</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__content content--center">
+                                            <h4><a href="#/">@listSale[i].Name</a></h4>
+                                            <ul class="prize d-flex">
+                                                <li>$@listSale[i].Price</li>
+                                                <li class="old_prize">$@listSale[i].Price</li>
                                             </ul>
+                                            <div class="action">
+                                                <div class="actions_inner">
+                                                    <ul class="add_to_links">
+                                                        <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                        <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                                                        <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product__hover--content">
+                                                <ul class="rating d-flex">
+                                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box color--2">
-                                        <span class="hot-label">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">The Remaining</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">Lando</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$50.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center">
-                                    <h4><a href="#/">Doctor Wldo</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$35.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">BEST SELLER</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center content--center">
-                                    <h4><a href="#/">Animals Life</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$50.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Single Product -->
-                            <!-- Start Single Product -->
-                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="product__thumb">
-                                    <a class="first__img" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <a class="second__img animation1" href="#/"><img src="https://res.cloudinary.com/senbonzakura/image/upload/v1574860475/images/ImagePlaceHolder/books/1_ce72gl.jpg" alt="product image"></a>
-                                    <div class="hot__box">
-                                        <span class="hot-label">BEST SELLER</span>
-                                    </div>
-                                </div>
-                                <div class="product__content content--center content--center">
-                                    <h4><a href="#/">Olio Madu</a></h4>
-                                    <ul class="prize d-flex">
-                                        <li>$50.00</li>
-                                        <li class="old_prize">$35.00</li>
-                                    </ul>
-                                    <div class="action">
-                                        <div class="actions_inner">
-                                            <ul class="add_to_links">
-                                                <li><a class="cart" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product__hover--content">
-                                        <ul class="rating d-flex">
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li class="on"><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
                             <!-- Start Single Product -->
                         </div>
                     </div>
