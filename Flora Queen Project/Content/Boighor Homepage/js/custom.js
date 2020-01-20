@@ -5,7 +5,7 @@ $(function () {
         function () {
             $(".loader-wrapper").fadeOut();
             $("html").css("overflow-y", "scroll");
-        }, 1500);
+        }, 500);
         $(".product__nav .nav-item.nav-link").click(function () {
             $(".tab__container").css("opacity", "0");
 

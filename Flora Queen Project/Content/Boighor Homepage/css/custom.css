@@ -14,15 +14,12 @@ body {
 .owl-carousel {
     touch-action: manipulation !important;
 }
-.loader {
-    font-size: 80px;
-    margin-top: calc(50vh - 40px);
-}
 .quickview-loader {
     font-size: 60px;
 }
 .logo-loader {
-    max-width: 200px;
+    margin-top: 50vh;
+    max-width: 220px;
 }
 .quickview-logo-loader {
     max-width: 200px;

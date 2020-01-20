@@ -65,7 +65,7 @@ namespace Flora_Queen_Project.Controllers
 
         public ActionResult BestSales()
         {
-            var data = DbContext.Products.OrderBy(t => t.CreatedAt).Take(8).ToList();
+            var data = DbContext.Products.OrderBy(t => t.OrderItems.Count).Take(5).ToList();
             return PartialView(data);
         }
 
