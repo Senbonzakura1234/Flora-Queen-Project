@@ -44,13 +44,13 @@ namespace Flora_Queen_Project.Controllers
                 return HttpNotFound();
             }
 
-            var listdata = DbContext.Products.Where(p => p.OccasionId == product.OccasionId && p.Id != product.Id).OrderByDescending(p => p.UpdatedAt).Take(2).ToList();
-            listdata.AddRange(DbContext.Products.Where(p => p.ColorId == product.ColorId && p.Id != product.Id).OrderByDescending(p => p.UpdatedAt).Take(2).ToList());
-            listdata.AddRange(DbContext.Products.Where(p => p.TypeId == product.TypeId && p.Id != product.Id).OrderByDescending(p => p.UpdatedAt).Take(2).ToList());
-            ViewBag.listdata = listdata;
+            var relateData = DbContext.Products.Where(p => p.OccasionId == product.OccasionId && p.Id != product.Id).OrderByDescending(p => p.UpdatedAt).Take(2).ToList();
+            relateData.AddRange(DbContext.Products.Where(p => p.ColorId == product.ColorId && p.Id != product.Id).OrderByDescending(p => p.UpdatedAt).Take(2).ToList());
+            relateData.AddRange(DbContext.Products.Where(p => p.TypeId == product.TypeId && p.Id != product.Id).OrderByDescending(p => p.UpdatedAt).Take(2).ToList());
+            ViewBag.relateData = relateData;
 
-            var listSale = DbContext.Products.OrderByDescending(p => p.UpdatedAt).Take(6).ToList();
-            ViewBag.listSale = listSale;
+            var saleData = DbContext.Products.OrderByDescending(p => p.UpdatedAt).Take(6).ToList();
+            ViewBag.saleData = saleData;
 
             return View(product);
         }
