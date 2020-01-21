@@ -3,12 +3,17 @@
     ViewBag.Title = "Index";
 }
 
-    <div class="ht__bradcaump__area bg-image--4">
+    <div class="ht__bradcaump__area bg-image--3">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Payment</h2>
+                        <h2 class="bradcaump-title">Shopping Cart</h2>
+                        <nav class="bradcaump-content">
+                            <a class="breadcrumb_item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb_item active">Shopping Cart</span>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -16,102 +21,78 @@
     </div>
     <div class="page-about about_area bg--white section-padding--lg">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section__title--3 text-center pb--30">
-                        <h2>Your Cart</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="cart-table-area section-padding-100">
-                <div class="container-fluid">
+            <div class="cart-main-area section-padding--lg bg--white">
+                <div class="container">
                     <div class="row">
-                        <div class="mx-auto col-lg-10">
-                            <div class="cart-table clearfix">
-                                <table class="table table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="cart_product_img">
-                                                <img src="https://res.cloudinary.com/leduc911/image/upload/v1578991663/floraqueen/Type/Rose/Queen_of_Hearts_20_Red_Roses_ipgzw9.png" height="180" width="180">
-                                            </td>
-                                            <td class="cart_product_desc">
-                                                <h5>Queen of Hearts 20 Red Roses</h5>
-                                            </td>
-                                            <td class="price">
-                                                <span>100000</span>
-                                            </td>
-                                            <td class="qty">
-                                                <div class="qty-btn d-flex">
-                                                    <div class="quantity">
-                                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        <input type="number" class="text-center" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="cart_product_img">
-                                                <img src="https://res.cloudinary.com/leduc911/image/upload/v1578991663/floraqueen/Type/Rose/Love_Actually_12_Red_and_Pink_Roses_ybqi9s.png" height="180" width="180">
-                                            </td>
-                                            <td class="cart_product_desc">
-                                                <h5>Love Actually 12 Red and Pink Roses</h5>
-                                            </td>
-                                            <td class="price">
-                                                <span>100000</span>
-                                            </td>
-                                            <td class="qty">
-                                                <div class="qty-btn d-flex">
-                                                    <div class="quantity">
-                                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        <input type="number" class="text-center" id="qty2" step="1" min="1" max="300" name="quantity" value="1">
-                                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="cart_product_img">
-                                                <img src="https://res.cloudinary.com/leduc911/image/upload/v1578882994/floraqueen/New%20Baby/Cotton_Candy-Gerberas_and_Carnations_atjmm3.png" height="180" width="180">
-                                            </td>
-                                            <td class="cart_product_desc">
-                                                <h5>Cotton Candy-Gerberas and Carnations </h5>
-                                            </td>
-                                            <td class="price">
-                                                <span>100000</span>
-                                            </td>
-                                            <td class="qty">
-                                                <div class="qty-btn d-flex">
-                                                    <div class="quantity">
-                                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        <input type="number" class="text-center" id="qty3" step="1" min="1" max="300" name="quantity" value="1">
-                                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="col-md-12 col-sm-12 ol-lg-12">
+                            <form action="#">
+                                <div class="table-content wnro__table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr class="title-top">
+                                                <th class="product-thumbnail">Image</th>
+                                                <th class="product-name">Product</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product-quantity">Quantity</th>
+                                                <th class="product-subtotal">Total</th>
+                                                <th class="product-remove">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/1.jpg" alt="product img"></a></td>
+                                                <td class="product-name"><a href="#">Natoque penatibus</a></td>
+                                                <td class="product-price"><span class="amount">$165.00</span></td>
+                                                <td class="product-quantity"><input type="number" value="1"></td>
+                                                <td class="product-subtotal">$165.00</td>
+                                                <td class="product-remove"><a href="#">X</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/2.jpg" alt="product img"></a></td>
+                                                <td class="product-name"><a href="#">Quisque fringilla</a></td>
+                                                <td class="product-price"><span class="amount">$50.00</span></td>
+                                                <td class="product-quantity"><input type="number" value="1"></td>
+                                                <td class="product-subtotal">$50.00</td>
+                                                <td class="product-remove"><a href="#">X</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/3.jpg" alt="product img"></a></td>
+                                                <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
+                                                <td class="product-price"><span class="amount">$50.00</span></td>
+                                                <td class="product-quantity"><input type="number" value="1"></td>
+                                                <td class="product-subtotal">$50.00</td>
+                                                <td class="product-remove"><a href="#">X</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <div class="cartbox__btn">
+                                <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                    <li><a href="#">Coupon Code</a></li>
+                                    <li><a href="#">Apply Code</a></li>
+                                    <li><a href="#">Update Cart</a></li>
+                                    <li><a href="#">Check Out</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="mx-auto">
-                            <div class="cart-summary">
-                                <h5>Cart Total</h5>
-                                <ul class="summary-table">
-                                    <li><span>subtotal:</span> <span>300000 VND</span></li>
-                                    <li><span>delivery:</span> <span>Free</span></li>
-                                    <li><span>total:</span> <span>300000 VND</span></li>
-                                </ul>
-                                <div class="cart-btn mt-100">
-                                    <a href="#" class="btn btn-dark">Checkout</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-6">
+                            <div class="cartbox__total__area">
+                                <div class="cartbox-total d-flex justify-content-between">
+                                    <ul class="cart__total__list">
+                                        <li>Cart total</li>
+                                        <li>Sub Total</li>
+                                    </ul>
+                                    <ul class="cart__total__tk">
+                                        <li>$70</li>
+                                        <li>$70</li>
+                                    </ul>
+                                </div>
+                                <div class="cart__total__amount">
+                                    <span>Grand Total</span>
+                                    <span>$140</span>
                                 </div>
                             </div>
                         </div>

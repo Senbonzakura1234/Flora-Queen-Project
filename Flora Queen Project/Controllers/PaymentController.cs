@@ -11,6 +11,14 @@ namespace Flora_Queen_Project.Controllers
         // GET: Payment
         public ActionResult Index()
         {
+            return View("Cart");
+        }
+        public ActionResult Cart()
+        {
+            return View();
+        }
+        public ActionResult Checkout()
+        {
             return View();
         }
     }

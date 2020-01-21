@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+}
+<div class="ht__bradcaump__area bg-image--3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title">Shopping Cart</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Shopping Cart</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-about about_area bg--white section-padding--lg">
+    <div class="container">
+        <div class="cart-main-area section-padding--lg bg--white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ol-lg-12">
+                        <form action="#">
+                            <div class="table-content wnro__table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr class="title-top">
+                                            <th class="product-thumbnail">Image</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img src="https://res.cloudinary.com/leduc911/image/upload/v1578991663/floraqueen/Type/Rose/Queen_of_Hearts_20_Red_Roses_ipgzw9.png" height="100" width="80" alt="product img"></a></td>
+                                            <td class="product-name"><a href="#">Queen of Hearts 20 Red Roses</a></td>
+                                            <td class="product-price"><span class="amount">100000 VND</span></td>
+                                            <td class="product-quantity"><input type="number" value="1"></td>
+                                            <td class="product-subtotal">100000 VND</td>
+                                            <td class="product-remove"><a href="#">X</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img src="https://res.cloudinary.com/leduc911/image/upload/v1578882994/floraqueen/New%20Baby/Cotton_Candy-Gerberas_and_Carnations_atjmm3.png" height="100" width="80" alt="product img"></a></td>
+                                            <td class="product-name"><a href="#">Cotton Candy-Gerberas and Carnations</a></td>
+                                            <td class="product-price"><span class="amount">100000 VND</span></td>
+                                            <td class="product-quantity"><input type="number" value="1"></td>
+                                            <td class="product-subtotal">100000 VND</td>
+                                            <td class="product-remove"><a href="#">X</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img src="https://res.cloudinary.com/leduc911/image/upload/v1578991663/floraqueen/Type/Rose/Love_Actually_12_Red_and_Pink_Roses_ybqi9s.png" height="100" width="80" alt="product img"></a></td>
+                                            <td class="product-name"><a href="#">Love Actually 12 Red and Pink Roses</a></td>
+                                            <td class="product-price"><span class="amount">100000 VND</span></td>
+                                            <td class="product-quantity"><input type="number" value="1"></td>
+                                            <td class="product-subtotal">100000 VND</td>
+                                            <td class="product-remove"><a href="#">X</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <div class="cartbox__btn">
+                            <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                <li><a href="#">Coupon Code</a></li>
+                                <li><a href="#">Apply Code</a></li>
+                                <li><a href="@Url.Action("Index","Shop")">Back To Shop</a></li>
+                                <li><a href="@Url.Action("Checkout","Payment")">Check Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <div class="cartbox__total__area">
+                            <div class="cartbox-total d-flex justify-content-between">
+                                <ul class="cart__total__list">
+                                    <li>Cart total</li>
+                                    <li>Sub Total</li>
+                                </ul>
+                                <ul class="cart__total__tk">
+                                    <li>300000 VND</li>
+                                    <li>0</li>
+                                </ul>
+                            </div>
+                            <div class="cart__total__amount">
+                                <span>Grand Total</span>
+                                <span>300000 VND</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
