@@ -81,7 +81,7 @@
                                     <div class="product__content content--center">
                                         <h4><a href="#/">robin parrish</a></h4>
                                         <ul class="prize d-flex">
-                                            <li>$ @(Model[i].Price/1000) K</li>
+                                            <li>$ @(Model[i].Price / 1000) K</li>
                                             <li class="old_prize">$@(Model[i].Price / 1000 * 1.5) K</li>
                                         </ul>
                                         <div class="action">
@@ -109,42 +109,11 @@
 
                             <!-- End Single Product -->
                         </div>
-                        @if (totalPage > 0)
-                        {
-                            <ul class="wn__pagination">
-                                @if (currentPage > 1)
-                                {
-                                    <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                }
-                                @if (currentPage > 2)
-                                {
-                                    <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
-                                }
-                                @if (currentPage > 1)
-                                {
-                                    <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
-                                }
-                                <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
-                                @if (totalPage - currentPage > 0)
-                                {
-                                    <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
-                                }
-                                @if (totalPage - currentPage > 1)
-                                {
-                                    <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
-                                }
-                                @if (currentPage < totalPage)
-                                {
-                                    <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                }
-                            
-                            </ul>
-                        }
                     </div>
-                    <div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
+                    <div class="shop-grid tab-pane fade mb-3" id="nav-list" role="tabpanel">
                         <div class="list__view__wrapper">
                             <!-- Start Single Product -->
-                            @for (int i = 0; i < Model.Count; i++)
+                            @for (var i = 0; i < Model.Count; i++)
                             {
                                 <div class="list__view">
                                     <div class="thumb">
@@ -179,6 +148,37 @@
                             <!-- End Single Product -->
                         </div>
                     </div>
+                    @if (totalPage > 0)
+                    {
+                        <ul class="wn__pagination">
+                            @if (currentPage > 1)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                            }
+                            @if (currentPage > 2)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
+                            }
+                            @if (currentPage > 1)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
+                            }
+                            <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
+                            @if (totalPage - currentPage > 0)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
+                            }
+                            @if (totalPage - currentPage > 1)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
+                            }
+                            @if (currentPage < totalPage)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            }
+
+                        </ul>
+                    }
                 </div>
             </div>
         </div>
@@ -188,26 +188,33 @@
 @section scripts
 {
     <script>
-        $(".occasion-click").click(function () {
-            const data = $(this).data("id");
-            $('input[name="occasion"]').val(data);
-        });
+        $(function () {
 
-        $(".type-click").click(function () {
-            const data = $(this).data("id");
-            $('input[name="type"]').val(data);
-        });
 
-        $(".color-click").click(function () {
-            const data = $(this).data("id");
-            $('input[name="color"]').val(data);
-        });
+            $(".occasion-click").click(function () {
+                const data = $(this).data("id");
+                $('input[name="occasion"]').val(data);
+                $("#shopFilter").submit();
+            });
 
-        $('#clear-filter').click(function () {
-            const data = "";
-            $('input[name="type"]').val(data);
-            $('input[name="occasion"]').val(data);
-            $('input[name="color"]').val(data);
+            $(".type-click").click(function () {
+                const data = $(this).data("id");
+                $('input[name="type"]').val(data);
+                $("#shopFilter").submit();
+            });
+
+            $(".color-click").click(function () {
+                const data = $(this).data("id");
+                $('input[name="color"]').val(data);
+                $("#shopFilter").submit();
+            });
+
+            $('#clear-filter').click(function () {
+                const data = "";
+                $('input[name="type"]').val(data);
+                $('input[name="occasion"]').val(data);
+                $('input[name="color"]').val(data);
+            });
         });
     </script>
 }

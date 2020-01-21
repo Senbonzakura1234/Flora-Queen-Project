@@ -11,23 +11,25 @@
         <h3 class="wedget__title">Filter by price</h3>
         <div class="content-shopby">
             <div class="price_filter s-filter clear">
-                <form action="/Shop/Index" method="GET">
-                    <input type="hidden" name="occasion" value="" />
-                    <input type="hidden" name="type" value="" />
-                    <input type="hidden" name="color" value="" />
+                <form action="@Url.Action("Index","Shop")" method="GET" name="shopFilter" id="shopFilter">
+                    <input type="hidden" name="occasion" value="@ViewBag.Occasion" />
+                    <input type="hidden" name="type" value="@ViewBag.Type" />
+                    <input type="hidden" name="color" value="@ViewBag.Color" />
+                    <input type="hidden" name="minAmount" id="minAmount" value="@ViewBag.minAmount" />
+                    <input type="hidden" name="maxAmount" id="maxAmount" value="@ViewBag.maxAmount" />
                     <div id="slider-range"></div>
                     <div class="slider__range--output">
                         <div class="price__output--wrap">
                             <div class="price--output">
                                 @* ReSharper disable once Html.AttributeValueNotResolved *@
-                                <span>Price :</span><input type="text" id="amount" readonly="">
+                                <span>Price :</span><input type="text" id="amount" >
                             </div>
                             <div class="price--filter">
-                                <button class="btn-gradient-success" type="submit">Filter</button>
-                                @* <a href="#">Filter</a> *@
+                                @* ReSharper disable once Html.IdNotResolved *@
+                                <a href="#/" onclick="document.getElementById('shopFilter').submit();">Filter</a> 
                             </div>
                             <div class="price--filter">
-                                <a href="/Shop/index" id="clear-filter">clear-filter</a>
+                                <a href="@Url.Action("Index","Shop")" id="clear-filter">clear-filter</a>
                             </div>
                         </div>
                     </div>

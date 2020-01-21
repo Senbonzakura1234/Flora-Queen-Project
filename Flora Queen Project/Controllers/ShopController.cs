@@ -50,7 +50,7 @@ namespace Flora_Queen_Project.Controllers
 //            return View(listProduct);
 //        }
 
-        public ActionResult Index(string occasion, string type, string color, int? page, int? limit)
+        public ActionResult Index(string occasion, string type, string color, int? page, int? limit, int? minAmount, int? maxAmount)
         {
             if (occasion == null)
             {
@@ -77,8 +77,23 @@ namespace Flora_Queen_Project.Controllers
                 limit = 9;
             }
 
+            if (minAmount == null)
+            {
+                minAmount = 0;
+            }
+
+            if (maxAmount == null)
+            {
+                maxAmount = 500;
+            }
+
             var listProduct = _db.Products.OrderByDescending(p => p.UpdatedAt).Where(p =>
-                p.TypeId.Contains(type) && p.OccasionId.Contains(occasion) && p.ColorId.Contains(color)).ToList();
+                p.TypeId.Contains(type) &&
+                p.OccasionId.Contains(occasion) && 
+                p.ColorId.Contains(color) && 
+                p.Price >= minAmount*1000 &&
+                p.Price <= maxAmount*1000
+                ).ToList();
 
             ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count() / limit.Value);
             ViewBag.CurrentPage = page;
@@ -87,12 +102,14 @@ namespace Flora_Queen_Project.Controllers
             ViewBag.Occasion = occasion;
             ViewBag.Type = type;
             ViewBag.Color = color;
+            ViewBag.minAmount = minAmount;
+            ViewBag.maxAmount = maxAmount;
 
             listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
 
-            foreach (var VARIABLE in listProduct)
+            foreach (var variable in listProduct)
             {
-                Debug.WriteLine("product name: " + VARIABLE.Name);
+                Debug.WriteLine("product name: " + variable.Name);
             }
 
             return View(listProduct);

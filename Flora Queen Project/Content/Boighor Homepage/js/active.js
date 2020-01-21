@@ -484,15 +484,17 @@
 /*====== Price Slider Active ======*/ 
     $("#slider-range").slider({
         range: true,
-        min: 10,
+        min: 0,
         max: 500,
-        values: [110, 400],
-        slide: function(event, ui) {
-            $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+        values: [$("#minAmount").val(), $("#maxAmount").val()],
+        step: 50,
+        slide: function (event, ui) {
+            $("#minAmount").val(ui.values[0]);
+            $("#maxAmount").val(ui.values[1]);
+            $("#amount").val(`${ui.values[0]}K Vnd - ${ui.values[1]}K Vnd`);
         }
     });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-        " - $" + $("#slider-range").slider("values", 1));
+    $("#amount").val(`${$("#slider-range").slider("values", 0)}K Vnd - ${$("#slider-range").slider("values", 1)}K Vnd`);
 
 
 /*====== Dropdown ======*/

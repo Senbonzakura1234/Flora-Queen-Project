@@ -4,7 +4,8 @@
     @foreach (var item in Model)
     {
         <li>
-            <a class="color-click" data-id="@item.Id">
+            @* ReSharper disable once Html.IdNotResolved *@
+            <a href="#/" class="color-click" data-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.Name)
                 <span>(@Html.DisplayFor(modelItem => item.Products.Count))</span>
             </a>
