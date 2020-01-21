@@ -123,6 +123,7 @@ namespace Flora_Queen_Project.Migrations
                         TypeId = c.String(maxLength: 128),
                         OccasionId = c.String(maxLength: 128),
                         ColorId = c.String(maxLength: 128),
+                        Discount = c.Double(nullable: false),
                         ProductStatus = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),

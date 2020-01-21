@@ -14,7 +14,7 @@ namespace Flora_Queen_Project.Migrations
     // ReSharper disable once UnusedMember.Global
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
-        private const string Url = "https://api.myjson.com/bins/c5pwu";
+        private const string Url = "https://api.myjson.com/bins/1g09l2";
 
         public Configuration()
         {
@@ -168,14 +168,15 @@ namespace Flora_Queen_Project.Migrations
                     Id = Guid.NewGuid().ToString(),
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    Description = f.Name,
+                    Description = f.Description,
                     ImgUrl = f.ImgUrl,
                     ColorId = context.Colors.FirstOrDefault(x => x.Name.Contains(f.Color))?.Id,
                     OccasionId = context.Occasions.FirstOrDefault(x => x.Name.Contains(f.Occasion))?.Id,
                     TypeId = context.Types.FirstOrDefault(x => x.Name.Contains(f.Type))?.Id,
                     Name = f.Name,
                     InStock = 100,
-                    Price = 100000,
+                    Price = Double.Parse(f.Price),
+                    Discount = Math.Round(new Random().NextDouble(),2),
                     ProductStatus = Product.ProductStatusEnum.Published
                 })
                 .ToList();
@@ -192,5 +193,7 @@ namespace Flora_Queen_Project.Migrations
         public string Color { get; set; }
         public string Type { get; set; }
         public string ImgUrl { get; set; }
+        public string Description { get; set; }
+        public string Price { get; set; }
     }
 }
