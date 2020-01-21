@@ -712,7 +712,6 @@
     <Content Include="Views\Shop\HotDeal.cshtml" />
     <Content Include="Views\Home\_AjaxQuickView.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
-    <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\Checkout.cshtml" />
     <Content Include="Views\Payment\Cart.cshtml" />
   </ItemGroup>
