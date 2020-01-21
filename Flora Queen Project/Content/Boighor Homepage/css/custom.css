@@ -59,3 +59,23 @@ body {
 .modal-body {
     position: relative;
 }
+.active.occasion-click {
+    color: #e59285 !important;
+}
+    .active.occasion-click span{
+        color: #e59285 !important;
+    }
+.active.type-click {
+    color: #e59285 !important;
+}
+    .active.type-click span {
+        color: #e59285 !important;
+    }
+.active.color-click {
+    background: #464646 none repeat scroll 0 0 !important;
+    color: #fff !important;
+}
+    .active.color-click span {
+        background: #464646 none repeat scroll 0 0;
+        color: #fff;
+    }

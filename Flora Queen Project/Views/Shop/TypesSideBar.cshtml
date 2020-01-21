@@ -7,6 +7,9 @@
             @* ReSharper disable once Html.IdNotResolved *@
             <a href="#/" class="type-click" data-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.Name)
+                <span class="text-muted text-small type-current" data-id="@item.Id">
+
+                </span>
                 <span>
                     @Html.DisplayFor(modelItem => item.Products.Count)
                 </span>

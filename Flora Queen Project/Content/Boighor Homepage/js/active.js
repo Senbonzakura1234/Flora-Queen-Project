@@ -491,10 +491,10 @@
         slide: function (event, ui) {
             $("#minAmount").val(ui.values[0]);
             $("#maxAmount").val(ui.values[1]);
-            $("#amount").val(`${ui.values[0]}K Vnd - ${ui.values[1]}K Vnd`);
+            $("#amount").text(`${ui.values[0]}K Vnd - ${ui.values[1]}K Vnd`);
         }
     });
-    $("#amount").val(`${$("#slider-range").slider("values", 0)}K Vnd - ${$("#slider-range").slider("values", 1)}K Vnd`);
+    $("#amount").text(`${$("#slider-range").slider("values", 0)}K Vnd - ${$("#slider-range").slider("values", 1)}K Vnd`);
 
 
 /*====== Dropdown ======*/
