@@ -266,8 +266,8 @@
                                         <div class="product__content content--center">
                                             <h4><a href="#/">@item.Name</a></h4>
                                             <ul class="prize d-flex">
-                                                <li>$@item.Price</li>
-                                                <li class="old_prize">$@item.Price</li>
+                                                <li>$ @(item.Price * item.Discount)</li>
+                                                <li class="old_prize">$ @item.Price</li>
                                             </ul>
                                             <div class="action">
                                                 <div class="actions_inner">

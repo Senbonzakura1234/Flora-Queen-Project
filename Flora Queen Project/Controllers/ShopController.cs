@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Flora_Queen_Project.Models;
 
@@ -96,7 +95,7 @@ namespace Flora_Queen_Project.Controllers
             if (sortBy == null || sortBy > 5 || sortBy < 0)
             {
                 Debug.WriteLine(sortBy);
-                sortBy = 3;
+                sortBy = 0;
             }
 
             var data = _db.Products.Where(p =>

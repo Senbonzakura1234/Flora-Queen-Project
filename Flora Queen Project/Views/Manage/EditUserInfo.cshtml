@@ -4,64 +4,6 @@
     ViewBag.Title = "EditUserInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@* *@
-@* <h2>EditUserInfo</h2> *@
-@* *@
-@* @using (Html.BeginForm()) *@
-@* { *@
-@*     @Html.AntiForgeryToken() *@
-@* *@
-@*     <div class="form-horizontal"> *@
-@*         <h4>NewEditUserInfo</h4> *@
-@*         <hr /> *@
-@*         @Html.ValidationSummary(true, "", new { @class = "text-danger" }) *@
-@*         <div class="form-group"> *@
-@*             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" }) *@
-@*             <div class="col-md-10"> *@
-@*                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } }) *@
-@*                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" }) *@
-@*             </div> *@
-@*         </div> *@
-@* *@
-@*         <div class="form-group"> *@
-@*             @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" }) *@
-@*             <div class="col-md-10"> *@
-@*                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } }) *@
-@*                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" }) *@
-@*             </div> *@
-@*         </div> *@
-@* *@
-@*         <div class="form-group"> *@
-@*             @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" }) *@
-@*             <div class="col-md-10"> *@
-@*                 @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } }) *@
-@*                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" }) *@
-@*             </div> *@
-@*         </div> *@
-@* *@
-@*         <div class="form-group"> *@
-@*             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" }) *@
-@*             <div class="col-md-10"> *@
-@*                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } }) *@
-@*                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" }) *@
-@*             </div> *@
-@*         </div> *@
-@* *@
-@*         <div class="form-group"> *@
-@*             @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" }) *@
-@*             <div class="col-md-10"> *@
-@*                 @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } }) *@
-@*                 @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" }) *@
-@*             </div> *@
-@*         </div> *@
-@* *@
-@*         <div class="form-group"> *@
-@*             <div class="col-md-offset-2 col-md-10"> *@
-@*                 <input type="submit" value="Create" class="btn btn-default" /> *@
-@*             </div> *@
-@*         </div> *@
-@*     </div> *@
-@* } *@
 
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area bg-image--6">
@@ -71,7 +13,7 @@
                 <div class="bradcaump__inner text-center">
                     <h2 class="bradcaump-title">My Account</h2>
                     <nav class="bradcaump-content">
-                        <a class="breadcrumb_item" href="index.html">Home</a>
+                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")">Home</a>
                         <span class="brd-separetor">/</span>
                         <span class="breadcrumb_item active">My Account</span>
                     </nav>
@@ -87,7 +29,6 @@
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="my__account__wrapper">
-                    <h3 class="account__title text-center text-success">@TempData["result"]</h3>
                     <h3 class="account__title text-center">Edit My Info</h3>
                     @using (Html.BeginForm())
                     {
@@ -107,7 +48,7 @@
 
                             <div class="input__box">
                                 @Html.LabelFor(model => model.Birthday)
-                                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @type = "date" } })
+                                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { type = "date" } })
                                 @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
                             </div>
 
@@ -117,13 +58,14 @@
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
                             <div class="input__box">
-                                <img id="preview" src="@Html.DisplayFor(model => model.Avatar)" class="img-thumbnail" style="width: 100px" alt="Alternate Text" />
+                                <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")" 
+                                     class="img-thumbnail" style="width: 100px" alt="Alternate Text" />
                                 <div style="margin-top: 20px;">
                                     @Html.LabelFor(model => model.Avatar)
-                                    @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                                    @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
                                     @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
-                                    <div style="margin-top: 5px">
-                                        <button type="button" id="upload_widget" class="btn btn-primary">Upload file</button>
+                                    <div class="form__btn" style="margin-top: 5px">
+                                        <button type="button" id="upload_widget" >Upload file</button>
                                     </div>
                                 </div>
                             </div>
@@ -149,9 +91,9 @@
         },
         (error, result) => {
             if (!error && result && result.event === "success") {
-                var imgLink = result.info.secure_url;
+                const imgLink = result.info.secure_url;
                 document.querySelector("input[name='Avatar']").value = imgLink;
-                var imgPreview = document.getElementById("preview");
+                const imgPreview = document.getElementById("preview");
                 imgPreview.src = imgLink;
                 imgPreview.classList.remove("hidden");
             }

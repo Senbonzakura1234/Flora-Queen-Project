@@ -14,8 +14,8 @@
     <h1>@Html.DisplayFor(model => model.Name)</h1>
     <div class="price-box-3">
         <div class="s-price-box">
-            <span class="new-price">@(Model.Price/1000)K VND</span>
-            <span class="old-price">@(Model.Price*1.5/1000)K VND</span>
+            <span class="new-price">$ @(Model.Price * Model.Discount)</span>
+            <span class="old-price">$ @Model.Price</span>
         </div>
     </div>
     <div class="quick-desc d-none d-sm-block">

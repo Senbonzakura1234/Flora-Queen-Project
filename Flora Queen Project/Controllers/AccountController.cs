@@ -386,6 +386,13 @@ namespace Flora_Queen_Project.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
+
+                if (await UserManager.FindByNameAsync(model.Username) != null)
+                {
+                    ViewBag.Duplicate = "Username used, please try another";
+                    return View(model);
+                }
+
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)

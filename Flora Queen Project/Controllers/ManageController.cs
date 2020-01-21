@@ -53,6 +53,7 @@ namespace Flora_Queen_Project.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.UpdateUserSuccess ? "Your profile updated successfully."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -390,7 +391,8 @@ namespace Flora_Queen_Project.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            UpdateUserSuccess
         }
 
         #endregion
@@ -399,31 +401,31 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditUserInfo(NewEditUserInfo editUserInfo)
         {
+            if (editUserInfo == null) return View((NewEditUserInfo) null);
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            user.FirstName = editUserInfo.FirstName;
-            user.LastName = editUserInfo.LastName;
-            user.Birthday = editUserInfo.Birthday;
-            user.Avatar = editUserInfo.Avatar;
-            user.Description = editUserInfo.Description;
             user.UpdatedAt = DateTime.Now;
-
-            try
+            if (editUserInfo.FirstName != null)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(user).State = EntityState.Modified;
-                    db.SaveChanges();
-                    TempData["result"] = "Success";
-                }
+                user.FirstName = editUserInfo.FirstName;
             }
-            catch (Exception e)
+            if (editUserInfo.LastName != null)
             {
-                Debug.WriteLine(e);
-                TempData["result"] = "Error";
+                user.LastName = editUserInfo.LastName;
             }
-            
-            return View(editUserInfo);
+            if (editUserInfo.Birthday != null)
+            {
+                user.Birthday = editUserInfo.Birthday;
+            }
+            if (editUserInfo.Avatar != null)
+            {
+                user.Avatar = editUserInfo.Avatar;
+            }
+            if (editUserInfo.Description != null)
+            {
+                user.Description = editUserInfo.Description;
+            }
+            UserManager.Update(user);
+            return RedirectToAction("Index", new { Message = ManageMessageId.UpdateUserSuccess });
         }
     }
 }
