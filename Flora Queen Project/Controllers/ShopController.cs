@@ -50,7 +50,7 @@ namespace Flora_Queen_Project.Controllers
 //            return View(listProduct);
 //        }
 
-        public ActionResult Index(string occasion, string type, string color, int? page, int? limit, int? minAmount, int? maxAmount)
+        public ActionResult Index(string occasion, string type, string color, int? page, int? limit, int? minAmount, int? maxAmount, int? viewMode)
         {
             if (occasion == null)
             {
@@ -87,6 +87,11 @@ namespace Flora_Queen_Project.Controllers
                 maxAmount = 500;
             }
 
+            if (viewMode == null || viewMode > 1 || viewMode < 0)
+            {
+                viewMode = 0;
+            }
+
             var listProduct = _db.Products.OrderByDescending(p => p.UpdatedAt).Where(p =>
                 p.TypeId.Contains(type) &&
                 p.OccasionId.Contains(occasion) && 
@@ -104,6 +109,7 @@ namespace Flora_Queen_Project.Controllers
             ViewBag.Color = color;
             ViewBag.minAmount = minAmount;
             ViewBag.maxAmount = maxAmount;
+            ViewBag.viewMode = viewMode;
 
             listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
 

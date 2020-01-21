@@ -6,8 +6,14 @@
     var totalPage = ((int?) ViewBag.TotalPage).Value;
     var currentPage = ((int?) ViewBag.CurrentPage).Value;
     var limit = ((int?) ViewBag.Limit).Value;
-
-    var currentPara = "?occasion="+ViewBag.Occasion + "&type=" + ViewBag.Type + "&color=" + ViewBag.Color;
+    var viewMode = ((int?) ViewBag.viewMode).Value ;
+    var currentPara = "?occasion="+ViewBag.Occasion + 
+                      "&type=" + ViewBag.Type + 
+                      "&color=" + ViewBag.Color + 
+                      "&minAmount="+ ViewBag.minAmount +
+                      "&maxAmount="+ ViewBag.maxAmount +
+                      "&viewMode="+ ViewBag.viewMode 
+        ;
 }
 
 @section header_class
@@ -46,8 +52,8 @@
                     <div class="col-lg-12">
                         <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
                             <div class="shop__list nav justify-content-center" role="tablist">
-                                <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
-                                <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+                                <a class="nav-item nav-link @(viewMode == 0? "active" : "")" data-toggle="tab" id="nav-grid-click" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
+                                <a class="nav-item nav-link @(viewMode == 1? "active" : "")" data-toggle="tab" id="nav-list-click" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
                             </div>
                             <p>Showing 1–12 of 40 results</p>
                             <div class="orderby__wrapper">
@@ -65,7 +71,7 @@
                     </div>
                 </div>
                 <div class="tab__container">
-                    <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+                    <div class="shop-grid tab-pane fade @(viewMode == 0? "show active" : "")  " id="nav-grid" role="tabpanel">
                         <div class="row">
                             <!-- Start Single Product -->
                             @for (int i = 0; i < Model.Count; i++)
@@ -110,7 +116,7 @@
                             <!-- End Single Product -->
                         </div>
                     </div>
-                    <div class="shop-grid tab-pane fade mb-3" id="nav-list" role="tabpanel">
+                    <div class="shop-grid tab-pane fade mb-3 @(viewMode == 1? "show active" : "") " id="nav-list" role="tabpanel">
                         <div class="list__view__wrapper">
                             <!-- Start Single Product -->
                             @for (var i = 0; i < Model.Count; i++)
@@ -189,7 +195,33 @@
 {
     <script>
         $(function () {
-
+            $("#nav-grid-click").click(function () {
+                $("#viewMode").val(0);
+            });
+            $("#nav-list-click").click(function () {
+                $("#viewMode").val(1);
+            });
+            $(".occasion-click").each(function () {
+                if ($(this).data("id") === $('input[name="occasion"]').val()) {
+                    $(this).addClass("active font-weight-bold");
+                } else {
+                    $(this).removeClass("active font-weight-bold");
+                }
+            });
+            $(".type-click").each(function () {
+                if ($(this).data("id") === $('input[name="type"]').val()) {
+                    $(this).addClass("active font-weight-bold");
+                } else {
+                    $(this).removeClass("active font-weight-bold");
+                }
+            });
+            $(".color-click").each(function () {
+                if ($(this).data("id") === $('input[name="color"]').val()) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
 
             $(".occasion-click").click(function () {
                 const data = $(this).data("id");
@@ -207,13 +239,6 @@
                 const data = $(this).data("id");
                 $('input[name="color"]').val(data);
                 $("#shopFilter").submit();
-            });
-
-            $('#clear-filter').click(function () {
-                const data = "";
-                $('input[name="type"]').val(data);
-                $('input[name="occasion"]').val(data);
-                $('input[name="color"]').val(data);
             });
         });
     </script>

@@ -1,11 +1,17 @@
 ﻿@model IEnumerable<Flora_Queen_Project.Models.Occasion>
-
+@{
+    var currentOccasions = ViewBag.Occasion;
+}
 <ul>
     @foreach (var item in Model)
     {
         <li>
             @* ReSharper disable once Html.IdNotResolved *@
-            <a href="#/" class="occasion-click" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)
+            <a href="#/" class="occasion-click" data-id="@item.Id">
+                @Html.DisplayFor(modelItem => item.Name)
+                <span class="text-muted text-small occasion-current" data-id="@item.Id">
+
+                </span>
                 <span>
                     @Html.DisplayFor(modelItem => item.Products.Count)
                 </span>
