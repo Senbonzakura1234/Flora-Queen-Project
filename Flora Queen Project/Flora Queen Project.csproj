@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OccasionsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -711,6 +712,7 @@
     <Content Include="Views\Shop\HotDeal.cshtml" />
     <Content Include="Views\Home\_AjaxQuickView.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
