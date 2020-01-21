@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data.Entity;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +17,8 @@ namespace Flora_Queen_Project.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -320,6 +325,23 @@ namespace Flora_Queen_Project.Controllers
             base.Dispose(disposing);
         }
 
+        public async Task<ActionResult> EditUserInfo()
+        {
+            //get user
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+            //add edit user
+            var editUser = new NewEditUserInfo
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Avatar = user.Avatar,
+                Birthday = user.Birthday,
+                Description = user.Description,
+            };
+
+            return View(editUser);
+        }
 #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -371,6 +393,37 @@ namespace Flora_Queen_Project.Controllers
             Error
         }
 
-#endregion
+        #endregion
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUserInfo(NewEditUserInfo editUserInfo)
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+            user.FirstName = editUserInfo.FirstName;
+            user.LastName = editUserInfo.LastName;
+            user.Birthday = editUserInfo.Birthday;
+            user.Avatar = editUserInfo.Avatar;
+            user.Description = editUserInfo.Description;
+            user.UpdatedAt = DateTime.Now;
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["result"] = "Success";
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                TempData["result"] = "Error";
+            }
+            
+            return View(editUserInfo);
+        }
     }
 }

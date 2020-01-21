@@ -714,6 +714,7 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Payment\Checkout.cshtml" />
     <Content Include="Views\Payment\Cart.cshtml" />
+    <Content Include="Views\Manage\EditUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
