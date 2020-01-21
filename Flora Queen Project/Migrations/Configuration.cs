@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Flora_Queen_Project.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
 
 namespace Flora_Queen_Project.Migrations
@@ -30,6 +32,33 @@ namespace Flora_Queen_Project.Migrations
             context.Database.ExecuteSqlCommand("delete from dbo.colors;");
             context.Database.ExecuteSqlCommand("delete from dbo.types;");
             context.Database.ExecuteSqlCommand("delete from dbo.products;");
+            //add User Roles
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Admin"};
+
+                manager.Create(role);
+            }
+
+            if (!context.Roles.Any(r => r.Name == "Mod"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Mod" };
+
+                manager.Create(role);
+            }
+
+            if (!context.Roles.Any(r => r.Name == "User"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "User" };
+
+                manager.Create(role);
+            }
             //add Occasion
             var listOccasions = new List<Occasion>
             {
