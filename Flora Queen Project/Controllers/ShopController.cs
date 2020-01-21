@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -26,9 +27,75 @@ namespace Flora_Queen_Project.Controllers
             private set => _db = value;
         }
         // GET: Shop
-        public ActionResult Index()
+//        public ActionResult Index(int? page, int? limit)
+//        {
+//            if (page == null)
+//            {
+//                page = 1;
+//            }
+//
+//            if (limit == null)
+//            {
+//                limit = 9;
+//            }
+//
+//            var listProduct = _db.Products.OrderByDescending(p => p.UpdatedAt).ToList();
+//            Debug.WriteLine("count: " + listProduct.Count);
+//            ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count() / limit.Value);
+//            ViewBag.CurrentPage = page;
+//            ViewBag.Limit = limit;
+//
+//            listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
+//
+//            return View(listProduct);
+//        }
+
+        public ActionResult Index(string occasion, string type, string color, int? page, int? limit)
         {
-            return View();
+            if (occasion == null)
+            {
+                occasion = "";
+            }
+
+            if (type == null)
+            {
+                type = "";
+            }
+
+            if (color == null)
+            {
+                color = "";
+            }
+
+            if (page == null)
+            {
+                page = 1;
+            }
+
+            if (limit == null)
+            {
+                limit = 9;
+            }
+
+            var listProduct = _db.Products.OrderByDescending(p => p.UpdatedAt).Where(p =>
+                p.TypeId.Contains(type) && p.OccasionId.Contains(occasion) && p.ColorId.Contains(color)).ToList();
+
+            ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count() / limit.Value);
+            ViewBag.CurrentPage = page;
+            ViewBag.Limit = limit;
+
+            ViewBag.Occasion = occasion;
+            ViewBag.Type = type;
+            ViewBag.Color = color;
+
+            listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
+
+            foreach (var VARIABLE in listProduct)
+            {
+                Debug.WriteLine("product name: " + VARIABLE.Name);
+            }
+
+            return View(listProduct);
         }
 
         public ActionResult Single(string id) //string id

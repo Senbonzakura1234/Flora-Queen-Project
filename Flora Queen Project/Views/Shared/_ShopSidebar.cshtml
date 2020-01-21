@@ -11,7 +11,10 @@
         <h3 class="wedget__title">Filter by price</h3>
         <div class="content-shopby">
             <div class="price_filter s-filter clear">
-                <form action="#" method="GET">
+                <form action="/Shop/Index" method="GET">
+                    <input type="hidden" name="occasion" value="" />
+                    <input type="hidden" name="type" value="" />
+                    <input type="hidden" name="color" value="" />
                     <div id="slider-range"></div>
                     <div class="slider__range--output">
                         <div class="price__output--wrap">
@@ -20,7 +23,11 @@
                                 <span>Price :</span><input type="text" id="amount" readonly="">
                             </div>
                             <div class="price--filter">
-                                <a href="#">Filter</a>
+                                <button class="btn-gradient-success" type="submit">Filter</button>
+                                @* <a href="#">Filter</a> *@
+                            </div>
+                            <div class="price--filter">
+                                <a href="/Shop/index" id="clear-filter">clear-filter</a>
                             </div>
                         </div>
                     </div>

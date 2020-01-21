@@ -4,7 +4,7 @@
     @foreach (var item in Model)
     {
         <li>
-            <a href="#">
+            <a class="color-click" data-id="@item.Id">
                 @Html.DisplayFor(modelItem => item.Name)
                 <span>(@Html.DisplayFor(modelItem => item.Products.Count))</span>
             </a>
