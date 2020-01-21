@@ -13,7 +13,7 @@ namespace Flora_Queen_Project.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202001181621038_InitalTable"; }
+            get { return "202001211812599_InitalTable"; }
         }
         
         string IMigrationMetadata.Source

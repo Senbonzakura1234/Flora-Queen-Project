@@ -12,6 +12,7 @@ namespace Flora_Queen_Project.Models
         public string Description { get; set; }
         public string ImgUrl { get; set; }
         public int InStock { get; set; }
+        [DataType(DataType.Currency)]
         public double Price { get; set; }
 
         [ForeignKey("Type")]
@@ -25,7 +26,7 @@ namespace Flora_Queen_Project.Models
         [ForeignKey("Color")]
         public string ColorId { get; set; }
         public virtual Color Color { get; set; }
-
+        public double Discount { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
 
         public ProductStatusEnum ProductStatus { get; set; }
