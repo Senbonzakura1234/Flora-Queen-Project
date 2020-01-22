@@ -79,3 +79,17 @@ body {
         background: #464646 none repeat scroll 0 0;
         color: #fff;
     }
+
+.current-price-cart {
+    color: #ce7852;
+    font-weight: 700;
+    margin-right: 15px;
+}
+.old-price-cart {
+    color: #7d7d7d;
+    text-decoration: line-through;
+    font-weight: 700;
+}
+.table-min-width {
+    min-width: 120px;
+}

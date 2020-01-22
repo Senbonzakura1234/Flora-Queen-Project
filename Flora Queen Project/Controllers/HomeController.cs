@@ -111,7 +111,8 @@ namespace Flora_Queen_Project.Controllers
                     id = product.Id,
                     name = product.Name,
                     price = product.Price,
-                    imgUrl = product.ImgUrl
+                    imgUrl = product.ImgUrl,
+                    discount = product.Discount
                 }, JsonRequestBehavior.AllowGet)
                 : null;
         }

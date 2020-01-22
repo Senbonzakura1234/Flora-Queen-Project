@@ -145,11 +145,14 @@
                                             <span>close</span>
                                         </div>
                                         <div class="items-total d-flex justify-content-between">
-                                            <span class="total-count"></span>
-                                            <span>Cart Subtotal</span>
+                                            @*<span class="total-count"></span>*@
+                                            <div class="pl-2">Cart Subtotal</div>
                                         </div>
-                                        <div class="total_amount text-right">
-                                            <span>$<span class="total-cart"></span></span>
+                                        <div class="total_amount text-left">
+                                            <ul class="d-flex">
+                                                <li class="current-price-cart"> $<span class="total-cart"></span> </li>
+                                                <li class="mr-auto old-price-cart text-muted"> $<span class="total-cart-old"></span> </li>
+                                            </ul>
                                         </div>
                                         <div class="mini_action checkout">
                                             <a class="checkout__btn createOrder" href="@Url.Action("Checkout","Payment")">Go to Checkout</a>

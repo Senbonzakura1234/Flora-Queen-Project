@@ -11,11 +11,12 @@
         var cart = [];
 
         // Constructor
-        function Item(id, name, price, imgUrl, count) {
+        function Item(id, name, price, imgUrl, discount, count) {
             this.id = id;
             this.name = name;
             this.price = price;
             this.imgUrl = imgUrl;
+            this.discount = discount;
             this.count = count;
         }
 
@@ -40,7 +41,7 @@
         const obj = {};
 
         // Add to cart
-        obj.addItemToCart = function (id, name, price, imgUrl, count) {
+        obj.addItemToCart = function (id, name, price, imgUrl, discount, count) {
             var item;
             for (item in cart) {
                 if (cart.hasOwnProperty(item)) {
@@ -51,7 +52,7 @@
                     }
                 }
             }
-            item = new Item(id, name, price, imgUrl, count);
+            item = new Item(id, name, price, imgUrl, discount, count);
             console.log(item);
             cart.push(item);
             saveCart();
@@ -118,10 +119,21 @@
             var totalCart = 0;
             for (let item in cart) {
                 if (cart.hasOwnProperty(item)) {
-                    totalCart += cart[item].price * cart[item].count;
+                    totalCart += cart[item].price * cart[item].discount * cart[item].count;
                 }
             }
             return Number(totalCart.toFixed(2));
+        };
+
+        // Total cart
+        obj.totalCartOld = function () {
+            var totalCartOld = 0;
+            for (let item in cart) {
+                if (cart.hasOwnProperty(item)) {
+                    totalCartOld += cart[item].price * cart[item].count;
+                }
+            }
+            return Number(totalCartOld.toFixed(2));
         };
 
         // List cart
@@ -182,7 +194,8 @@
                     const name = res.name;
                     const price = res.price;
                     const imgUrl = res.imgUrl;
-                    shoppingCart.addItemToCart(id, name, price, imgUrl, 1);
+                    const discount = res.discount;
+                    shoppingCart.addItemToCart(id, name, price, imgUrl, discount, 1);
                     displayCart();
                 }
             },
@@ -242,7 +255,7 @@
                 //    }</td></tr>`;
 
                 data += `
-                        <div class="item01 d-flex mt--20">
+                        <div class="item01 d-flex mt--20 cartItemNo${cartArray[i].id}">
                             <div class="thumb">
                                 <a href="#/">
                                     <img src="${cartArray[i].imgUrl}" alt="product images">
@@ -250,7 +263,10 @@
                             </div>
                             <div class="content">
                                 <h6><a href="#/">${cartArray[i].name}</a></h6>
-                                <span class="prize">$ ${cartArray[i].price}</span>
+                                <ul class="d-flex text-small">
+                                    <li class="current-price-cart">$ ${(cartArray[i].price * cartArray[i].discount).toFixed(2)}</li>
+                                    <li class="old-price-cart text-muted">$ ${cartArray[i].price}</li>
+                                </ul>
                                 <div class="product_prize d-flex justify-content-between">
                                     <span class="qun">Qty: ${cartArray[i].count}</span>
                                     <ul class="d-flex justify-content-end">
@@ -279,18 +295,102 @@
         const output = `<div class="miniproduct show-cart">
                             ${data}      
                         </div>`;
+
+       
+
         if (shoppingCart.totalCount() > 0) {
-            $(".checkout").show();
-            $(".single__items").show();
-            $(".mini_action.cart").show();
+            $(".checkout").slideDown();
+            $(".single__items").slideDown();
+            $(".mini_action.cart").slideDown();
         } else {
-            $(".checkout").hide();
-            $(".single__items").hide();
-            $(".mini_action.cart").hide();
+            $(".checkout").slideUp();
+            $(".single__items").slideUp();
+            $(".mini_action.cart").fadeOut();
         }
         $(".show-cart").html(output);
         $(".total-cart").html(shoppingCart.totalCart());
+
+        if (shoppingCart.totalCartOld() !== shoppingCart.totalCart()) {
+            $(".total-cart-old").html(shoppingCart.totalCartOld());
+            $(".total_amount .old-price-cart").show();
+        } else {
+            $(".total_amount .old-price-cart").hide();
+        }
         $(".total-count").html(shoppingCart.totalCount());
+
+
+        if ($(".cart-table").length) {
+            var cartTableData = "";
+            for (let i in cartArray) {
+                if (cartArray.hasOwnProperty(i)) {
+
+                    cartTableData += `
+                        <tr>
+                            <td class="table-min-width"><a href="#"><img src="${cartArray[i].imgUrl}" height="100" width="80" alt="product img"></a></td>
+                            <td class="table-min-width"><a href="#">${cartArray[i].name}</a></td>
+                            <td class="table-min-width"><span class="amount">${cartArray[i].price}</span></td>
+                            <td class="table-min-width">
+                                <div class="input-group">
+                                    <a class="minus-item input-group-addon btn btn-primary" data-id="${cartArray[i].id}">-</a>
+                                    <input type="number" class="item-count form-control" data-id="${cartArray[i].id}" value="${cartArray[i].count}">
+                                    <a class="plus-item btn btn-primary input-group-addon" data-id="${cartArray[i].id}">+</a>
+                                </div>
+                            </td>
+                            <td class="table-min-width">$ ${(cartArray[i].price * cartArray[i].discount).toFixed(2)}</td>
+                            <td class="table-min-width">
+                                 <a class="delete-item" href="#/" data-id="${cartArray[i].id}">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        `;
+                }
+            }
+            const cartTableOutput = `
+                                    <div class="table-content wnro__table table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td class="table-min-width">Image</td>
+                                                <td class="table-min-width">Product</td>
+                                                <td class="table-min-width">Price</td>
+                                                <td class="table-min-width">Quantity</td>
+                                                <td class="table-min-width">Total</td>
+                                                <td class="table-min-width">Remove</td>
+                                            </tr>
+                                            ${cartTableData}      
+                                        </table>
+                                    </div>
+                                    `;
+            if (shoppingCart.totalCount() > 0) {
+                $(".cart-checkout-btn").show();
+                $(".cart-table").html(cartTableOutput);
+            } else {
+                $(".cart-checkout-btn").hide();
+                $(".cart-table").html(
+                        `<div class="table-content wnro__table table-responsive">
+                            <table class="table">
+                                <tr class="title-top">
+                                    <td class="product-thumbnail table-min-width">Image</td>
+                                    <td class="product-name table-min-width">Product</td>
+                                    <td class="product-price table-min-width">Price</th>
+                                    <td class="product-quantity table-min-width">Quantity</td>
+                                    <td class="product-subtotal table-min-width">Total</td>
+                                    <td class="product-remove table-min-width">Remove</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
+                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
+                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
+                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
+                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
+                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
+                                </tr>
+                            </table>
+                        </div>`
+                    );
+            }
+            $(".total-cart").html(shoppingCart.totalCart());
+        }
     }
 
     // Delete item button
@@ -327,6 +427,49 @@
     // Item count input
     // ReSharper disable once UnusedParameter
     $(".show-cart").on("change",
+        ".item-count",
+        function (event) {
+            const id = $(this).data("id");
+            const count = Number($(this).val());
+            shoppingCart.setCountForItem(id, count);
+            displayCart();
+        });
+
+
+
+
+    // ReSharper disable once UnusedParameter
+    $(".cart-table").on("click",
+        ".delete-item",
+        function (event) {
+            const id = $(this).data("id");
+            shoppingCart.removeItemFromCartAll(id);
+            displayCart();
+        });
+
+
+    // -1
+    // ReSharper disable once UnusedParameter
+    $(".cart-table").on("click",
+        ".minus-item",
+        function (event) {
+            const id = $(this).data("id");
+            shoppingCart.removeItemFromCart(id);
+            displayCart();
+        });
+    // +1
+    // ReSharper disable once UnusedParameter
+    $(".cart-table").on("click",
+        ".plus-item",
+        function (event) {
+            const id = $(this).data("id");
+            shoppingCart.addItemToCart(id);
+            displayCart();
+        });
+
+    // Item count input
+    // ReSharper disable once UnusedParameter
+    $(".cart-table").on("change",
         ".item-count",
         function (event) {
             const id = $(this).data("id");
