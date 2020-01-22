@@ -402,6 +402,7 @@ namespace Flora_Queen_Project.Controllers
         public async Task<ActionResult> EditUserInfo(NewEditUserInfo editUserInfo)
         {
             if (editUserInfo == null) return View((NewEditUserInfo) null);
+            if (!ModelState.IsValid) return View(editUserInfo);
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             user.UpdatedAt = DateTime.Now;
             if (editUserInfo.FirstName != null)

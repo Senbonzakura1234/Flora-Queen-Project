@@ -97,5 +97,23 @@ namespace Flora_Queen_Project.Controllers
             var product = await DbContext.Products.FindAsync(id);
             return product == null ? null : PartialView("_AjaxQuickView", product);
         }
+
+        public async Task<ActionResult> GetProductInfo(string id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            var product = await DbContext.Products.FindAsync(id);
+            return product != null
+                ? Json(new
+                {
+                    id = product.Id,
+                    name = product.Name,
+                    price = product.Price,
+                    imgUrl = product.ImgUrl
+                }, JsonRequestBehavior.AllowGet)
+                : null;
+        }
     }
 }
