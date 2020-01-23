@@ -52,7 +52,7 @@
                     <div class="@RenderSection("logo_head_class", required: false) col-lg-2">
                         <div class="logo">
                             @* ReSharper disable Html.IdNotResolved *@
-                            <a href="#/">
+                            <a href="@Url.Action("Index","Home")">
                                 <img class="d-none d-lg-block mt-3" style="max-height: 45px"
                                     src="https://res.cloudinary.com/senbonzakura/image/upload/v1578996462/images/ImagePlaceHolder/logo/floraqueen-logo_s8xu3a.png"
                                      alt="logo images">
@@ -66,7 +66,7 @@
                     <div class="col-lg-8 d-none d-lg-block">
                         <nav class="mainmenu__nav">
                             <ul class="meninmenu d-flex justify-content-start">
-                                <li class="drop with--one--item"><a href="#/">Home</a></li>
+                                <li class="drop with--one--item"><a href="@Url.Action("Index","Home")">Home</a></li>
                                 <li class="drop">
                                     <a href="#/">Flower</a>
                                     <div class="megamenu mega03">
@@ -76,10 +76,10 @@
                                     </div>
                                 </li>
                                 <li class="drop">
-                                    <a href="#/">PLANTS</a>
+                                    <a href="@Url.Action("Index","Shop")">PLANTS</a>
                                 </li>
                                 <li class="drop">
-                                    <a href="#/">VIP</a>
+                                    <a href="@Url.Action("Index","Shop")">VIP</a>
                                 </li>
                                 <li class="drop">
                                     <a href="#/">INTERNATIONAL</a>
@@ -108,13 +108,13 @@
                                     <div class="megamenu mega02">
                                         <ul class="item item02">
                                             <li class="title">GIFTS</li>
-                                            <li><a href="#/">Chocolate Baskets</a></li>
-                                            <li><a href="#/">Baby Gift</a></li>
+                                            <li><a href="@Url.Action("Index","Home")">Chocolate Baskets</a></li>
+                                            <li><a href="@Url.Action("Index","Home")">Baby Gift</a></li>
                                         </ul>
                                         <ul class="item item02">
                                             <li class="title">SERVICE</li>
-                                            <li><a href="#/">Business Service</a></li>
-                                            <li><a href="#/">Join us as a Florist</a></li>
+                                            <li><a href="@Url.Action("Index","Home")">Business Service</a></li>
+                                            <li><a href="@Url.Action("Index","Home")">Join us as a Florist</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -177,52 +177,6 @@
                                     <div class="content-inner">
                                         <div class="switcher-currency">
                                             <strong class="label switcher-label">
-                                                <span>Currency</span>
-                                            </strong>
-                                            <div class="switcher-options">
-                                                <div class="switcher-currency-trigger">
-                                                    <span class="currency-trigger">USD - US Dollar</span>
-                                                    <ul class="switcher-dropdown">
-                                                        <li>GBP - British Pound Sterling</li>
-                                                        <li>EUR - Euro</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="switcher-currency">
-                                            <strong class="label switcher-label">
-                                                <span>Language</span>
-                                            </strong>
-                                            <div class="switcher-options">
-                                                <div class="switcher-currency-trigger">
-                                                    <span class="currency-trigger">English01</span>
-                                                    <ul class="switcher-dropdown">
-                                                        <li>English02</li>
-                                                        <li>English03</li>
-                                                        <li>English04</li>
-                                                        <li>English05</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="switcher-currency">
-                                            <strong class="label switcher-label">
-                                                <span>Select Store</span>
-                                            </strong>
-                                            <div class="switcher-options">
-                                                <div class="switcher-currency-trigger">
-                                                    <span class="currency-trigger">Fashion Store</span>
-                                                    <ul class="switcher-dropdown">
-                                                        <li>Furniture</li>
-                                                        <li>Shoes</li>
-                                                        <li>Speaker Store</li>
-                                                        <li>Furniture</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="switcher-currency">
-                                            <strong class="label switcher-label">
                                                 <span>My Account</span>
                                             </strong>
                                             <div class="switcher-options">
@@ -244,11 +198,11 @@
                     <div class="col-lg-12 d-none">
                         <nav class="mobilemenu__nav">
                             <ul class="meninmenu">
-                                <li><a href="#/">Home</a></li>
+                                <li><a href="@Url.Action("Index","Home")">Home</a></li>
                                 <li>
                                     <a href="#/">Pages</a>
                                     <ul>
-                                        <li><a href="#/">About Page</a></li>
+                                        <li><a href="@Url.Action("About","Home")">About</a></li>
                                         <li>
                                             <a href="#/">Portfolio</a>
                                             <ul>
@@ -256,20 +210,18 @@
                                                 <li><a href="#/">Portfolio Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#/">My Account</a></li>
-                                        <li><a href="#/">Cart Page</a></li>
-                                        <li><a href="#/">Checkout Page</a></li>
+                                        <li><a href="@Url.Action("Cart","Payment")">Cart</a></li>
+                                        <li><a href="@Url.Action("Checkout","Payment")">Checkout Page</a></li>
                                         <li><a href="#/">Wishlist Page</a></li>
-                                        <li><a href="#/">404 Page</a></li>
-                                        <li><a href="#/">Faq Page</a></li>
+                                        <li><a href="@Url.Action("FAQ","Home")">Faq Page</a></li>
                                         <li><a href="#/">Team Page</a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#/">Shop</a>
                                     <ul>
-                                        <li><a href="#/">Shop Grid</a></li>
-                                        <li><a href="#/">Single Product</a></li>
+                                        <li><a href="@Url.Action("Index","Shop")?viewMode=0">Shop Grid</a></li>
+                                        <li><a href="@Url.Action("Index","Shop")?viewMode=1">Shop List</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -279,7 +231,7 @@
                                         <li><a href="#/">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#/">Contact</a></li>
+                                <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
                             </ul>
                         </nav>
                     </div>

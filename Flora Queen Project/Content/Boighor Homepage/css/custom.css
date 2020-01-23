@@ -93,3 +93,6 @@ body {
 .table-min-width {
     min-width: 120px;
 }
+.cart-has-item .cart-no-item {
+    display: none;
+}

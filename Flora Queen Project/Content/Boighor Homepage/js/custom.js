@@ -1,6 +1,8 @@
 ﻿
 
 $(function () {
+    console.log(window.location.pathname);
+    
     setTimeout(
         function () {
             $(".loader-wrapper").fadeOut();

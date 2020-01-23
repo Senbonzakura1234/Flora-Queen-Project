@@ -257,12 +257,12 @@
                 data += `
                         <div class="item01 d-flex mt--20 cartItemNo${cartArray[i].id}">
                             <div class="thumb">
-                                <a href="#/">
+                                <a href="/Shop/Single/${cartArray[i].id}">
                                     <img src="${cartArray[i].imgUrl}" alt="product images">
                                 </a>
                             </div>
                             <div class="content">
-                                <h6><a href="#/">${cartArray[i].name}</a></h6>
+                                <h6><a href="/Shop/Single/${cartArray[i].id}">${cartArray[i].name}</a></h6>
                                 <ul class="d-flex text-small">
                                     <li class="current-price-cart">$ ${(cartArray[i].price * cartArray[i].discount).toFixed(2)}</li>
                                     <li class="old-price-cart text-muted">$ ${cartArray[i].price}</li>
@@ -319,25 +319,41 @@
         $(".total-count").html(shoppingCart.totalCount());
 
 
+        if ($(".wn__checkout__area").length) {
+            if (shoppingCart.totalCount() > 0) {
+                $(".cart-has-item").fadeIn();
+                $(".cart-no-item").remove();
+            } else {
+                $(".cart-no-item").fadeIn();
+                $(".cart-has-item").remove();
+            }
+        }
         if ($(".cart-table").length) {
             var cartTableData = "";
             for (let i in cartArray) {
                 if (cartArray.hasOwnProperty(i)) {
 
-                    cartTableData += `
+                    cartTableData +=
+                        `
                         <tr>
-                            <td class="table-min-width"><a href="#"><img src="${cartArray[i].imgUrl}" height="100" width="80" alt="product img"></a></td>
-                            <td class="table-min-width"><a href="#">${cartArray[i].name}</a></td>
-                            <td class="table-min-width"><span class="amount">${cartArray[i].price}</span></td>
-                            <td class="table-min-width">
-                                <div class="input-group">
-                                    <a class="minus-item input-group-addon btn btn-primary" data-id="${cartArray[i].id}">-</a>
+                            <td class="product-thumbnail text-center table-min-width">
+                                <a href="/Shop/Single/${cartArray[i].id}">
+                                    <img src="${cartArray[i].imgUrl}" height="100" width="80" alt="product img">
+                                </a>
+                            </td>
+                            <td class="product-name text-center table-min-width">
+                                <a href="/Shop/Single/${cartArray[i].id}">${cartArray[i].name}</a>
+                            </td>
+                            <td class="product-price text-center  table-min-width"><span class="amount">${cartArray[i].price}</span></td>
+                            <td class="product-quantity text-center  table-min-width">
+                                <div class="input-group" style="max-width: 100%">
+                                    <a class="minus-item input-group-addon text-white btn btn-dark" data-id="${cartArray[i].id}">-</a>
                                     <input type="number" class="item-count form-control" data-id="${cartArray[i].id}" value="${cartArray[i].count}">
-                                    <a class="plus-item btn btn-primary input-group-addon" data-id="${cartArray[i].id}">+</a>
+                                    <a class="plus-item btn btn-dark text-white input-group-addon" data-id="${cartArray[i].id}">+</a>
                                 </div>
                             </td>
-                            <td class="table-min-width">$ ${(cartArray[i].price * cartArray[i].discount).toFixed(2)}</td>
-                            <td class="table-min-width">
+                            <td class="product-subtotal text-center  table-min-width">$ ${(cartArray[i].price * cartArray[i].discount).toFixed(2)}</td>
+                            <td class="product-remove text-center  table-min-width">
                                  <a class="delete-item" href="#/" data-id="${cartArray[i].id}">
                                     <i class="zmdi zmdi-delete"></i>
                                 </a>
@@ -347,19 +363,23 @@
                 }
             }
             const cartTableOutput = `
-                                    <div class="table-content wnro__table table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <td class="table-min-width">Image</td>
-                                                <td class="table-min-width">Product</td>
-                                                <td class="table-min-width">Price</td>
-                                                <td class="table-min-width">Quantity</td>
-                                                <td class="table-min-width">Total</td>
-                                                <td class="table-min-width">Remove</td>
-                                            </tr>
-                                            ${cartTableData}      
-                                        </table>
-                                    </div>
+                                        <div class="table-content wnro__table table-responsive">
+                                            <table class="table" style="text-align:center;">
+                                                <thead>
+                                                    <tr class="title-top">
+                                                        <th class="product-thumbnail text-center ">Image</th>
+                                                        <th class="product-name text-center ">Product</th>
+                                                        <th class="product-price text-center ">Price</th>
+                                                        <th class="product-quantity text-center ">Quantity</th>
+                                                        <th class="product-subtotal text-center ">Total</th>
+                                                        <th class="product-remove text-center ">Remove</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${cartTableData} 
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     `;
             if (shoppingCart.totalCount() > 0) {
                 $(".cart-checkout-btn").show();
@@ -367,27 +387,23 @@
             } else {
                 $(".cart-checkout-btn").hide();
                 $(".cart-table").html(
-                        `<div class="table-content wnro__table table-responsive">
-                            <table class="table">
-                                <tr class="title-top">
-                                    <td class="product-thumbnail table-min-width">Image</td>
-                                    <td class="product-name table-min-width">Product</td>
-                                    <td class="product-price table-min-width">Price</th>
-                                    <td class="product-quantity table-min-width">Quantity</td>
-                                    <td class="product-subtotal table-min-width">Total</td>
-                                    <td class="product-remove table-min-width">Remove</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
-                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
-                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
-                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
-                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
-                                    <td class="text-center table-min-width"><span class="text-muted text-small">- Null -</span></td>
-                                </tr>
+                    `
+                        <div class="table-content wnro__table table-responsive">
+                            <table class="table" style="text-align:center;">
+                                <thead>
+                                    <tr class="title-top">
+                                        <th class="product-thumbnail text-center">- Cart Empty -</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="product-thumbnail text-center table-min-width">- Cart Empty -</td>
+                                    </tr>
+                                </tbody>
                             </table>
-                        </div>`
-                    );
+                        </div>
+                    `
+                );
             }
             $(".total-cart").html(shoppingCart.totalCart());
         }
@@ -477,6 +493,5 @@
             shoppingCart.setCountForItem(id, count);
             displayCart();
         });
-
     displayCart();
 })

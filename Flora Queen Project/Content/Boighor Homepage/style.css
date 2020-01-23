@@ -6472,9 +6472,9 @@ h3.widget-title-modal {
     color: #3f3f3f;
     display: block;
     font-weight: 700;
-    height: 1em;
+    /*height: 1em;*/
     line-height: 1;
-    padding: 10px 0;
+    /*padding: 10px 0;*/
     text-align: center;
 }
 
