@@ -5,6 +5,6 @@
         @* ReSharper disable once Html.IdNotResolved *@
         @foreach (var item in Model)
         {
-            <li><a href="#/">@Html.DisplayFor(modelItem => item.Name)</a></li>
+            <li><a href="@Url.Action("Index","Shop")?type=@item.Id">@Html.DisplayFor(modelItem => item.Name)</a></li>
         }
     </ul>

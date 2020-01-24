@@ -485,16 +485,16 @@
     $("#slider-range").slider({
         range: true,
         min: 0,
-        max: 500,
+        max: 200,
         values: [$("#minAmount").val(), $("#maxAmount").val()],
-        step: 50,
+        step: 10,
         slide: function (event, ui) {
             $("#minAmount").val(ui.values[0]);
             $("#maxAmount").val(ui.values[1]);
-            $("#amount").text(`${ui.values[0]}K Vnd - ${ui.values[1]}K Vnd`);
+            $("#amount").text(`$ ${ui.values[0]} - $ ${ui.values[1]}`);
         }
     });
-    $("#amount").text(`${$("#slider-range").slider("values", 0)}K Vnd - ${$("#slider-range").slider("values", 1)}K Vnd`);
+    $("#amount").text(`$ ${$("#slider-range").slider("values", 0)} - $ ${$("#slider-range").slider("values", 1)}`);
 
 
 /*====== Dropdown ======*/

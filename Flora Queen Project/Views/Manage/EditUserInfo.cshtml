@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section header_class
+{oth-page}
+@section logo_head_class
+{col-md-6 col-sm-5 col-6}
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area bg-image--6">
     <div class="container">
@@ -58,14 +62,14 @@
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
                             <div class="input__box">
-                                <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")" 
+                                <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")"
                                      class="img-thumbnail" style="width: 100px" alt="Alternate Text" />
                                 <div style="margin-top: 20px;">
                                     @Html.LabelFor(model => model.Avatar)
                                     @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
                                     @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
                                     <div class="form__btn" style="margin-top: 5px">
-                                        <button type="button" id="upload_widget" >Upload file</button>
+                                        <button type="button" id="upload_widget">Upload file</button>
                                     </div>
                                 </div>
                             </div>
@@ -85,20 +89,20 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
     <script type="text/javascript">
-    var myWidget = cloudinary.createUploadWidget({
+        var myWidget = cloudinary.createUploadWidget({
             cloudName: 'leduc911',
             uploadPreset: 'v686mun2'
         },
-        (error, result) => {
-            if (!error && result && result.event === "success") {
-                const imgLink = result.info.secure_url;
-                document.querySelector("input[name='Avatar']").value = imgLink;
-                const imgPreview = document.getElementById("preview");
-                imgPreview.src = imgLink;
-                imgPreview.classList.remove("hidden");
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    const imgLink = result.info.secure_url;
+                    document.querySelector("input[name='Avatar']").value = imgLink;
+                    const imgPreview = document.getElementById("preview");
+                    imgPreview.src = imgLink;
+                    imgPreview.classList.remove("hidden");
+                }
             }
-        }
-    );
+        );
 
         document.getElementById("upload_widget").addEventListener("click", function () {
             myWidget.open();

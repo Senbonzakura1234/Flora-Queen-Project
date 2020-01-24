@@ -402,6 +402,7 @@
     <Content Include="Content\Boighor Homepage\images\testimonial\3.png" />
     <Content Include="Content\Boighor Homepage\js\active.js" />
     <Content Include="Content\Boighor Homepage\js\bootstrap.min.js" />
+    <Content Include="Content\Boighor Homepage\js\cart.js" />
     <Content Include="Content\Boighor Homepage\js\custom.js" />
     <Content Include="Content\Boighor Homepage\js\plugins.js" />
     <Content Include="Content\Boighor Homepage\js\popper.min.js" />

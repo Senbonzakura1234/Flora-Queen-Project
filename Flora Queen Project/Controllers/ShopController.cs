@@ -102,8 +102,8 @@ namespace Flora_Queen_Project.Controllers
                 p.TypeId.Contains(type) &&
                 p.OccasionId.Contains(occasion) &&
                 p.ColorId.Contains(color) &&
-                p.Price >= minAmount * 1000 &&
-                p.Price <= maxAmount * 1000
+                p.Price >= minAmount &&
+                p.Price <= maxAmount
             ).ToList();
             var listProduct = new List<Product>();
             // ReSharper disable once ConvertIfStatementToSwitchStatement
@@ -124,12 +124,12 @@ namespace Flora_Queen_Project.Controllers
             }
             else if (sortBy is (int) FilterEnum.PriceAsc)
             {
-                var dataList = data.OrderBy(p => p.Name);
+                var dataList = data.OrderBy(p => p.Price);
                 listProduct.AddRange(dataList);
             }
             else if (sortBy is (int) FilterEnum.PriceDesc)
             {
-                var dataList = data.OrderByDescending(p => p.Name);
+                var dataList = data.OrderByDescending(p => p.Price);
                 listProduct.AddRange(dataList);
             }
             else if (sortBy is (int) FilterEnum.SellRate)
