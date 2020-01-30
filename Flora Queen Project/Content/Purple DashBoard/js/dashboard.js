@@ -464,51 +464,51 @@ $(function () {
                     }
                 }
 
-                const ctx = document.getElementById("color-chart").getContext("2d");
-                const gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
-                gradientStrokeBlue.addColorStop(0, "rgba(54, 215, 232, 1)");
-                gradientStrokeBlue.addColorStop(1, "rgba(177, 148, 250, 1)");
-                const gradientLegendBlue = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
+                const ctxColor = document.getElementById("color-chart").getContext("2d");
+                const colorGradientStrokeBlue = ctxColor.createLinearGradient(0, 0, 0, 181);
+                colorGradientStrokeBlue.addColorStop(0, "rgba(54, 215, 232, 1)");
+                colorGradientStrokeBlue.addColorStop(1, "rgba(177, 148, 250, 1)");
+                const colorGradientLegendBlue = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
 
-                const gradientStrokeRed = ctx.createLinearGradient(0, 0, 0, 50);
-                gradientStrokeRed.addColorStop(0, "rgba(255, 191, 150, 1)");
-                gradientStrokeRed.addColorStop(1, "rgba(254, 112, 150, 1)");
-                const gradientLegendRed = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
+                const colorGradientStrokeRed = ctxColor.createLinearGradient(0, 0, 0, 50);
+                colorGradientStrokeRed.addColorStop(0, "rgba(255, 191, 150, 1)");
+                colorGradientStrokeRed.addColorStop(1, "rgba(254, 112, 150, 1)");
+                const colorGradientLegendRed = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
 
-                const gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
-                gradientStrokeGreen.addColorStop(0, "rgba(6, 185, 157, 1)");
-                gradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
-                const gradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
+                const colorGradientStrokeGreen = ctxColor.createLinearGradient(0, 0, 0, 300);
+                colorGradientStrokeGreen.addColorStop(0, "rgba(6, 185, 157, 1)");
+                colorGradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
+                const colorGradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
 
-                var trafficChartData = {
+                var colorsChartData = {
                     datasets: [{
                         data: colorCountArray,
                         backgroundColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            colorGradientStrokeBlue,
+                            colorGradientStrokeGreen,
+                            colorGradientStrokeRed
                         ],
                         hoverBackgroundColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            colorGradientStrokeBlue,
+                            colorGradientStrokeGreen,
+                            colorGradientStrokeRed
                         ],
                         borderColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            colorGradientStrokeBlue,
+                            colorGradientStrokeGreen,
+                            colorGradientStrokeRed
                         ],
                         legendColor: [
-                            gradientLegendBlue,
-                            gradientLegendGreen,
-                            gradientLegendRed
+                            colorGradientLegendBlue,
+                            colorGradientLegendGreen,
+                            colorGradientLegendRed
                         ]
                     }],
 
                     // These labels appear in the legend and in the tooltips when hovering different arcs
                     labels: colorNameArray
                 };
-                const trafficChartOptions = {
+                const colorsChartOptions = {
                     responsive: true,
                     animation: {
                         animateScale: true,
@@ -519,25 +519,25 @@ $(function () {
                     legendCallback: function (chart) {
                         const text = [];
                         text.push("<ul>");
-                        for (let i = 0; i < trafficChartData.datasets[0].data.length; i++) {
-                            text.push(`<li><span class="legend-dots" style="background:${trafficChartData.datasets[0].legendColor[i]}"></span>`);
-                            if (trafficChartData.labels[i]) {
-                                text.push(trafficChartData.labels[i]);
+                        for (let i = 0; i < colorsChartData.datasets[0].data.length; i++) {
+                            text.push(`<li><span class="legend-dots" style="background:${colorsChartData.datasets[0].legendColor[i]}"></span>`);
+                            if (colorsChartData.labels[i]) {
+                                text.push(colorsChartData.labels[i]);
                             }
-                            text.push(`<span class="float-right">${trafficChartData.datasets[0].data[i]}%</span>`);
+                            text.push(`<span class="float-right">${colorsChartData.datasets[0].data[i]}%</span>`);
                             text.push("</li>");
                         }
                         text.push("</ul>");
                         return text.join("");
                     }
                 };
-                const trafficChartCanvas = $("#color-chart").get(0).getContext("2d");
-                const trafficChart = new window.Chart(trafficChartCanvas, {
+                const colorsChartCanvas = $("#color-chart").get(0).getContext("2d");
+                const colorsChart = new window.Chart(colorsChartCanvas, {
                     type: "doughnut",
-                    data: trafficChartData,
-                    options: trafficChartOptions
+                    data: colorsChartData,
+                    options: colorsChartOptions
                 });
-                $("#color-chart-legend").html(trafficChart.generateLegend());
+                $("#color-chart-legend").html(colorsChart.generateLegend());
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
@@ -564,51 +564,60 @@ $(function () {
                     }
                 }
 
-                const ctx = document.getElementById("occasion-chart").getContext("2d");
-                const gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
-                gradientStrokeBlue.addColorStop(0, "rgba(54, 215, 232, 1)");
-                gradientStrokeBlue.addColorStop(1, "rgba(177, 148, 250, 1)");
-                const gradientLegendBlue = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
+                const ctxOccasion = document.getElementById("occasion-chart").getContext("2d");
+                const occasionGradientStrokeBlue = ctxOccasion.createLinearGradient(0, 0, 0, 181);
+                occasionGradientStrokeBlue.addColorStop(0, "rgba(54, 215, 232, 1)");
+                occasionGradientStrokeBlue.addColorStop(1, "rgba(177, 148, 250, 1)");
+                const occasionGradientLegendBlue = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
 
-                const gradientStrokeRed = ctx.createLinearGradient(0, 0, 0, 50);
-                gradientStrokeRed.addColorStop(0, "rgba(255, 191, 150, 1)");
-                gradientStrokeRed.addColorStop(1, "rgba(254, 112, 150, 1)");
-                const gradientLegendRed = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
+                const occasionGradientStrokeRed = ctxOccasion.createLinearGradient(0, 0, 0, 50);
+                occasionGradientStrokeRed.addColorStop(0, "rgba(255, 191, 150, 1)");
+                occasionGradientStrokeRed.addColorStop(1, "rgba(254, 112, 150, 1)");
+                const occasiongradientLegendRed = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
 
-                const gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
-                gradientStrokeGreen.addColorStop(0, "rgba(6, 185, 157, 1)");
-                gradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
-                const gradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
+                const occasionGradientStrokeGreen = ctxOccasion.createLinearGradient(0, 0, 0, 300);
+                occasionGradientStrokeGreen.addColorStop(0, "rgba(6, 185, 157, 1)");
+                occasionGradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
+                const occasionGradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
 
-                var trafficChartData = {
+                const occasionGradientStrokeMystic = ctxOccasion.createLinearGradient(0, 0, 0, 132);
+                occasionGradientStrokeMystic.addColorStop(0, "rgba(233, 142, 152, 1)");
+                occasionGradientStrokeMystic.addColorStop(1, "rgba(127, 217, 210, 1)");
+                const occasiongradientLegendMystic = "linear-gradient(to right, rgba(233, 142, 152, 1), rgba(127, 217, 210, 1))";
+
+                var occasionsChartData = {
                     datasets: [{
                         data: occasionCountArray,
                         backgroundColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            occasionGradientStrokeBlue,
+                            occasionGradientStrokeGreen,
+                            occasionGradientStrokeRed,
+                            occasionGradientStrokeMystic
                         ],
                         hoverBackgroundColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            occasionGradientStrokeBlue,
+                            occasionGradientStrokeGreen,
+                            occasionGradientStrokeRed,
+                            occasionGradientStrokeMystic
                         ],
                         borderColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            occasionGradientStrokeBlue,
+                            occasionGradientStrokeGreen,
+                            occasionGradientStrokeRed,
+                            occasionGradientStrokeMystic
                         ],
                         legendColor: [
-                            gradientLegendBlue,
-                            gradientLegendGreen,
-                            gradientLegendRed
+                            occasionGradientLegendBlue,
+                            occasionGradientLegendGreen,
+                            occasiongradientLegendRed,
+                            occasiongradientLegendMystic
                         ]
                     }],
 
                     // These labels appear in the legend and in the tooltips when hovering different arcs
                     labels: occasionNameArray
                 };
-                const trafficChartOptions = {
+                const occasionsChartOptions = {
                     responsive: true,
                     animation: {
                         animateScale: true,
@@ -619,25 +628,25 @@ $(function () {
                     legendCallback: function (chart) {
                         const text = [];
                         text.push("<ul>");
-                        for (let i = 0; i < trafficChartData.datasets[0].data.length; i++) {
-                            text.push(`<li><span class="legend-dots" style="background:${trafficChartData.datasets[0].legendColor[i]}"></span>`);
-                            if (trafficChartData.labels[i]) {
-                                text.push(trafficChartData.labels[i]);
+                        for (let i = 0; i < occasionsChartData.datasets[0].data.length; i++) {
+                            text.push(`<li><span class="legend-dots" style="background:${occasionsChartData.datasets[0].legendColor[i]}"></span>`);
+                            if (occasionsChartData.labels[i]) {
+                                text.push(occasionsChartData.labels[i]);
                             }
-                            text.push(`<span class="float-right">${trafficChartData.datasets[0].data[i]}%</span>`);
+                            text.push(`<span class="float-right">${occasionsChartData.datasets[0].data[i]}%</span>`);
                             text.push("</li>");
                         }
                         text.push("</ul>");
                         return text.join("");
                     }
                 };
-                const trafficChartCanvas = $("#occasion-chart").get(0).getContext("2d");
-                const trafficChart = new window.Chart(trafficChartCanvas, {
+                const occasionsChartCanvas = $("#occasion-chart").get(0).getContext("2d");
+                const occasionsChart = new window.Chart(occasionsChartCanvas, {
                     type: "doughnut",
-                    data: trafficChartData,
-                    options: trafficChartOptions
+                    data: occasionsChartData,
+                    options: occasionsChartOptions
                 });
-                $("#occasion-chart-legend").html(trafficChart.generateLegend());
+                $("#occasion-chart-legend").html(occasionsChart.generateLegend());
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
@@ -664,51 +673,51 @@ $(function () {
                     }
                 }
 
-                const ctx = document.getElementById("type-chart").getContext("2d");
-                const gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
-                gradientStrokeBlue.addColorStop(0, "rgba(54, 215, 232, 1)");
-                gradientStrokeBlue.addColorStop(1, "rgba(177, 148, 250, 1)");
-                const gradientLegendBlue = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
+                const ctxType = document.getElementById("type-chart").getContext("2d");
+                const typeGradientStrokeBlue = ctxType.createLinearGradient(0, 0, 0, 181);
+                typeGradientStrokeBlue.addColorStop(0, "rgba(54, 215, 232, 1)");
+                typeGradientStrokeBlue.addColorStop(1, "rgba(177, 148, 250, 1)");
+                const typeGradientLegendBlue = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
 
-                const gradientStrokeRed = ctx.createLinearGradient(0, 0, 0, 50);
-                gradientStrokeRed.addColorStop(0, "rgba(255, 191, 150, 1)");
-                gradientStrokeRed.addColorStop(1, "rgba(254, 112, 150, 1)");
-                const gradientLegendRed = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
+                const typeGradientStrokeRed = ctxType.createLinearGradient(0, 0, 0, 50);
+                typeGradientStrokeRed.addColorStop(0, "rgba(255, 191, 150, 1)");
+                typeGradientStrokeRed.addColorStop(1, "rgba(254, 112, 150, 1)");
+                const typeGradientLegendRed = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
 
-                const gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
-                gradientStrokeGreen.addColorStop(0, "rgba(6, 185, 157, 1)");
-                gradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
-                const gradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
+                const typeGradientStrokeGreen = ctxType.createLinearGradient(0, 0, 0, 300);
+                typeGradientStrokeGreen.addColorStop(0, "rgba(6, 185, 157, 1)");
+                typeGradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
+                const typeGradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
 
-                var trafficChartData = {
+                var typesChartData = {
                     datasets: [{
                         data: typeCountArray,
                         backgroundColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            typeGradientStrokeBlue,
+                            typeGradientStrokeGreen,
+                            typeGradientStrokeRed
                         ],
                         hoverBackgroundColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            typeGradientStrokeBlue,
+                            typeGradientStrokeGreen,
+                            typeGradientStrokeRed
                         ],
                         borderColor: [
-                            gradientStrokeBlue,
-                            gradientStrokeGreen,
-                            gradientStrokeRed
+                            typeGradientStrokeBlue,
+                            typeGradientStrokeGreen,
+                            typeGradientStrokeRed
                         ],
                         legendColor: [
-                            gradientLegendBlue,
-                            gradientLegendGreen,
-                            gradientLegendRed
+                            typeGradientLegendBlue,
+                            typeGradientLegendGreen,
+                            typeGradientLegendRed
                         ]
                     }],
 
                     // These labels appear in the legend and in the tooltips when hovering different arcs
                     labels: typeNameArray
                 };
-                const trafficChartOptions = {
+                const typesChartOptions = {
                     responsive: true,
                     animation: {
                         animateScale: true,
@@ -719,25 +728,25 @@ $(function () {
                     legendCallback: function (chart) {
                         const text = [];
                         text.push("<ul>");
-                        for (let i = 0; i < trafficChartData.datasets[0].data.length; i++) {
-                            text.push(`<li><span class="legend-dots" style="background:${trafficChartData.datasets[0].legendColor[i]}"></span>`);
-                            if (trafficChartData.labels[i]) {
-                                text.push(trafficChartData.labels[i]);
+                        for (let i = 0; i < typesChartData.datasets[0].data.length; i++) {
+                            text.push(`<li><span class="legend-dots" style="background:${typesChartData.datasets[0].legendColor[i]}"></span>`);
+                            if (typesChartData.labels[i]) {
+                                text.push(typesChartData.labels[i]);
                             }
-                            text.push(`<span class="float-right">${trafficChartData.datasets[0].data[i]}%</span>`);
+                            text.push(`<span class="float-right">${typesChartData.datasets[0].data[i]}%</span>`);
                             text.push("</li>");
                         }
                         text.push("</ul>");
                         return text.join("");
                     }
                 };
-                const trafficChartCanvas = $("#type-chart").get(0).getContext("2d");
-                const trafficChart = new window.Chart(trafficChartCanvas, {
+                const typesChartCanvas = $("#type-chart").get(0).getContext("2d");
+                const typesChart = new window.Chart(typesChartCanvas, {
                     type: "doughnut",
-                    data: trafficChartData,
-                    options: trafficChartOptions
+                    data: typesChartData,
+                    options: typesChartOptions
                 });
-                $("#type-chart-legend").html(trafficChart.generateLegend());
+                $("#type-chart-legend").html(typesChart.generateLegend());
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
