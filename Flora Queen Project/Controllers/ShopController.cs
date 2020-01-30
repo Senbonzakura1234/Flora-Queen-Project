@@ -229,5 +229,114 @@ namespace Flora_Queen_Project.Controllers
             var data = DbContext.Products.OrderBy(p => p.Name).FirstOrDefault();
             return PartialView(data);
         }
+
+        //Shopping Cart
+        public ActionResult AddItem(string ProId, int quantity)
+        {
+            var ShoppingCart = Session["ShoppingCart"] as List<CartItem>;
+
+            if (ShoppingCart == null)
+            {
+                ShoppingCart = new List<CartItem>();
+                Debug.WriteLine("list null");
+            }
+
+            bool checkPro = true;
+            for (int i = 0; i < ShoppingCart.Count; i++)
+            {
+                if (ShoppingCart[i].id == ProId)
+                {
+                    ShoppingCart[i].count += quantity;
+                    if (ShoppingCart[i].count <= 0)
+                    {
+                        ShoppingCart.RemoveAt(i);
+                    }
+
+                    checkPro = false;
+                    break;
+                }
+            }
+
+            if (checkPro)
+            {
+                var product = DbContext.Products.Find(ProId);
+                if (product == null)
+                {
+                    return Json(new
+                    {
+                        ShoppingCart
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                
+                ShoppingCart.Add(new CartItem
+                {
+                    id = product.Id,
+                    count = quantity,
+                    discount = product.Discount,
+                    price = product.Price
+                });
+                
+            }
+
+            Session["ShoppingCart"] = ShoppingCart;
+            getTotal(ShoppingCart);
+
+            return Json(new
+            {
+                ShoppingCart,
+                totalQuantity = (int) Session["TotalQuantity"],
+                totalPrice = (double) Session["TotalPrice"]
+
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteItem(string ProId)
+        {
+            var ShoppingCart = Session["ShoppingCart"] as List<CartItem>;
+
+            if (ShoppingCart == null)
+            {
+                ShoppingCart = new List<CartItem>();
+                Debug.WriteLine("list null");
+            }
+
+            for (int i = 0; i < ShoppingCart.Count; i++)
+            {
+                if (ShoppingCart[i].id == ProId)
+                {
+                    ShoppingCart.RemoveAt(i);
+                    break;
+                }
+            }
+
+            Session["ShoppingCart"] = ShoppingCart;
+            getTotal(ShoppingCart);
+
+            return Json(new
+            {
+                ShoppingCart,
+                totalQuantity = (int)Session["TotalQuantity"],
+                totalPrice = (double)Session["TotalPrice"]
+
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        private void getTotal(List<CartItem> listCartItems)
+        {
+            var totalQuantity = 0;
+            double totalPrice = 0;
+
+            if (listCartItems != null)
+            {
+                for (int i = 0; i < listCartItems.Count; i++)
+                {
+                    totalQuantity += listCartItems[i].count;
+                    totalPrice += listCartItems[i].count * listCartItems[i].price * listCartItems[i].discount;
+                }
+            }
+          
+            Session["TotalQuantity"] = totalQuantity;
+            Session["TotalPrice"] = totalPrice;
+        }
     }
 }
