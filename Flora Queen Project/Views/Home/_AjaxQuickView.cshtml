@@ -18,18 +18,8 @@
             <span class="old-price">$ @Model.Price</span>
         </div>
     </div>
-    <div class="quick-desc d-none d-sm-block">
+    <div class="quick-desc">
         @Html.DisplayFor(model => model.Description)
-    </div>
-    <div class="select__size">
-        <h2>Select size</h2>
-        <ul class="color__list">
-            <li class="l__size"><a title="L" href="#/">L</a></li>
-            <li class="m__size"><a title="M" href="#/">M</a></li>
-            <li class="s__size"><a title="S" href="#/">S</a></li>
-            <li class="xl__size"><a title="XL" href="#/">XL</a></li>
-            <li class="xxl__size"><a title="XXL" href="#/">XXL</a></li>
-        </ul>
     </div>
     <div class="social-sharing">
         <div class="widget widget_socialsharing_widget">
@@ -42,5 +32,7 @@
             </ul>
         </div>
     </div>
-
+    <div class="addtocart-btn">
+        <a href="#/" class="add-to-cart" data-id="@Model.Id" data-action="addOne">Add to cart</a>
+    </div>
 </div>

@@ -90,9 +90,10 @@ body {
     text-decoration: line-through;
     font-weight: 700;
 }
-.table-min-width {
-    min-width: 120px;
-}
-.cart-has-item .cart-no-item {
-    display: none;
+
+@media (min-width: 576px) {
+    .cart-utilities {
+        bottom: 15px;
+        position: relative
+    }
 }

@@ -1798,7 +1798,10 @@ Elements Styles
 }
 
 @media only screen and (max-width: 575px) {
-    .minicart-content-wrapper { width: 308px; }
+    .minicart-content-wrapper { width: 350px; }
+    .block-minicart {
+        right: -60px;
+    }
 }
 
 @media only screen and (max-width: 420px) {

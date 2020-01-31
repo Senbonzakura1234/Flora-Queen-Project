@@ -1,0 +1,77 @@
+﻿@using Flora_Queen_Project.Models
+@model IEnumerable<Flora_Queen_Project.Models.CartItem>
+
+@* ReSharper disable  Html.IdNotResolved *@
+
+<li class="shopcart">
+    @* ReSharper disable once Html.IdNotResolved *@
+    <a class="cartbox_active" href="#/">
+        <i class="fas fa-shopping-cart text-white" style="height: 100%"></i>
+        <span class="product_qun cart-count">@Model.Count()</span>
+    </a>
+    <div class="block-minicart minicart__active">
+        <div class="minicart-content-wrapper">
+            <div class="micart__close">
+                <span>close</span>
+            </div>
+            <div class="items-total d-flex justify-content-between">
+                <span><span class="cart-count">@Model.Count()</span> items</span>
+                <span>Cart Subtotal</span>
+            </div>
+            <div class="total_amount text-right">
+                <span class="price-1st @(Model.Any()? "current-price-cart" : "")">$@(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))</span>
+                <span class="price-2nd old-price-cart @(!Model.Any()? "d-none" : "")">$@Math.Round(Model.Sum(item => item.count * item.price), 2)</span>
+            </div>
+
+
+
+            <div class="mini_action checkout @(!Model.Any()? "d-none" : "")">
+                <a class="checkout__btn" href="@Url.Action("Checkout","Payment")">Go to Checkout</a>
+            </div>
+            <div class="single__items @(!Model.Any()? "d-none" : "")">
+                <div class="miniproduct">
+                    @foreach (var item in Model)
+                    {
+                        <div class="item01 d-flex mb-3 mb-sm-1">
+                            <div class="thumb">
+                                <a href="@Url.Action("Single", "Shop", new{item.id})"><img src="@item.imgUrl" alt="product images"></a>
+                            </div>
+                            <div class="content">
+                                <h6><a href="@Url.Action("Single", "Shop", new{item.id})">@item.name</a></h6>
+                                <span class="text-small">
+                                    <span class="current-price-cart">$@(item.price * item.discount)</span>
+                                    <span class="old-price-cart">$@item.price</span>
+                                </span>
+                                <div class="product_prize d-flex justify-content-between">
+                                    <span class="qun">Qty: @item.count</span>
+                                    <ul class="cart-utilities justify-content-end d-flex">
+                                        <li>
+                                            <a class="add-to-cart" href="#/" data-id="@item.id" data-action="addOne">
+                                                <i class="zmdi zmdi-plus-circle"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="add-to-cart" href="#/" data-id="@item.id" data-action="minusOne">
+                                                <i class="zmdi zmdi-minus-circle"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="add-to-cart" href="#/" data-id="@item.id" data-action="delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="mini_action cart @(!Model.Any()? "d-none" : "")">
+                <a class="cart__btn" href="@Url.Action("Cart","Payment")">View and edit cart</a>
+            </div>
+        </div>
+    </div>
+</li>
+
+

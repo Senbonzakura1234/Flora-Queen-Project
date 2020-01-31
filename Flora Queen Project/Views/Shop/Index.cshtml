@@ -3,18 +3,18 @@
 
 @{
     ViewBag.Title = "List";
-    var sortBy = ((int?) ViewBag.sortBy).Value;
-    var totalPage = ((int?) ViewBag.TotalPage).Value;
-    var currentPage = ((int?) ViewBag.CurrentPage).Value;
-    var limit = ((int?) ViewBag.Limit).Value;
-    var viewMode = ((int?) ViewBag.viewMode).Value ;
-    var currentPara = "?occasion="+ViewBag.Occasion + 
-                      "&type=" + ViewBag.Type + 
-                      "&color=" + ViewBag.Color + 
-                      "&minAmount="+ ViewBag.minAmount +
-                      "&maxAmount="+ ViewBag.maxAmount +
-                      "&viewMode="+ ViewBag.viewMode +
-                      "&sortBy="+ ViewBag.sortBy 
+    var sortBy = ((int?)ViewBag.sortBy).Value;
+    var totalPage = ((int?)ViewBag.TotalPage).Value;
+    var currentPage = ((int?)ViewBag.CurrentPage).Value;
+    var limit = ((int?)ViewBag.Limit).Value;
+    var viewMode = ((int?)ViewBag.viewMode).Value;
+    var currentPara = "?occasion=" + ViewBag.Occasion +
+                      "&type=" + ViewBag.Type +
+                      "&color=" + ViewBag.Color +
+                      "&minAmount=" + ViewBag.minAmount +
+                      "&maxAmount=" + ViewBag.maxAmount +
+                      "&viewMode=" + ViewBag.viewMode +
+                      "&sortBy=" + ViewBag.sortBy
         ;
 }
 
@@ -61,18 +61,30 @@
                             <div class="orderby__wrapper">
                                 <span>Sort By</span>
                                 <select class="shot__byselect" id="sortSelect">
-                                    <option @(sortBy == 0? "selected" : "") 
-                                        value="@((int)ShopController.FilterEnum.Date)">Date</option>
-                                    <option @(sortBy == 1? "selected" : "")
-                                        value="@((int)ShopController.FilterEnum.NameAsc)">Name (Ascending)</option>
-                                    <option @(sortBy == 2? "selected" : "")
-                                        value="@((int)ShopController.FilterEnum.NameDesc)">Name (Descending)</option>
-                                    <option @(sortBy == 3? "selected" : "")
-                                        value="@((int)ShopController.FilterEnum.PriceAsc)">Price (Ascending)</option>
-                                    <option @(sortBy == 4? "selected" : "")
-                                        value="@((int)ShopController.FilterEnum.PriceDesc)">Price (Descending)</option>
-                                    <option @(sortBy == 5? "selected" : "")
-                                        value="@((int)ShopController.FilterEnum.SellRate)">SellRate</option>
+                                    <option @(sortBy == 0 ? "selected" : "")
+                                            value="@((int)ShopController.FilterEnum.Date)">
+                                        Date
+                                    </option>
+                                    <option @(sortBy == 1 ? "selected" : "")
+                                            value="@((int)ShopController.FilterEnum.NameAsc)">
+                                        Name (Ascending)
+                                    </option>
+                                    <option @(sortBy == 2 ? "selected" : "")
+                                            value="@((int)ShopController.FilterEnum.NameDesc)">
+                                        Name (Descending)
+                                    </option>
+                                    <option @(sortBy == 3 ? "selected" : "")
+                                            value="@((int)ShopController.FilterEnum.PriceAsc)">
+                                        Price (Ascending)
+                                    </option>
+                                    <option @(sortBy == 4 ? "selected" : "")
+                                            value="@((int)ShopController.FilterEnum.PriceDesc)">
+                                        Price (Descending)
+                                    </option>
+                                    <option @(sortBy == 5 ? "selected" : "")
+                                            value="@((int)ShopController.FilterEnum.SellRate)">
+                                        SellRate
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -105,10 +117,10 @@
                                         <div class="action">
                                             <div class="actions_inner">
                                                 <ul class="add_to_links">
-                                                    <li><a class="cart add-to-cart" data-id="@Model[i].Id" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                    <li><a class="cart add-to-cart" data-action="addOne" data-id="@Model[i].Id" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
                                                     <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
                                                     <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                    <li><a data-toggle="modal" title="Quick View"  data-id="@Model[i].Id" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -158,7 +170,7 @@
                                         </ul>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
                                         <ul class="cart__action d-flex">
-                                            <li class="cart"><a href="#/">Add to cart</a></li>
+                                            <li class="cart add-to-cart" data-id="@Model[i].Id" data-action="addOne"><a href="#/">Add to cart</a></li>
                                             <li class="wishlist"><a href="#/"></a></li>
                                             <li class="compare"><a href="#/"></a></li>
                                         </ul>
@@ -172,42 +184,42 @@
                     </div>
                     @if (totalPage > 0)
                     {
-                <ul class="wn__pagination">
-                    @if (currentPage > 3)
-                    {
-                        <li><a href="@currentPara&page=@(1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                    }
-                    @if (currentPage > 1)
-                    {
-                        <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                    }
-                    @if (currentPage > 2)
-                    {
-                        <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
-                    }
-                    @if (currentPage > 1)
-                    {
-                        <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
-                    }
-                    <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
-                    @if (totalPage - currentPage > 0)
-                    {
-                        <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
-                    }
-                    @if (totalPage - currentPage > 1)
-                    {
-                        <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
-                    }
-                    @if (currentPage < totalPage)
-                    {
-                        <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                    }
+                        <ul class="wn__pagination">
+                            @if (currentPage > 3)
+                            {
+                                <li><a href="@currentPara&page=@(1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                            }
+                            @if (currentPage > 1)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                            }
+                            @if (currentPage > 2)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
+                            }
+                            @if (currentPage > 1)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
+                            }
+                            <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
+                            @if (totalPage - currentPage > 0)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
+                            }
+                            @if (totalPage - currentPage > 1)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
+                            }
+                            @if (currentPage < totalPage)
+                            {
+                                <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            }
 
-                    @if (currentPage < totalPage - 2)
-                    {
-                        <li><a href="@currentPara&page=@(totalPage)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a></li>
-                    }
-                </ul>
+                            @if (currentPage < totalPage - 2)
+                            {
+                                <li><a href="@currentPara&page=@(totalPage)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            }
+                        </ul>
                     }
                 </div>
             </div>
@@ -217,60 +229,6 @@
 <!-- End Shop Page -->
 @section scripts
 {
-    <script>
-        $(function () {
-            $('#sortSelect').on('change', function () {
-                const sortValue = $('#sortSelect').val();
-                $("#sortBy").val(sortValue);
-                console.log($("#sortBy").val());
-                $("#shopFilter").submit();
-            });
-            $("#nav-grid-click").click(function () {
-                $("#viewMode").val(0);
-            });
-            $("#nav-list-click").click(function () {
-                $("#viewMode").val(1);
-            });
-            $(".occasion-click").each(function () {
-                if ($(this).data("id") === $('input[name="occasion"]').val()) {
-                    $(this).addClass("active font-weight-bold");
-                } else {
-                    $(this).removeClass("active font-weight-bold");
-                }
-            });
-            $(".type-click").each(function () {
-                if ($(this).data("id") === $('input[name="type"]').val()) {
-                    $(this).addClass("active font-weight-bold");
-                } else {
-                    $(this).removeClass("active font-weight-bold");
-                }
-            });
-            $(".color-click").each(function () {
-                if ($(this).data("id") === $('input[name="color"]').val()) {
-                    $(this).addClass("active");
-                } else {
-                    $(this).removeClass("active");
-                }
-            });
-
-            $(".occasion-click").click(function () {
-                const data = $(this).data("id");
-                $('input[name="occasion"]').val(data);
-                $("#shopFilter").submit();
-            });
-
-            $(".type-click").click(function () {
-                const data = $(this).data("id");
-                $('input[name="type"]').val(data);
-                $("#shopFilter").submit();
-            });
-
-            $(".color-click").click(function () {
-                const data = $(this).data("id");
-                $('input[name="color"]').val(data);
-                $("#shopFilter").submit();
-            });
-
-        });
-    </script>
+    @Scripts.Render("~/Content/Boighor Homepage/js/shopSort.js")
+    @Scripts.Render("~/Content/Boighor Homepage/js/shopFilter.js")
 }
