@@ -316,5 +316,17 @@ namespace Flora_Queen_Project.Controllers
             Session["ShoppingCart"] = shoppingCart;
             return PartialView(shoppingCart);
         }
+
+        public ActionResult Cart()
+        {
+            if (!(Session["ShoppingCart"] is List<CartItem> shoppingCart))
+            {
+                shoppingCart = new List<CartItem>();
+                Debug.WriteLine("list null");
+            }
+
+            Session["ShoppingCart"] = shoppingCart;
+            return View(shoppingCart);
+        }
     }
 }

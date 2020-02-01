@@ -7,6 +7,7 @@ namespace Flora_Queen_Project.Models
     {
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
+        public double Discount { get; set; }
 
         [Key, Column(Order = 0)]
         public string ProductId { get; set; }

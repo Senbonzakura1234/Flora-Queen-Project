@@ -19,8 +19,18 @@
                 <span>Cart Subtotal</span>
             </div>
             <div class="total_amount text-right">
-                <span class="price-1st @(Model.Any()? "current-price-cart" : "")">$@(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))</span>
-                <span class="price-2nd old-price-cart @(!Model.Any()? "d-none" : "")">$@Math.Round(Model.Sum(item => item.count * item.price), 2)</span>
+                <span class="price-1st-wrapper @(Model.Any() ? "current-price-cart" : "")">
+                    $
+                    <span class="price-1st">
+                        @(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))
+                    </span>
+                </span>
+                <span class="price-2nd-wrapper old-price-cart @(!Model.Any() ? "d-none" : "")">
+                    $
+                    <span class="price-2nd">
+                        @Math.Round(Model.Sum(item => item.count * item.price), 2)
+                    </span>
+                </span>
             </div>
 
 
@@ -68,7 +78,7 @@
                 </div>
             </div>
             <div class="mini_action cart @(!Model.Any()? "d-none" : "")">
-                <a class="cart__btn" href="@Url.Action("Cart","Payment")">View and edit cart</a>
+                <a class="cart__btn" href="@Url.Action("Cart","Shop")">View and edit cart</a>
             </div>
         </div>
     </div>
