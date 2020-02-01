@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Flora_Queen_Project.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace Flora_Queen_Project.Controllers
 {
@@ -339,6 +340,9 @@ namespace Flora_Queen_Project.Controllers
                 Avatar = user.Avatar,
                 Birthday = user.Birthday,
                 Description = user.Description,
+                CompanyName = user.CompanyName,
+                Zipcode = user.Zipcode,
+                Gender = user.Gender
             };
 
             return View(editUser);
@@ -425,6 +429,18 @@ namespace Flora_Queen_Project.Controllers
             {
                 user.Description = editUserInfo.Description;
             }
+            if (!editUserInfo.CompanyName.IsNullOrWhiteSpace())
+            {
+                user.CompanyName = editUserInfo.CompanyName;
+            }
+
+            if (!editUserInfo.Zipcode.IsNullOrWhiteSpace())
+            {
+                user.Zipcode = editUserInfo.Zipcode;
+            }
+
+            user.Gender = editUserInfo.Gender;
+
             UserManager.Update(user);
             return RedirectToAction("Index", new { Message = ManageMessageId.UpdateUserSuccess });
         }

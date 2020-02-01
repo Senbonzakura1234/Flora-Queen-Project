@@ -32,6 +32,9 @@ namespace Flora_Queen_Project.Models
             Private = -1,
 
         }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? Birthday { get; set; }
 
         [DataType(DataType.DateTime)]

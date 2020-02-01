@@ -91,6 +91,13 @@ namespace Flora_Queen_Project.Models
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public string Description { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? Birthday { get; set; }
+
+        public string Zipcode { get; set; }
+        public string CompanyName { get; set; }
+        public ApplicationUser.GenderEnum Gender { get; set; }
     }
 }

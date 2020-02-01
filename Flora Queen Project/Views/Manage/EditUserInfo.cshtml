@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="bradcaump__inner text-center">
-                    <h2 class="bradcaump-title">My Account</h2>
+                    <h2 class="bradcaump-title">@ViewBag.Title</h2>
                     <nav class="bradcaump-content">
                         <a class="breadcrumb_item" href="@Url.Action("Index","Home")">Home</a>
                         <span class="brd-separetor">/</span>
@@ -37,47 +37,62 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        <div class="account__form">
-                            <div class="input__box">
-                                @Html.LabelFor(model => model.FirstName)
-                                @Html.EditorFor(model => model.FirstName)
-                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                            </div>
+                <div class="account__form">
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.FirstName)
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
 
-                            <div class="input__box">
-                                @Html.LabelFor(model => model.LastName)
-                                @Html.EditorFor(model => model.LastName)
-                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.LastName)
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
 
-                            <div class="input__box">
-                                @Html.LabelFor(model => model.Birthday)
-                                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { type = "date" } })
-                                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.Birthday)
+                        @Html.EditorFor(model => model.Birthday, new {htmlAttributes = new {type = "date"}})
+                        @Html.ValidationMessageFor(model => model.Birthday, "", new {@class = "text-danger"})
+                    </div>
 
-                            <div class="input__box">
-                                @Html.LabelFor(model => model.Description)
-                                @Html.EditorFor(model => model.Description)
-                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.Description)
+                        @Html.EditorFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.CompanyName)
+                        @Html.EditorFor(model => model.CompanyName)
+                        @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.Zipcode)
+                        @Html.EditorFor(model => model.Zipcode)
+                        @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input__box">
+                        @Html.LabelFor(model => model.Gender)
+                        @Html.EnumDropDownListFor(model => model.Gender, "--------", new {  @class = "select__option form-control"  })
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input__box">
+                        <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")"
+                             class="img-thumbnail" style="width: 100px" alt="Alternate Text" />
+                        <div style="margin-top: 20px;">
+                            @Html.LabelFor(model => model.Avatar)
+                            @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
+                            @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                            <div class="form__btn" style="margin-top: 5px">
+                                <button type="button" id="upload_widget">Upload file</button>
                             </div>
-                            <div class="input__box">
-                                <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")"
-                                     class="img-thumbnail" style="width: 100px" alt="Alternate Text" />
-                                <div style="margin-top: 20px;">
-                                    @Html.LabelFor(model => model.Avatar)
-                                    @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
-                                    @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
-                                    <div class="form__btn" style="margin-top: 5px">
-                                        <button type="button" id="upload_widget">Upload file</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form__btn">
-                                <button type="submit">Update</button>
-                            </div>
-
                         </div>
+                    </div>
+                    <div class="form__btn">
+                        <button type="submit">Update</button>
+                    </div>
+
+                </div>
                     }
                 </div>
             </div>
