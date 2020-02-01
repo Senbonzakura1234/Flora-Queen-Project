@@ -2067,13 +2067,13 @@ Header Styles
     background: #ce7852 none repeat scroll 0 0;
     border-radius: 100px;
     color: #fff;
-    display: block;
+    /*display: block;*/
     font-size: 9px;
     font-weight: 400;
     height: 17px;
     line-height: 17px;
     margin: -8px 0 0;
-    min-width: auto;
+    /*min-width: auto;*/
     overflow: visible;
     padding: 0;
     position: absolute;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +11,10 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Flora_Queen_Project.Controllers
 {
+    [Authorize]
     public class PaymentController : Controller
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
         protected readonly string CurrentUserId;
 
@@ -22,23 +24,17 @@ namespace Flora_Queen_Project.Controllers
             CurrentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
         }
         public PaymentController(
-            ApplicationDbContext dbContext,
             ApplicationUserManager userManager)
         {
             UserManager = userManager;
-            DbContext = dbContext;
         }
         public ApplicationUserManager UserManager
         {
             get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             private set => _userManager = value;
         }
-        public ApplicationDbContext DbContext
-        {
-            get => _db ?? ApplicationDbContext.Create();
-            private set => _db = value;
-        }
-        [Authorize]
+
+        
         public async Task<ActionResult> Checkout()
         {
             if (!(Session["ShoppingCart"] is List<CartItem> shoppingCart))
@@ -49,6 +45,7 @@ namespace Flora_Queen_Project.Controllers
             Session["ShoppingCart"] = shoppingCart;
             if (!shoppingCart.Any())
             {
+                TempData["Display"] = "show";
                 return RedirectToAction("Index", "Shop");
             }
 
@@ -71,7 +68,6 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Checkout(CheckoutViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
             if (!(Session["ShoppingCart"] is List<CartItem> shoppingCart))
             {
                 shoppingCart = new List<CartItem>();
@@ -80,10 +76,11 @@ namespace Flora_Queen_Project.Controllers
             Session["ShoppingCart"] = shoppingCart;
             if (!shoppingCart.Any())
             {
+                TempData["Display"] = "show";
                 return RedirectToAction("Index", "Shop");
             }
-
-            var total = shoppingCart.Sum(item => item.total);
+            if (!ModelState.IsValid) return View(model);
+            var total = Math.Round(shoppingCart.Sum(item => item.total), 2);
 
             var order = new Order
             {
@@ -98,7 +95,7 @@ namespace Flora_Queen_Project.Controllers
             var orderItems = new List<OrderItem>();
             foreach (var item in shoppingCart)
             {
-                var product = await DbContext.Products.FindAsync(item.id);
+                var product = await _db.Products.FindAsync(item.id);
                 if (product == null)
                 {
                     return HttpNotFound();
@@ -116,8 +113,8 @@ namespace Flora_Queen_Project.Controllers
             }
 
             order.OrderItems = orderItems;
-            DbContext.ApplicationOrders.Add(order);
-            await DbContext.SaveChangesAsync();
+            _db.ApplicationOrders.Add(order);
+            await _db.SaveChangesAsync();
 
             Session.Remove("ShoppingCart");
             return RedirectToAction("Index", "Home");

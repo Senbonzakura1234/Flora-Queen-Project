@@ -7,7 +7,7 @@
     @* ReSharper disable once Html.IdNotResolved *@
     <a class="cartbox_active" href="#/">
         <i class="fas fa-shopping-cart text-white" style="height: 100%"></i>
-        <span class="product_qun cart-count">@Model.Count()</span>
+        <span class="product_qun cart-count  @(!Model.Any() ? "display-none" : "")">@Model.Count()</span>
     </a>
     <div class="block-minicart minicart__active">
         <div class="minicart-content-wrapper">
@@ -25,7 +25,7 @@
                         @(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))
                     </span>
                 </span>
-                <span class="price-2nd-wrapper old-price-cart @(!Model.Any() ? "d-none" : "")">
+                <span class="price-2nd-wrapper  old-price-cart @(!Model.Any() ? "display-none" : "")">
                     $
                     <span class="price-2nd">
                         @Math.Round(Model.Sum(item => item.count * item.price), 2)
@@ -35,10 +35,10 @@
 
 
 
-            <div class="mini_action checkout @(!Model.Any()? "d-none" : "")">
+            <div class="mini_action checkout @(!Model.Any()? "display-none" : "")">
                 <a class="checkout__btn" href="@Url.Action("Checkout","Payment")">Go to Checkout</a>
             </div>
-            <div class="single__items @(!Model.Any()? "d-none" : "")">
+            <div class="single__items @(!Model.Any()? "display-none" : "")">
                 <div class="miniproduct">
                     @foreach (var item in Model)
                     {
@@ -77,7 +77,7 @@
                     }
                 </div>
             </div>
-            <div class="mini_action cart @(!Model.Any()? "d-none" : "")">
+            <div class="mini_action cart @(!Model.Any()? "display-none" : "")">
                 <a class="cart__btn" href="@Url.Action("Cart","Shop")">View and edit cart</a>
             </div>
         </div>

@@ -27,29 +27,7 @@ namespace Flora_Queen_Project.Controllers
             get => _db ?? ApplicationDbContext.Create();
             private set => _db = value;
         }
-        // GET: Shop
-//        public ActionResult Index(int? page, int? limit)
-//        {
-//            if (page == null)
-//            {
-//                page = 1;
-//            }
-//
-//            if (limit == null)
-//            {
-//                limit = 9;
-//            }
-//
-//            var listProduct = _db.Products.OrderByDescending(p => p.UpdatedAt).ToList();
-//            Debug.WriteLine("count: " + listProduct.Count);
-//            ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count() / limit.Value);
-//            ViewBag.CurrentPage = page;
-//            ViewBag.Limit = limit;
-//
-//            listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
-//
-//            return View(listProduct);
-//        }
+
 
         public ActionResult Index(string occasion, string type, string color, int? page, int? limit, int? minAmount, int? maxAmount, int? viewMode, int? sortBy)
         {

@@ -721,6 +721,7 @@
     <Content Include="Views\Shop\ShowCartAjax.cshtml" />
     <Content Include="Views\Shop\Cart.cshtml" />
     <Content Include="Views\Payment\Checkout.cshtml" />
+    <Content Include="Views\Shop\_Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
