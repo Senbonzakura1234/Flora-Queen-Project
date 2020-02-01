@@ -90,9 +90,17 @@ body {
     text-decoration: line-through;
     font-weight: 700;
 }
-.table-min-width {
-    min-width: 120px;
+
+@media (min-width: 576px) {
+    .cart-utilities {
+        bottom: 15px;
+        position: relative
+    }
 }
-.cart-has-item .cart-no-item {
+
+.cart-quantity-input::-webkit-inner-spin-button,
+.cart-quantity-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
     display: none;
+    margin: 0;
 }

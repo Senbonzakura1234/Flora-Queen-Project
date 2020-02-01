@@ -11,11 +11,29 @@ namespace Flora_Queen_Project.Models
         public string Id { get; set; }
         public double Amount { get; set; }
         public string OrderDescription  { get; set; }
+
+        public string ShipName { get; set; }
+        public string ShipAddress { get; set; }
+        public string ShipPhone { get; set; }
+        public string ShipEmail { get; set; }
+
         public string BankCode { get; set; }
         // ReSharper disable InconsistentNaming
         public string vnp_TransactionNo { get; set; }
         public string vpn_Message { get; set; }
         public string vpn_TxnResponseCode { get; set; }
+
+        public OrderPaymentMethodEnum PaymentMethod { get; set; }
+        public enum OrderPaymentMethodEnum
+        {
+            [Display(Name = "Online Banking")]
+            OB = 0,
+            [Display(Name = "Cash on Delivery")]
+            CoD = 1,
+            [Display(Name = "Direct Bank Transfer")]
+            DBT = 2
+        }
+
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }

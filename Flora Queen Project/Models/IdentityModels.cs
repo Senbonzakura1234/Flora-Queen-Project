@@ -1,8 +1,8 @@
-﻿    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Data.Entity;
-    using System.Security.Claims;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,6 +16,22 @@ namespace Flora_Queen_Project.Models
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public string Description { get; set; }
+        public string Address { get; set; }
+        public string Zipcode { get; set; }
+        public string CompanyName { get; set; }
+        public GenderEnum Gender { get; set; }
+        public enum GenderEnum
+        {
+            [Display(Name = "Female")]
+            Female = 0,
+            [Display(Name = "Male")]
+            Male = 1,
+            [Display(Name = "Unknown")]
+            Unknown = 2,
+            [Display(Name = "Private")]
+            Private = -1,
+
+        }
         public DateTime? Birthday { get; set; }
 
         [DataType(DataType.DateTime)]

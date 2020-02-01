@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Flora_Queen_Project.Models;
 
@@ -145,12 +146,12 @@ namespace Flora_Queen_Project.Controllers
 
             ViewBag.sortBy = sortBy;
             Debug.WriteLine(sortBy);
-            ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count() / limit.Value);
+            ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count / limit.Value);
             ViewBag.CurrentPage = page;
 
             ViewBag.Limit = limit;
 
-            ViewBag.TotalItem = listProduct.Count();
+            ViewBag.TotalItem = listProduct.Count;
             ViewBag.Occasion = occasion;
             ViewBag.Type = type;
             ViewBag.Color = color;
@@ -231,112 +232,101 @@ namespace Flora_Queen_Project.Controllers
         }
 
         //Shopping Cart
-        public ActionResult AddItem(string ProId, int quantity)
+        public async Task<ActionResult> UpdateCart(string proId, int quantity, string dataAction)
         {
-            var ShoppingCart = Session["ShoppingCart"] as List<CartItem>;
-
-            if (ShoppingCart == null)
+            if (!(Session["ShoppingCart"] is List<CartItem> shoppingCart))
             {
-                ShoppingCart = new List<CartItem>();
+                shoppingCart = new List<CartItem>();
                 Debug.WriteLine("list null");
             }
 
-            bool checkPro = true;
-            for (int i = 0; i < ShoppingCart.Count; i++)
+            if (!string.IsNullOrEmpty(dataAction))
             {
-                if (ShoppingCart[i].id == ProId)
+                if (dataAction != "delete")
                 {
-                    ShoppingCart[i].count += quantity;
-                    if (ShoppingCart[i].count <= 0)
+                    var productExist = true;
+                    for (var i = 0; i < shoppingCart.Count; i++)
                     {
-                        ShoppingCart.RemoveAt(i);
+                        if (shoppingCart[i].id != proId) continue;
+                        if (dataAction != "minusOne")
+                        {
+                            shoppingCart[i].count += quantity;
+                            shoppingCart[i].total =
+                                Math.Round(shoppingCart[i].price * shoppingCart[i].discount * shoppingCart[i].count, 2);
+                        }
+                        else
+                        {
+                            shoppingCart[i].count -= 1;
+                            shoppingCart[i].total =
+                                Math.Round(shoppingCart[i].price * shoppingCart[i].discount * shoppingCart[i].count, 2);
+                        }
+
+                        if (shoppingCart[i].count <= 0)
+                        {
+                            shoppingCart.RemoveAt(i);
+                        }
+
+                        productExist = false;
+                        break;
                     }
 
-                    checkPro = false;
-                    break;
-                }
-            }
-
-            if (checkPro)
-            {
-                var product = DbContext.Products.Find(ProId);
-                if (product == null)
-                {
-                    return Json(new
+                    if (productExist)
                     {
-                        ShoppingCart
-                    }, JsonRequestBehavior.AllowGet);
+                        var product = await DbContext.Products.FindAsync(proId);
+                        if (product == null) return Json(new { shoppingCart }, JsonRequestBehavior.AllowGet);
+
+                        shoppingCart.Add(new CartItem
+                        {
+                            id = product.Id,
+                            name = product.Name,
+                            imgUrl = product.ImgUrl,
+                            count = quantity,
+                            discount = product.Discount,
+                            price = product.Price,
+                            total = Math.Round(product.Price * product.Discount * quantity, 2)
+                        });
+                    }
                 }
-                
-                ShoppingCart.Add(new CartItem
+                else
                 {
-                    id = product.Id,
-                    count = quantity,
-                    discount = product.Discount,
-                    price = product.Price
-                });
-                
+                    for (var i = 0; i < shoppingCart.Count; i++)
+                    {
+                        if (shoppingCart[i].id != proId) continue;
+                        shoppingCart.RemoveAt(i);
+                        break;
+                    }
+                }
             }
 
-            Session["ShoppingCart"] = ShoppingCart;
-            getTotal(ShoppingCart);
+            Session["ShoppingCart"] = shoppingCart;
 
-            return Json(new
-            {
-                ShoppingCart,
-                totalQuantity = (int) Session["TotalQuantity"],
-                totalPrice = (double) Session["TotalPrice"]
-
-            }, JsonRequestBehavior.AllowGet);
+            return Json(new { shoppingCart }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult DeleteItem(string ProId)
-        {
-            var ShoppingCart = Session["ShoppingCart"] as List<CartItem>;
 
-            if (ShoppingCart == null)
+
+        public ActionResult ShowCartAjax()
+        {
+            if (!(Session["ShoppingCart"] is List<CartItem> shoppingCart))
             {
-                ShoppingCart = new List<CartItem>();
+                shoppingCart = new List<CartItem>();
                 Debug.WriteLine("list null");
             }
 
-            for (int i = 0; i < ShoppingCart.Count; i++)
-            {
-                if (ShoppingCart[i].id == ProId)
-                {
-                    ShoppingCart.RemoveAt(i);
-                    break;
-                }
-            }
-
-            Session["ShoppingCart"] = ShoppingCart;
-            getTotal(ShoppingCart);
-
-            return Json(new
-            {
-                ShoppingCart,
-                totalQuantity = (int)Session["TotalQuantity"],
-                totalPrice = (double)Session["TotalPrice"]
-
-            }, JsonRequestBehavior.AllowGet);
+            Session["ShoppingCart"] = shoppingCart;
+            return PartialView(shoppingCart);
         }
 
-        private void getTotal(List<CartItem> listCartItems)
+        public ActionResult Cart()
         {
-            var totalQuantity = 0;
-            double totalPrice = 0;
-
-            if (listCartItems != null)
+            if (!(Session["ShoppingCart"] is List<CartItem> shoppingCart))
             {
-                for (int i = 0; i < listCartItems.Count; i++)
-                {
-                    totalQuantity += listCartItems[i].count;
-                    totalPrice += listCartItems[i].count * listCartItems[i].price * listCartItems[i].discount;
-                }
+                shoppingCart = new List<CartItem>();
+                Debug.WriteLine("list null");
             }
-          
-            Session["TotalQuantity"] = totalQuantity;
-            Session["TotalPrice"] = totalPrice;
+
+            Session["ShoppingCart"] = shoppingCart;
+            return View(shoppingCart);
         }
     }
 }

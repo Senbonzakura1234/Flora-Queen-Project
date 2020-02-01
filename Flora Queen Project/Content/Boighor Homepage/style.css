@@ -1798,7 +1798,10 @@ Elements Styles
 }
 
 @media only screen and (max-width: 575px) {
-    .minicart-content-wrapper { width: 308px; }
+    .minicart-content-wrapper { width: 350px; }
+    .block-minicart {
+        right: -60px;
+    }
 }
 
 @media only screen and (max-width: 420px) {
@@ -6256,7 +6259,7 @@ h3.widget-title-modal {
 }
 
 .table-content table td.product-subtotal {
-    color: #333;
+    color: #ce7852;
     font-size: 16px;
     font-weight: bold;
     width: 120px;

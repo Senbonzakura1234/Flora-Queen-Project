@@ -3,7 +3,7 @@ namespace Flora_Queen_Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitalTable : DbMigration
+    public partial class InitialTable : DbMigration
     {
         public override void Up()
         {
@@ -14,10 +14,15 @@ namespace Flora_Queen_Project.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         Amount = c.Double(nullable: false),
                         OrderDescription = c.String(),
+                        ShipName = c.String(),
+                        ShipAddress = c.String(),
+                        ShipPhone = c.String(),
+                        ShipEmail = c.String(),
                         BankCode = c.String(),
                         vnp_TransactionNo = c.String(),
                         vpn_Message = c.String(),
                         vpn_TxnResponseCode = c.String(),
+                        PaymentMethod = c.Int(nullable: false),
                         ApplicationUserId = c.String(maxLength: 128),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
@@ -37,6 +42,10 @@ namespace Flora_Queen_Project.Migrations
                         LastName = c.String(),
                         Avatar = c.String(),
                         Description = c.String(),
+                        Address = c.String(),
+                        Zipcode = c.String(),
+                        CompanyName = c.String(),
+                        Gender = c.Int(nullable: false),
                         Birthday = c.DateTime(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
@@ -103,6 +112,7 @@ namespace Flora_Queen_Project.Migrations
                         OrderId = c.String(nullable: false, maxLength: 128),
                         Quantity = c.Int(nullable: false),
                         UnitPrice = c.Double(nullable: false),
+                        Discount = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => new { t.ProductId, t.OrderId })
                 .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)

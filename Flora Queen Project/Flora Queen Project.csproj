@@ -190,9 +190,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001181621038_InitalTable.cs" />
-    <Compile Include="Migrations\202001181621038_InitalTable.Designer.cs">
-      <DependentUpon>202001181621038_InitalTable.cs</DependentUpon>
+    <Compile Include="Migrations\202002011124142_InitialTable.cs" />
+    <Compile Include="Migrations\202002011124142_InitialTable.Designer.cs">
+      <DependentUpon>202002011124142_InitialTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -408,6 +408,8 @@
     <Content Include="Content\Boighor Homepage\js\custom.js" />
     <Content Include="Content\Boighor Homepage\js\plugins.js" />
     <Content Include="Content\Boighor Homepage\js\popper.min.js" />
+    <Content Include="Content\Boighor Homepage\js\shopFilter.js" />
+    <Content Include="Content\Boighor Homepage\js\shopSort.js" />
     <Content Include="Content\Boighor Homepage\js\vendor\jquery-3.2.1.min.js" />
     <Content Include="Content\Boighor Homepage\js\vendor\modernizr-3.5.0.min.js" />
     <Content Include="Content\Boighor Homepage\style.css" />
@@ -715,9 +717,10 @@
     <Content Include="Views\Shop\HotDeal.cshtml" />
     <Content Include="Views\Home\_AjaxQuickView.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
-    <Content Include="Views\Payment\Checkout.cshtml" />
-    <Content Include="Views\Payment\Cart.cshtml" />
     <Content Include="Views\Manage\EditUserInfo.cshtml" />
+    <Content Include="Views\Shop\ShowCartAjax.cshtml" />
+    <Content Include="Views\Shop\Cart.cshtml" />
+    <Content Include="Views\Payment\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -735,8 +738,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001181621038_InitalTable.resx">
-      <DependentUpon>202001181621038_InitalTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002011124142_InitialTable.resx">
+      <DependentUpon>202002011124142_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -133,42 +133,11 @@
                                     <i class="fas fa-heart text-white" style="height: 100%"></i>
                                 </a>
                             </li>
-                            <li class="shopcart">
-                                <a class="cartbox_active" href="#/">
-                                    <i class="fas fa-shopping-cart text-white" style="height: 100%"></i>
-                                    <span class="product_qun total-count">0</span>
-                                </a>
-                                <!-- Start Shopping Cart -->
-                                <div class="block-minicart minicart__active">
-                                    <div class="minicart-content-wrapper">
-                                        <div class="micart__close">
-                                            <span>close</span>
-                                        </div>
-                                        <div class="items-total d-flex justify-content-between">
-                                            @*<span class="total-count"></span>*@
-                                            <div class="pl-2">Cart Subtotal</div>
-                                        </div>
-                                        <div class="total_amount text-left">
-                                            <ul class="d-flex">
-                                                <li class="current-price-cart"> $<span class="total-cart"></span> </li>
-                                                <li class="mr-auto old-price-cart text-muted"> $<span class="total-cart-old"></span> </li>
-                                            </ul>
-                                        </div>
-                                        <div class="mini_action checkout">
-                                            <a class="checkout__btn createOrder" href="@Url.Action("Checkout","Payment")">Go to Checkout</a>
-                                        </div>
-                                        <div class="single__items">
-                                            <div class="miniproduct show-cart">
 
-                                            </div>
-                                        </div>
-                                        <div class="mini_action cart">
-                                            <a class="cart__btn" href="@Url.Action("Cart","Payment")">View and edit cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Shopping Cart -->
-                            </li>
+                            <!-- Start Shopping Cart -->
+                            @Html.Action("ShowCartAjax", "Shop")
+                            <!-- End Shopping Cart -->
+
                             <li class="setting__bar__icon">
                                 <a class="setting__active" href="#/">
                                     <i class="fas fa-cog text-white" style="height: 100%"></i>
