@@ -424,6 +424,7 @@ namespace Flora_Queen_Project.Controllers
                 Debug.WriteLine(currentUrl);
             }
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Abandon();
             return Redirect(currentUrl);
         }
 
