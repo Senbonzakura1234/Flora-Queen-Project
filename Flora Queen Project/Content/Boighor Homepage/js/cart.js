@@ -29,7 +29,7 @@
             },
             success: function (res) {
                 if (res != null) {
-                    let replaceCartNav = "", cartTableContent = "", cartOldTotal = 0, cartCurrentTotal = 0;
+                    let replaceCartNav = "", cartTableContent = "", replaceCartCheckout = "", cartOldTotal = 0, cartCurrentTotal = 0;
                     const cartCount = res.shoppingCart.length;
                     if (cartCount > 0) {
                         for (let i = 0; i < cartCount; i++) {
@@ -92,11 +92,11 @@
                                             </td>
                                             <td class="product-quantity" style="min-width: 150px">
                                                 <div class="input-group d-flex" >
-                                                    <button class="btn btn-dark input-group-prepend ml-auto mr-1">
+                                                    <button class="btn btn-dark add-to-cart input-group-prepend ml-auto mr-1" data-id="${res.shoppingCart[i].id}" data-action="minusOne">
                                                         <i class="zmdi zmdi-minus"></i>
                                                     </button>
                                                     <input class="text-center cart-quantity-input" type="number" value="${res.shoppingCart[i].count}" readonly="readonly">
-                                                    <button class="btn btn-dark input-group-prepend mr-auto ml-1">
+                                                    <button class="btn btn-dark add-to-cart input-group-prepend mr-auto ml-1" data-id="${res.shoppingCart[i].id}" data-action="addOne">
                                                         <i class="zmdi zmdi-plus"></i>
                                                     </button>
                                                 </div>
@@ -105,11 +105,23 @@
                                                 $${res.shoppingCart[i].total.toFixed(2)}
                                             </td>
                                             <td class="product-remove" style="min-width: 100px">
-                                                <a href="#/">
+                                                <a href="#/" class="add-to-cart" data-id="${res.shoppingCart[i].id}" data-action="delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </a>
                                             </td>
                                         </tr>
+                                    `;
+                            }
+                            if ($("ul.order_product").length) {
+                                replaceCartCheckout += 
+                                    `
+                                        <li>
+                                            ${res.shoppingCart[i].name} × ${res.shoppingCart[i].count} 
+                                            <text class="current-price-cart ${res.shoppingCart[i].discount === 1? "d-none": ""}">
+                                                ${(res.shoppingCart[i].discount - 1) * 100}%
+                                            </text>
+                                            <span>$${res.shoppingCart[i].total}</span>
+                                        </li>
                                     `;
                             }
                         }
@@ -119,11 +131,12 @@
                         cartCurrentTotal = cartCurrentTotal.toFixed(2);
 
                         $(".price-1st-wrapper").addClass("current-price-cart");
-                        $(".price-2nd-wrapper").removeClass("d-none");
-                        $(".mini_action.checkout").removeClass("d-none");
-                        $(".single__items").removeClass("d-none");
-                        $(".mini_action.cart").removeClass("d-none");
-
+                        $(".price-2nd-wrapper").fadeIn();
+                        $(".mini_action.checkout").fadeIn();
+                        $(".single__items").fadeIn();
+                        $(".mini_action.cart").fadeIn();
+                        $(".cart-count").fadeIn();
+                        $(".cart-checkout-btn").fadeIn();
 
                         if ($(".cart-table").length) {
                             var replaceCartTable =
@@ -145,14 +158,24 @@
                                     </table>
                                 `;
                             $(".cart-table.table-content").html(replaceCartTable);
+                            $(".total-cart-table").html(cartCurrentTotal);
+                            $(".grand-total-cart-table").html(cartCurrentTotal);
+                            $(".cartbox__total__area").slideDown();
                         }
 
+                        if ($("ul.order_product").length) {
+                            $(".order_product").html(replaceCartCheckout);
+                            $(".subtotal-cart-checkout").html(`$${cartCurrentTotal}`);
+                            $(".total-cart-checkout").html(`$${cartCurrentTotal}`);
+                        }
                     } else {
                         $(".price-1st-wrapper").removeClass("current-price-cart");
-                        $(".price-2nd-wrapper").addClass("d-none");
-                        $(".mini_action.checkout").addClass("d-none");
-                        $(".single__items").addClass("d-none");
-                        $(".mini_action.cart").addClass("d-none");
+                        $(".price-2nd-wrapper").fadeOut();
+                        $(".mini_action.checkout").fadeOut();
+                        $(".single__items").fadeOut();
+                        $(".mini_action.cart").fadeOut();
+                        $(".cart-count").fadeOut();
+                        $(".cart-checkout-btn").fadeOut();
 
                         if ($(".cart-table").length) {
                             $(".cart-table.table-content").html(
@@ -173,7 +196,16 @@
                                             </tbody>
                                         </table>
                                     `   
-                                );
+                            );
+                            $(".total-cart-table").html(cartCurrentTotal);
+                            $(".grand-total-cart-table").html(cartCurrentTotal);
+                            $(".cartbox__total__area").slideUp();
+                        }
+
+                        if ($("ul.order_product").length) {
+                            $(".order_product").html(replaceCartCheckout);
+                            $(".subtotal-cart-checkout").html(`$${cartCurrentTotal}`);
+                            $(".total-cart-checkout").html(`$${cartCurrentTotal}`);
                         }
                     }
 

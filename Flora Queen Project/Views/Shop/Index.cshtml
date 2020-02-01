@@ -42,10 +42,18 @@
     </div>
 </div>
 <!-- End Bradcaump area -->
+
 <!-- Start Shop Page -->
 <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
     <div class="container">
         <div class="row">
+            @if (TempData["Display"] != null)
+            {
+                if (TempData["Display"].ToString() == "show")
+                {
+                    Html.RenderPartial("_Alert");
+                }
+            }
             <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
                 @Html.Partial("_ShopSidebar")
             </div>
@@ -54,35 +62,35 @@
                     <div class="col-lg-12">
                         <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
                             <div class="shop__list nav justify-content-center" role="tablist">
-                                <a class="nav-item nav-link @(viewMode == 0? "active" : "")" data-toggle="tab" id="nav-grid-click" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
-                                <a class="nav-item nav-link @(viewMode == 1? "active" : "")" data-toggle="tab" id="nav-list-click" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+                                <a class="nav-item nav-link @(viewMode == 0 ? "active" : "")" data-toggle="tab" id="nav-grid-click" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
+                                <a class="nav-item nav-link @(viewMode == 1 ? "active" : "")" data-toggle="tab" id="nav-list-click" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
                             </div>
                             <p>Showing @((currentPage - 1) * limit + 1) – @((currentPage - 1) * limit + Model.Count) of @ViewBag.TotalItem results</p>
                             <div class="orderby__wrapper">
                                 <span>Sort By</span>
                                 <select class="shot__byselect" id="sortSelect">
                                     <option @(sortBy == 0 ? "selected" : "")
-                                            value="@((int)ShopController.FilterEnum.Date)">
+                                        value="@((int) ShopController.FilterEnum.Date)">
                                         Date
                                     </option>
                                     <option @(sortBy == 1 ? "selected" : "")
-                                            value="@((int)ShopController.FilterEnum.NameAsc)">
+                                        value="@((int) ShopController.FilterEnum.NameAsc)">
                                         Name (Ascending)
                                     </option>
                                     <option @(sortBy == 2 ? "selected" : "")
-                                            value="@((int)ShopController.FilterEnum.NameDesc)">
+                                        value="@((int) ShopController.FilterEnum.NameDesc)">
                                         Name (Descending)
                                     </option>
                                     <option @(sortBy == 3 ? "selected" : "")
-                                            value="@((int)ShopController.FilterEnum.PriceAsc)">
+                                        value="@((int) ShopController.FilterEnum.PriceAsc)">
                                         Price (Ascending)
                                     </option>
                                     <option @(sortBy == 4 ? "selected" : "")
-                                            value="@((int)ShopController.FilterEnum.PriceDesc)">
+                                        value="@((int) ShopController.FilterEnum.PriceDesc)">
                                         Price (Descending)
                                     </option>
                                     <option @(sortBy == 5 ? "selected" : "")
-                                            value="@((int)ShopController.FilterEnum.SellRate)">
+                                        value="@((int) ShopController.FilterEnum.SellRate)">
                                         SellRate
                                     </option>
                                 </select>
@@ -91,7 +99,7 @@
                     </div>
                 </div>
                 <div class="tab__container">
-                    <div class="shop-grid tab-pane fade @(viewMode == 0? "show active" : "")  " id="nav-grid" role="tabpanel">
+                    <div class="shop-grid tab-pane fade @(viewMode == 0 ? "show active" : "")  " id="nav-grid" role="tabpanel">
                         <div class="row">
                             <!-- Start Single Product -->
                             @for (var i = 0; i < Model.Count; i++)
@@ -120,7 +128,7 @@
                                                     <li><a class="cart add-to-cart" data-action="addOne" data-id="@Model[i].Id" href="#/"><i class="bi bi-shopping-bag4"></i></a></li>
                                                     <li><a class="wishlist" href="#/"><i class="bi bi-shopping-cart-full"></i></a></li>
                                                     <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                                    <li><a data-toggle="modal" title="Quick View"  data-id="@Model[i].Id" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                    <li><a data-toggle="modal" title="Quick View" data-id="@Model[i].Id" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -140,7 +148,7 @@
                             <!-- End Single Product -->
                         </div>
                     </div>
-                    <div class="shop-grid tab-pane fade mb-3 @(viewMode == 1? "show active" : "") " id="nav-list" role="tabpanel">
+                    <div class="shop-grid tab-pane fade mb-3 @(viewMode == 1 ? "show active" : "") " id="nav-list" role="tabpanel">
                         <div class="list__view__wrapper">
                             <!-- Start Single Product -->
                             @for (var i = 0; i < Model.Count; i++)
@@ -191,28 +199,28 @@
                             }
                             @if (currentPage > 1)
                             {
-                                <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                                <li><a href="@currentPara&page=@(currentPage - 1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
                             }
                             @if (currentPage > 2)
                             {
-                                <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
+                                <li><a href="@currentPara&page=@(currentPage - 2)&limit=@(limit)">@(currentPage - 2)</a></li>
                             }
                             @if (currentPage > 1)
                             {
-                                <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
+                                <li><a href="@currentPara&page=@(currentPage - 1)&limit=@(limit)">@(currentPage - 1)</a></li>
                             }
                             <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
                             @if (totalPage - currentPage > 0)
                             {
-                                <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
+                                <li><a href="@currentPara&page=@(currentPage + 1)&limit=@(limit)">@(currentPage + 1)</a></li>
                             }
                             @if (totalPage - currentPage > 1)
                             {
-                                <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
+                                <li><a href="@currentPara&page=@(currentPage + 2)&limit=@(limit)">@(currentPage + 2)</a></li>
                             }
                             @if (currentPage < totalPage)
                             {
-                                <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                                <li><a href="@currentPara&page=@(currentPage + 1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
                             }
 
                             @if (currentPage < totalPage - 2)

@@ -67,11 +67,11 @@
                                             </td>
                                             <td class="product-quantity" style="min-width: 150px">
                                                 <div class="input-group d-flex" >
-                                                    <button class="btn btn-dark input-group-prepend ml-auto mr-1">
+                                                    <button class="add-to-cart btn btn-dark input-group-prepend ml-auto mr-1" data-id="@item.id" data-action="minusOne">
                                                         <i class="zmdi zmdi-minus"></i>
                                                     </button>
                                                     <input class="text-center cart-quantity-input" type="number" value="@item.count" readonly="readonly">
-                                                    <button class="btn btn-dark input-group-prepend mr-auto ml-1">
+                                                    <button class="add-to-cart btn btn-dark input-group-prepend mr-auto ml-1" data-id="@item.id" data-action="addOne">
                                                         <i class="zmdi zmdi-plus"></i>
                                                     </button>
                                                 </div>
@@ -80,7 +80,7 @@
                                                 $@Math.Round(item.total, 2)
                                             </td>
                                             <td class="product-remove" style="min-width: 100px">
-                                                <a href="#/">
+                                                <a href="#/" class="add-to-cart" data-id="@item.id" data-action="delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </a>
                                             </td>
@@ -93,27 +93,27 @@
                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap">
                                 <li class="px-2 ml-auto"><a href="#">Coupon</a></li>
                                 <li class="px-2"><a href="@Url.Action("Index","Shop")">To Shop</a></li>
-                                <li class="cart-checkout-btn px-2"><a href="@Url.Action("Checkout","Payment")">Check Out</a></li>
+                                <li class="cart-checkout-btn px-2 @(!Model.Any() ? "display-none" : "")"><a href="@Url.Action("Checkout","Payment")">Check Out</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 offset-lg-6">
-                        <div class="cartbox__total__area">
+                        <div class="cartbox__total__area @(!Model.Any() ? "display-none" : "")">
                             <div class="cartbox-total d-flex justify-content-between">
                                 <ul class="cart__total__list">
                                     <li>Sub Total</li>
                                     <li>Shipping fee</li>
                                 </ul>
                                 <ul class="cart__total__tk">
-                                    <li>$<span class="total-cart">@(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))</span></li>
+                                    <li>$<span class="total-cart-table">@(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))</span></li>
                                     <li>$<span>0</span></li>
                                 </ul>
                             </div>
                             <div class="cart__total__amount">
                                 <span>Grand Total</span>
-                                <span>$<span class="total-cart">@(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))</span></span>
+                                <span>$<span class="grand-total-cart-table">@(Model.Aggregate<CartItem, double>(0, (current, item) => current + item.total))</span></span>
                             </div>
                         </div>
                     </div>

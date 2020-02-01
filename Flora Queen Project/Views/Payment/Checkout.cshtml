@@ -1,8 +1,10 @@
-﻿@model Flora_Queen_Project.Models.CheckoutViewModel
+﻿@using Flora_Queen_Project.Models
+@model Flora_Queen_Project.Models.CheckoutViewModel
 
 
 @{
     ViewBag.Title = "Checkout";
+    var cartReview = ViewBag.ShopCartReview as List<CartItem>;
 }
 
 @section header_class
@@ -144,13 +146,22 @@
                         <li>Total</li>
                     </ul>
                     <ul class="order_product">
-                        <li>Queen of Hearts 20 Red Roses × 1<span>100000 VND</span></li>
-                        <li>Cotton Candy-Gerberas and Carnations × 1<span>100000 VND</span></li>
-                        <li>Love Actually 12 Red and Pink Roses × 1<span>100000 VND</span></li>
+                        @if (cartReview != null)
+                        {
+                            foreach (var item in cartReview)
+                            {
+                                <li>
+                                    @item.name × @item.count   
+                                    @* ReSharper disable once CompareOfFloatsByEqualityOperator *@
+                                    <text class="current-price-cart @(item.discount == 1? "d-none" : "")">@((-1 + item.discount) * 100)%</text>
+                                    <span>$@item.total</span>
+                                </li>
+                            }
+                        }
                     </ul>
                     <ul class="shipping__method">
-                        <li>Cart Subtotal <span>100000 VND</span></li>
-                        <li>
+                        <li>Cart Subtotal <span class="subtotal-cart-checkout">$@(cartReview?.Sum(item => item.total) ?? 0)</span></li>
+                        @*<li>
                             Shipping
                             <ul>
                                 <li>
@@ -162,10 +173,10 @@
                                     <label>Flat Rate: $48.00</label>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*@
                     </ul>
                     <ul class="total__amount">
-                        <li>Order Total <span>300000 VND</span></li>
+                        <li>Order Total <span class="total-cart-checkout">$@(cartReview?.Sum(item => item.total) ?? 0)</span></li>
                     </ul>
                 </div>
                 <div id="accordion" class="checkout_accordion mt--30" role="tablist">
