@@ -1,14 +1,17 @@
-﻿@model Flora_Queen_Project.Models.NewEditUserInfo
+﻿@using Microsoft.AspNet.Identity
+@model Flora_Queen_Project.Models.NewEditUserInfo
 
 @{
-    ViewBag.Title = "EditUserInfo";
+    ViewBag.Title = "Edit User Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section header_class
 {oth-page}
+
 @section logo_head_class
 {col-md-6 col-sm-5 col-6}
+
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area bg-image--6">
     <div class="container">
@@ -17,7 +20,7 @@
                 <div class="bradcaump__inner text-center">
                     <h2 class="bradcaump-title">@ViewBag.Title</h2>
                     <nav class="bradcaump-content">
-                        <a class="breadcrumb_item" href="@Url.Action("Index","Home")">Home</a>
+                        <a class="breadcrumb_item" href="@Url.Action("Index", "Home")">Home</a>
                         <span class="brd-separetor">/</span>
                         <span class="breadcrumb_item active">My Account</span>
                     </nav>
@@ -31,68 +34,75 @@
 <section class="my_account_area pt--80 pb--55 bg--white">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-12">
+            <div class="col-lg-8 col-12 mx-auto">
                 <div class="my__account__wrapper">
-                    <h3 class="account__title text-center">Edit My Info</h3>
+                    <h3 class="account__title text-center">@User.Identity.GetUserName()</h3>
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                <div class="account__form">
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.FirstName)
-                        @Html.EditorFor(model => model.FirstName)
-                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                    </div>
+                        <div class="account__form">
+                            <div class="form-row">
+                                <div class="input__box form-group col-md-6">
+                                    @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
+                                    @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                                    <div class="form__btn">
+                                        <button type="button" class="upload-image-btn" id="upload_widget">
+                                            <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")"
+                                                 class="img-thumbnail" alt="Alternate Text" />
+                                        </button>
+                                    </div>
+                                    @Html.LabelFor(model => model.Avatar)
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="input__box form-group col-12 p-0">
+                                        @Html.LabelFor(model => model.FirstName)
+                                        @Html.EditorFor(model => model.FirstName)
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
 
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.LastName)
-                        @Html.EditorFor(model => model.LastName)
-                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                    </div>
+                                        @Html.LabelFor(model => model.LastName)
+                                        @Html.EditorFor(model => model.LastName)
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
 
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.Birthday)
-                        @Html.EditorFor(model => model.Birthday, new {htmlAttributes = new {type = "date"}})
-                        @Html.ValidationMessageFor(model => model.Birthday, "", new {@class = "text-danger"})
-                    </div>
+                                        @Html.LabelFor(model => model.Birthday)
+                                        @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="input__box form-group col-md-6">
+                                    @Html.LabelFor(model => model.Description)
+                                    @Html.EditorFor(model => model.Description)
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
 
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.Description)
-                        @Html.EditorFor(model => model.Description)
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.CompanyName)
-                        @Html.EditorFor(model => model.CompanyName)
-                        @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.Zipcode)
-                        @Html.EditorFor(model => model.Zipcode)
-                        @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="input__box">
-                        @Html.LabelFor(model => model.Gender)
-                        @Html.EnumDropDownListFor(model => model.Gender, "--------", new {  @class = "select__option form-control"  })
-                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="input__box">
-                        <img id="preview" src="@(Model.Avatar ?? "https://res.cloudinary.com/senbonzakura/image/upload/v1571307597/UserDefault_dchh43.png")"
-                             class="img-thumbnail" style="width: 100px" alt="Alternate Text" />
-                        <div style="margin-top: 20px;">
-                            @Html.LabelFor(model => model.Avatar)
-                            @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
-                            @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
-                            <div class="form__btn" style="margin-top: 5px">
-                                <button type="button" id="upload_widget">Upload file</button>
+                                <div class="input__box form-group col-md-6">
+                                    @Html.LabelFor(model => model.CompanyName)
+                                    @Html.EditorFor(model => model.CompanyName)
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input__box form-group col-md-6">
+                                    @Html.LabelFor(model => model.Zipcode)
+                                    @Html.EditorFor(model => model.Zipcode)
+                                    @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="input__box form-group col-md-6">
+                                    @Html.LabelFor(model => model.Gender)
+                                    @Html.EnumDropDownListFor(model => model.Gender, "--------", new { @class = "select__option form-control" })
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form__btn col-md-12 text-right">
+                                    <a href="@Url.Action("Index")">Cancel</a>
+                                    <button type="submit">Update</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form__btn">
-                        <button type="submit">Update</button>
-                    </div>
-
-                </div>
                     }
                 </div>
             </div>
@@ -100,14 +110,15 @@
     </div>
 </section>
 <!-- End My Account Area -->
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
     <script type="text/javascript">
         var myWidget = cloudinary.createUploadWidget({
-            cloudName: 'leduc911',
-            uploadPreset: 'v686mun2'
-        },
+                cloudName: 'leduc911',
+                uploadPreset: 'v686mun2'
+            },
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     const imgLink = result.info.secure_url;
@@ -119,7 +130,15 @@
             }
         );
 
-        document.getElementById("upload_widget").addEventListener("click", function () {
-            myWidget.open();
-        }, false);</script>
+        document.getElementById("upload_widget").addEventListener("click",
+            function() {
+                myWidget.open();
+            },
+            false);
+        $(function() {
+            const avatarPreviewWidth = $(".upload-image-btn").outerWidth();
+            $(".upload-image-btn").css({'height':avatarPreviewWidth+'px'});
+            $("#preview").css({'height':(avatarPreviewWidth - 10)+'px'});
+        });
+    </script>
 }

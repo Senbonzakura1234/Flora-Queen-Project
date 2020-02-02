@@ -413,6 +413,15 @@ namespace Flora_Queen_Project.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> AjaxCheckUserName(string username)
+        {
+            var validationResult = await UserManager.FindByNameAsync(username) == null;
+            Debug.WriteLine(validationResult);
+            return Json(validationResult);
+        }
+
         //
         // POST: /Account/LogOff
         [HttpPost]

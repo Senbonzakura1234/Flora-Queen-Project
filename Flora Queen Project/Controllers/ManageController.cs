@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,7 +17,8 @@ namespace Flora_Queen_Project.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        private ApplicationDbContext db = new ApplicationDbContext();
+        // ReSharper disable once UnusedMember.Local
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -184,7 +183,7 @@ namespace Flora_Queen_Project.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", @"Failed to verify phone");
             return View(model);
         }
 
@@ -351,13 +350,7 @@ namespace Flora_Queen_Project.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
@@ -370,21 +363,14 @@ namespace Flora_Queen_Project.Controllers
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
+            return user?.PasswordHash != null;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private bool HasPhoneNumber()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
+            return user?.PhoneNumber != null;
         }
 
         public enum ManageMessageId
@@ -441,7 +427,7 @@ namespace Flora_Queen_Project.Controllers
 
             user.Gender = editUserInfo.Gender;
 
-            UserManager.Update(user);
+            await UserManager.UpdateAsync(user);
             return RedirectToAction("Index", new { Message = ManageMessageId.UpdateUserSuccess });
         }
     }
