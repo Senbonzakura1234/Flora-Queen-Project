@@ -24,7 +24,7 @@ namespace Flora_Queen_Project.Models
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        public ICollection<SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
@@ -71,7 +71,7 @@ namespace Flora_Queen_Project.Models
     public class RegisterViewModel
     {
 
-
+        
         public string Email { get; set; }
 
         public string Password { get; set; }

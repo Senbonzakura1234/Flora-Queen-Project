@@ -219,7 +219,7 @@ $(function () {
         var gradientStrokeBluevisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 360);
         gradientStrokeBluevisitsalechart.addColorStop(0, "rgba(54, 215, 232, 1)");
         gradientStrokeBluevisitsalechart.addColorStop(1, "rgba(177, 148, 250, 1)");
-        var gradientLegendBluevisitsalechart = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
+        //var gradientLegendBluevisitsalechart = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
 
         var gradientStrokeRedvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 300);
         gradientStrokeRedvisitsalechart.addColorStop(0, "rgba(255, 191, 150, 1)");
@@ -228,7 +228,7 @@ $(function () {
 
         var myChartvisitsalechart = new window.Chart(ctxvisitsalechart,
             {
-                type: "bar",
+                type: "line",
                 data: {
                     labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG"],
                     datasets: [
@@ -239,8 +239,8 @@ $(function () {
                             hoverBackgroundColor: gradientStrokeVioletvisitsalechart,
                             legendColor: gradientLegendVioletvisitsalechart,
                             pointRadius: 0,
-                            borderWidth: 1,
-                            fill: "origin",
+                            borderWidth: 2,
+                            fill: false,
                             data: [20, 40, 15, 35, 25, 50, 30, 20]
                         },
                         {
@@ -250,20 +250,9 @@ $(function () {
                             hoverBackgroundColor: gradientStrokeRedvisitsalechart,
                             legendColor: gradientLegendRedvisitsalechart,
                             pointRadius: 0,
-                            borderWidth: 1,
-                            fill: "origin",
+                            borderWidth: 2,
+                            fill: false,
                             data: [40, 30, 20, 10, 50, 15, 35, 40]
-                        },
-                        {
-                            label: "UK",
-                            borderColor: gradientStrokeBluevisitsalechart,
-                            backgroundColor: gradientStrokeBluevisitsalechart,
-                            hoverBackgroundColor: gradientStrokeBluevisitsalechart,
-                            legendColor: gradientLegendBluevisitsalechart,
-                            pointRadius: 0,
-                            borderWidth: 1,
-                            fill: "origin",
-                            data: [70, 10, 30, 40, 25, 50, 15, 30]
                         }
                     ]
                 },
@@ -287,7 +276,7 @@ $(function () {
                         yAxes: [
                             {
                                 ticks: {
-                                    display: false,
+                                    display: true,
                                     min: 0,
                                     stepSize: 20,
                                     max: 80

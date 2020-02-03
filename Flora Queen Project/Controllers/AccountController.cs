@@ -80,6 +80,7 @@ namespace Flora_Queen_Project.Controllers
             var firstOrDefault = DbContext.Users.FirstOrDefault(p => p.Email == model.Email);
             if (firstOrDefault == null)
             {
+                ModelState.AddModelError("", @"Username not found or wrong password.");
                 return View(model);
             }
             // This doesn't count login failures towards account lockout
@@ -94,6 +95,7 @@ namespace Flora_Queen_Project.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
+                    ModelState.AddModelError("", @"Username not found or wrong password.");
                     return View(model);
                 default:
                     ModelState.AddModelError("", @"Invalid login attempt.");
@@ -343,7 +345,10 @@ namespace Flora_Queen_Project.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
 
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, true);
+            var result = await UserManager.FindByEmailAsync(loginInfo.Email) != null
+                ? SignInStatus.Failure
+                : await SignInManager.ExternalSignInAsync(loginInfo, true);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -354,6 +359,8 @@ namespace Flora_Queen_Project.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = true });
                 // ReSharper disable once RedundantCaseLabel
                 case SignInStatus.Failure:
+                    ViewBag.FailureInfo = "Email has already taken";
+                    return View("ExternalLoginFailure");
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;

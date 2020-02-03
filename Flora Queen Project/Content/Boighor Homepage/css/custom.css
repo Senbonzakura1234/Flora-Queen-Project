@@ -112,6 +112,6 @@ body {
     width: 60%;
     min-width: 200px;
     border-radius: 100%;
+    overflow: hidden;
 }.upload-image-btn img{
-    border-radius: 100%;
  }

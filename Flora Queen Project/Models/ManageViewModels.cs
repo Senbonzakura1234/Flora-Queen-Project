@@ -13,6 +13,7 @@ namespace Flora_Queen_Project.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public EditUserProfileViewModel UserProfile { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -85,7 +86,7 @@ namespace Flora_Queen_Project.Models
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
 
-    public class NewEditUserInfo
+    public class EditUserProfileViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
