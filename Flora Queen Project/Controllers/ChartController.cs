@@ -62,5 +62,32 @@ namespace Flora_Queen_Project.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetOrderData()
+        {
+            var listOrder = DbContext.ApplicationOrders.GroupBy(o => new
+            {
+                month = o.CreatedAt.Month,
+                year = o.CreatedAt.Year
+            }).Select(o => new
+            {
+                datetime = o.FirstOrDefault().CreatedAt,
+                o.FirstOrDefault().CreatedAt.Month,
+                o.FirstOrDefault().CreatedAt.Year,
+                Quantity = o.Count(),
+                Revenue = o.Sum(order => order.Amount)
+            }).OrderBy( o => o.datetime);
+
+            return Json(new
+            {
+                listOrder
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public class RevenueData
+        {
+            public int Month;
+            public int Year;
+            public double Revenue;
+        }
     }
 }
