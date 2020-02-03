@@ -106,3 +106,12 @@ body {
     display: none;
     margin: 0;
 }
+
+.upload-image-btn {
+    padding: 3px !important;
+    width: 60%;
+    min-width: 200px;
+    border-radius: 100%;
+    overflow: hidden;
+}.upload-image-btn img{
+ }

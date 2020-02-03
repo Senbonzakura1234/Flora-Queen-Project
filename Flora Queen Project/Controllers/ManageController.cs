@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,7 +17,8 @@ namespace Flora_Queen_Project.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        private ApplicationDbContext db = new ApplicationDbContext();
+        // ReSharper disable once UnusedMember.Local
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -58,13 +57,26 @@ namespace Flora_Queen_Project.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var userProfile = new EditUserProfileViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                CompanyName = user.CompanyName,
+                Birthday = user.Birthday,
+                Avatar = user.Avatar,
+                Description = user.Description,
+                Zipcode = user.Zipcode,
+                Gender = user.Gender
+            };
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                UserProfile = userProfile
             };
             return View(model);
         }
@@ -184,7 +196,7 @@ namespace Flora_Queen_Project.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", @"Failed to verify phone");
             return View(model);
         }
 
@@ -333,7 +345,7 @@ namespace Flora_Queen_Project.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             //add edit user
-            var editUser = new NewEditUserInfo
+            var editUser = new EditUserProfileViewModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -351,13 +363,7 @@ namespace Flora_Queen_Project.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
@@ -370,21 +376,14 @@ namespace Flora_Queen_Project.Controllers
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
+            return user?.PasswordHash != null;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private bool HasPhoneNumber()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
+            return user?.PhoneNumber != null;
         }
 
         public enum ManageMessageId
@@ -403,45 +402,45 @@ namespace Flora_Queen_Project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditUserInfo(NewEditUserInfo editUserInfo)
+        public async Task<ActionResult> EditUserInfo(EditUserProfileViewModel editUserProfileViewModel)
         {
-            if (editUserInfo == null) return View((NewEditUserInfo) null);
-            if (!ModelState.IsValid) return View(editUserInfo);
+            if (editUserProfileViewModel == null) return View((EditUserProfileViewModel) null);
+            if (!ModelState.IsValid) return View(editUserProfileViewModel);
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             user.UpdatedAt = DateTime.Now;
-            if (editUserInfo.FirstName != null)
+            if (editUserProfileViewModel.FirstName != null)
             {
-                user.FirstName = editUserInfo.FirstName;
+                user.FirstName = editUserProfileViewModel.FirstName;
             }
-            if (editUserInfo.LastName != null)
+            if (editUserProfileViewModel.LastName != null)
             {
-                user.LastName = editUserInfo.LastName;
+                user.LastName = editUserProfileViewModel.LastName;
             }
-            if (editUserInfo.Birthday != null)
+            if (editUserProfileViewModel.Birthday != null)
             {
-                user.Birthday = editUserInfo.Birthday;
+                user.Birthday = editUserProfileViewModel.Birthday;
             }
-            if (editUserInfo.Avatar != null)
+            if (editUserProfileViewModel.Avatar != null)
             {
-                user.Avatar = editUserInfo.Avatar;
+                user.Avatar = editUserProfileViewModel.Avatar;
             }
-            if (editUserInfo.Description != null)
+            if (editUserProfileViewModel.Description != null)
             {
-                user.Description = editUserInfo.Description;
+                user.Description = editUserProfileViewModel.Description;
             }
-            if (!editUserInfo.CompanyName.IsNullOrWhiteSpace())
+            if (!editUserProfileViewModel.CompanyName.IsNullOrWhiteSpace())
             {
-                user.CompanyName = editUserInfo.CompanyName;
-            }
-
-            if (!editUserInfo.Zipcode.IsNullOrWhiteSpace())
-            {
-                user.Zipcode = editUserInfo.Zipcode;
+                user.CompanyName = editUserProfileViewModel.CompanyName;
             }
 
-            user.Gender = editUserInfo.Gender;
+            if (!editUserProfileViewModel.Zipcode.IsNullOrWhiteSpace())
+            {
+                user.Zipcode = editUserProfileViewModel.Zipcode;
+            }
 
-            UserManager.Update(user);
+            user.Gender = editUserProfileViewModel.Gender;
+
+            await UserManager.UpdateAsync(user);
             return RedirectToAction("Index", new { Message = ManageMessageId.UpdateUserSuccess });
         }
     }
