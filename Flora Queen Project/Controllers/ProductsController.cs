@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -14,7 +15,8 @@ namespace Flora_Queen_Project.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Products
-        public ActionResult Index(string occasion, string type, string color, int? minAmount, int? maxAmount, int? viewMode, int? sortBy)
+        public ActionResult Index(string occasion, string type, string color, int? page,
+            int? limit, int? minAmount, int? maxAmount, int? sortBy, int? direct, string name)
         {
             if (occasion == null)
             {
@@ -31,61 +33,132 @@ namespace Flora_Queen_Project.Controllers
                 color = "";
             }
 
-            if (viewMode == null || viewMode > 1 || viewMode < 0)
+            if (page == null)
             {
-                viewMode = 0;
+                page = 1;
             }
 
-            if (sortBy == null || sortBy > 5 || sortBy < 0)
+            if (limit == null)
             {
+                limit = 9;
+            }
+
+            if (minAmount == null)
+            {
+                minAmount = 0;
+            }
+
+            if (maxAmount == null)
+            {
+                maxAmount = 500;
+            }            
+            
+            
+            
+
+            if (sortBy == null || sortBy > 4 || sortBy < 0)
+            {
+                Debug.WriteLine(sortBy);
                 sortBy = 0;
             }
-            var data = db.Products.Where(p =>
-            p.TypeId.Contains(type) &&
-            p.OccasionId.Contains(occasion) &&
-            p.ColorId.Contains(color) &&
-            p.Price >= minAmount &&
-            p.Price <= maxAmount
-            ).ToList();
-            var listProduct = new List<Product>();
 
+            if (direct == null || direct > 1 || direct < 0)
+            {
+                Debug.WriteLine(direct);
+                direct = 0;
+            }
+
+            if(name == null)
+            {
+                name = "";
+            }
+
+            var data = db.Products.Where(p =>
+                     p.TypeId.Contains(type) &&
+                     p.OccasionId.Contains(occasion) &&
+                     p.ColorId.Contains(color) &&
+                     p.Price >= minAmount &&
+                     p.Price <= maxAmount &&
+                     p.Name.Contains(name)
+                ).ToList();
+            var listProduct = new List<Product>();
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (sortBy is (int)FilterEnum.Date)
             {
-                var dataList = data.OrderByDescending(p => p.CreatedAt);
-                listProduct.AddRange(dataList);
+                if(direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = data.OrderBy(p => p.CreatedAt);
+                    listProduct.AddRange(dataList);
+                }
+                else
+                {
+                    var dataList = data.OrderByDescending(p => p.CreatedAt);
+                    listProduct.AddRange(dataList);
+                }
             }
-            else if (sortBy is (int)FilterEnum.NameAsc)
+            else if (sortBy is (int)FilterEnum.Name)
             {
-                var dataList = data.OrderBy(p => p.Name);
-                listProduct.AddRange(dataList);
-            }
-            else if (sortBy is (int)FilterEnum.NameDesc)
-            {
-                var dataList = data.OrderByDescending(p => p.Name);
-                listProduct.AddRange(dataList);
-            }
-            else if (sortBy is (int)FilterEnum.PriceAsc)
-            {
-                var dataList = data.OrderBy(p => p.Price);
-                listProduct.AddRange(dataList);
-            }
-            else if (sortBy is (int)FilterEnum.PriceDesc)
-            {
-                var dataList = data.OrderByDescending(p => p.Price);
-                listProduct.AddRange(dataList);
-            }
-            else if (sortBy is (int)FilterEnum.SellRate)
-            {
-                var dataList = data.OrderByDescending(p => p.OrderItems.Count);
-                listProduct.AddRange(dataList);
-            }
-            else
-            {
-                var dataList = data.OrderByDescending(p => p.CreatedAt);
-                listProduct.AddRange(dataList);
+                if(direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = data.OrderBy(p => p.Name);
+                    listProduct.AddRange(dataList);
+                }
+                else
+                {
+                    var dataList = data.OrderByDescending(p => p.Name);
+                    listProduct.AddRange(dataList);
+                }
             }
 
+            else if (sortBy is (int)FilterEnum.Price)
+            {
+                if (direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = data.OrderBy(p => p.Price);
+                    listProduct.AddRange(dataList);
+                }
+                else
+                {
+                    var dataList = data.OrderByDescending(p => p.Price);
+                    listProduct.AddRange(dataList);
+                }
+            }
+
+            else if (sortBy is (int)FilterEnum.SellRate)
+            {
+                if (direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = data.OrderBy(p => p.OrderItems.Count);
+                    listProduct.AddRange(dataList);
+                }
+                else
+                {
+                    var dataList = data.OrderByDescending(p => p.OrderItems.Count);
+                    listProduct.AddRange(dataList);
+                }
+            }            
+            else if (sortBy is (int)FilterEnum.InStock)
+            {
+                if (direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = data.OrderBy(p => p.InStock);
+                    listProduct.AddRange(dataList);
+                }
+                else
+                {
+                    var dataList = data.OrderByDescending(p => p.InStock);
+                    listProduct.AddRange(dataList);
+                }
+            }
+
+
+
             ViewBag.sortBy = sortBy;
+            Debug.WriteLine(sortBy);
+            ViewBag.TotalPage = Math.Ceiling((double)listProduct.Count / limit.Value);
+            ViewBag.CurrentPage = page;
+
+            ViewBag.Limit = limit;
 
             ViewBag.TotalItem = listProduct.Count;
             ViewBag.Occasion = occasion;
@@ -93,28 +166,31 @@ namespace Flora_Queen_Project.Controllers
             ViewBag.Color = color;
             ViewBag.minAmount = minAmount;
             ViewBag.maxAmount = maxAmount;
-            ViewBag.viewMode = viewMode;
+            ViewBag.direct = direct;
+            ViewBag.directSet = direct is (int)DirectEnum.Asc ? (int)DirectEnum.Desc : (int)DirectEnum.Asc;
+            ViewBag.name = name;
+            listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
 
-            listProduct = listProduct.ToList();
+            foreach (var variable in listProduct)
+            {
+                Debug.WriteLine("product name: " + variable.Name);
+            }
 
             return View(listProduct);
         }
         public enum FilterEnum
         {
-            [Display(Name = "Sell rate")]
-            SellRate = 5,
-            [Display(Name = "Price Descending")]
-            PriceDesc = 4,
-            [Display(Name = "Price Ascending")]
-            PriceAsc = 3,
-            [Display(Name = "Name Descending")]
-            NameDesc = 2,
-            [Display(Name = "Name Ascending")]
-            NameAsc = 1,
-            [Display(Name = "Date")]
+            InStock = 4,           
+            SellRate = 3,
+            Price = 2,
+            Name = 1,
             Date = 0
         }
-
+        public enum DirectEnum
+        {
+            Asc = 0,
+            Desc = 1
+        }
         // GET: Products/Details/5
         public ActionResult Details(string id)
         {

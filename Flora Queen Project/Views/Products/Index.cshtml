@@ -4,14 +4,20 @@
 @{
     ViewBag.Title = "Index";
     var sortBy = ((int?)ViewBag.sortBy).Value;
-    var viewMode = ((int?)ViewBag.viewMode).Value;
+    var totalPage = ((int?)ViewBag.TotalPage).Value;
+    var currentPage = ((int?)ViewBag.CurrentPage).Value;
+    var direct = ((int?)ViewBag.direct).Value;
+    var directSet = ((int?)ViewBag.directSet).Value;
+    var limit = ((int?)ViewBag.Limit).Value;
     var currentPara = "?occasion=" + ViewBag.Occasion +
                       "&type=" + ViewBag.Type +
                       "&color=" + ViewBag.Color +
                       "&minAmount=" + ViewBag.minAmount +
                       "&maxAmount=" + ViewBag.maxAmount +
-                      "&viewMode=" + ViewBag.viewMode +
-                      "&sortBy=" + ViewBag.sortBy
+                      "&sortBy=" + ViewBag.sortBy +
+                      "&direct=" + ViewBag.direct +
+                      "&monthData=" + ViewBag.monthData +
+                      "&yearData=" + ViewBag.yearData
         ;
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
@@ -20,91 +26,177 @@
     <div class="col-md-12 mx-auto grid-margin stretch-card">
         <div class="card">
             <div class="card-body table-responsive">
+                <h4 class="card-title">Default form</h4>
+                <p class="card-description"> Basic form layout </p>
+                @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { id = "productForm" }))
+                {
+                    <div class="form-row">
+                        <div class="col-md-6 form-group">
+                            <label for="name">Product Name</label>
+                            <input type="text" name="name" id="name" class="form-control"/>
+                        </div>
+                        @*<div class="col-md-6 form-group">
+                            @Html.DropDownList("typeData", EnumHelper.GetSelectList(typeof(Order.OrderStatusEnum)), "Select Status", new { @class = "form-control", id = "OrderStatus" })
+                        </div>*@
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 form-group"></div>
+                        <div class="col-md-6 form-group"></div>
+                    </div>
+                    <span class="my-auto col-md-auto">Sort By</span>
+                    <input name="sortBy" id="sortBy" type="hidden" value="@sortBy" />
+                    <input name="direct" id="direct" type="hidden" value="@direct" />
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-gradient-primary ml-auto">Submit</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mx-auto grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body table-responsive">
                 <h4 class="card-title">Products</h4>
                 <p class="card-description d-sm-flex">
                     <span class="text-muted text-small my-auto">Click product name to see detail</span>
                     <br class="d-sm-none" />
-                        <span class="my-auto col-md-auto">Sort By</span>
-                        <select class="shot__byselect" id="sortSelect">
-                            <option @(sortBy == 0 ? "selected" : "")
-                                    value="@((int)ProductsController.FilterEnum.Date)">
-                                Date
-                            </option>
-                            <option @(sortBy == 1 ? "selected" : "")
-                                    value="@((int)ProductsController.FilterEnum.NameAsc)">
-                                Name (Ascending)
-                            </option>
-                            <option @(sortBy == 2 ? "selected" : "")
-                                    value="@((int)ProductsController.FilterEnum.NameDesc)">
-                                Name (Descending)
-                            </option>
-                            <option @(sortBy == 3 ? "selected" : "")
-                                    value="@((int)ProductsController.FilterEnum.PriceAsc)">
-                                Price (Ascending)
-                            </option>
-                            <option @(sortBy == 4 ? "selected" : "")
-                                    value="@((int)ProductsController.FilterEnum.PriceDesc)">
-                                Price (Descending)
-                            </option>
-                            <option @(sortBy == 5 ? "selected" : "")
-                                    value="@((int)ProductsController.FilterEnum.SellRate)">
-                                SellRate
-                            </option>
-                        </select>
-                        <a class="btn btn-sm btn-primary ml-auto mr-2 mt-2 mt-sm-0" href="@Url.Action("Create", "Occasions")">
-                            Create New <span class="mdi mdi-plus-circle"></span>
-                        </a>
+                    <a class="btn btn-sm btn-primary ml-auto mr-2 mt-2 mt-sm-0" href="@Url.Action("Create", "Products")">
+                        Create New <span class="mdi mdi-plus-circle"></span>
+                    </a>
                 </p>
-                    <table class="table" id="update-customer">
-                        <thead class="text-primary">
-                            <tr>
-                                <th class="text-center">
-                                    @Html.DisplayName("Image")
-                                </th>
-                                <th class="text-center">
+                <table class="table" id="update-customer">
+                    <thead class="text-primary">
+                        <tr>
+                            <th class="text-center">
+                                @Html.DisplayName("Image")
+                            </th>
+                            <th class="text-center">
+                                <a href="#/" class="sortData text-primary" data-direct="@directSet"
+                                   data-sort="@((int)ProductsController.FilterEnum.Name)">
                                     @Html.DisplayNameFor(model => model.Name)
-                                </th>
-                                <th class="text-center">
-                                    @Html.DisplayNameFor(model => model.InStock)
-                                </th>
-                                <th class="text-center">
-                                    @Html.DisplayNameFor(model => model.Price)
-                                </th>
-                                <th class="text-right d-none d-lg-table-cell">
-                                    Edit
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                                </a>
+                            </th>
+                            <th class="text-center">
+                                <a href="#/" class="sortData text-primary" data-direct="@directSet"
+                                   data-sort="@((int)ProductsController.FilterEnum.InStock)">
 
-                                <tr>
-                                    <td class="text-center">
-                                        <img src="@item.ImgUrl" alt="@item.Name" height="160" width="160" />
-                                    </td>
-                                    <td>
-                                        <a class="badge w-100 badge-gradient-primary w-100"
-                                           href="@Url.Action("Details", "Products", new {id = item.Id})">
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.InStock)
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.Price)
-                                    </td>
-                                    <td class="text-right d-none d-lg-table-cell">
-                                        <a class="badge badge-warning" href="@Url.Action("Edit", "Products", new {id = item.Id})">
-                                            <span class="mdi mdi-pencil-box-outline"></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                    @Html.DisplayNameFor(model => model.InStock)
+                                </a>
+                            </th>
+                            <th class="text-center">
+                                <a href="#/" class="sortData text-primary" data-direct="@directSet"
+                                   data-sort="@((int)ProductsController.FilterEnum.SellRate)">
+                                    @Html.DisplayNameFor(model => model.OrderItems.Count)
+                                </a>
+                            </th>
+                            <th class="text-center">
+                                <a href="#/" class="sortData text-primary" data-direct="@directSet"
+                                   data-sort="@((int)ProductsController.FilterEnum.Price)">
+                                    @Html.DisplayNameFor(model => model.Price)
+                                </a>
+                            </th>
+                            <th class="text-center">
+                                <a href="#/" class="sortData text-primary" data-direct="@directSet"
+                                   data-sort="@((int)ProductsController.FilterEnum.Date)">
+                                    @Html.DisplayNameFor(model => model.CreatedAt)
+                                </a>
+                            </th>
+                            <th class="text-right d-none d-lg-table-cell">
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td class="text-center">
+                                    <img src="@item.ImgUrl" alt="@item.Name" height="160" width="160" />
+                                </td>
+                                <td>
+                                    <a class="badge w-100 badge-gradient-primary w-100"
+                                       href="@Url.Action("Details", "Products", new {id = item.Id})">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.InStock)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.OrderItems.Count)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                                </td>
+                                <td class="text-right d-none d-lg-table-cell">
+                                    <a class="badge badge-warning" href="@Url.Action("Edit", "Products", new {id = item.Id})">
+                                        <span class="mdi mdi-pencil-box-outline"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
+        </div>
     </div>
 </div>
+@if (totalPage > 0)
+{
+    <ul class="wn__pagination">
+        @if (currentPage > 3)
+        {
+            <li><a href="@currentPara&page=@(1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
+        }
+        @if (currentPage > 1)
+        {
+            <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
+        }
+        @if (currentPage > 2)
+        {
+            <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
+        }
+        @if (currentPage > 1)
+        {
+            <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
+        }
+        <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
+        @if (totalPage - currentPage > 0)
+        {
+            <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
+        }
+        @if (totalPage - currentPage > 1)
+        {
+            <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
+        }
+        @if (currentPage < totalPage)
+        {
+            <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
+        }
+
+        @if (currentPage < totalPage - 2)
+        {
+            <li><a href="@currentPara&page=@(totalPage)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a></li>
+        }
+    </ul>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".sortData").click(function () {
+                const sortByData = $(this).data("sort");
+                $('input[name="sortBy"]').val(sortByData);
+                const directData = $(this).data("direct");
+                $('input[name="direct"]').val(directData);
+                console.log(directData);
+                $("#productForm").submit();
+            });
+        });
+    </script>
+}
