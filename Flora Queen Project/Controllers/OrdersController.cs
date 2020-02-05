@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
@@ -15,67 +14,133 @@ namespace Flora_Queen_Project.Controllers
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Orders
-        public ActionResult Index(double? minPrice, double? maxPrice, int? status, int? month, int? year, int? page, int? limit, int? sortBy)
+        public ActionResult Index(double? minAmount, double? maxAmount, int? status, int? month, int? year, int? page,
+            int? limit, int? sortBy, int? direct, int? payment, string shipName )
         {
-            var orders = _db.ApplicationOrders.ToList();
-            if (minPrice != null && minPrice.Value > 0)
-            {
-                orders = orders.Where(o => o.Amount >= minPrice).ToList();
+            var orders = _db.ApplicationOrders.Where(o => o.OrderStatus != Order.OrderStatusEnum.Deleted).ToList();
 
-                if (maxPrice != null && maxPrice.Value >= minPrice)
-                {
-                    orders = orders.Where(o => o.Amount <= maxPrice).ToList();
-                }
+            if (string.IsNullOrWhiteSpace(shipName))
+            {
+                shipName = "";
+            }
+            orders = orders.Where(o => o.ShipName.Contains(shipName)).ToList();
+
+            if (minAmount == null || minAmount < 0)
+            {
+                minAmount = 0;
+            }
+            orders = orders.Where(o => o.Amount >= minAmount).ToList();
+
+            if (maxAmount == null || maxAmount < 0)
+            {
+                maxAmount = 500;
+            }
+            orders = orders.Where(o => o.Amount <= maxAmount).ToList();
+
+            if (status != null && Enum.IsDefined(typeof(Order.OrderStatusEnum), status))
+            {
+                orders = orders.Where(o => o.OrderStatus == (Order.OrderStatusEnum) status).ToList();
+            }
+            else
+            {
+                status = 5;
             }
 
-            if (status != null)
+            if (payment != null && Enum.IsDefined(typeof(Order.OrderPaymentMethodEnum), payment))
             {
-                orders = orders.Where(o => o.OrderStatus == (Order.OrderStatusEnum) status.Value).ToList();
+                orders = orders.Where(o => o.PaymentMethod == (Order.OrderPaymentMethodEnum) payment).ToList();
+            }
+            else
+            {
+                payment = 4;
             }
 
             if (month != null && month.Value >= 1 && month.Value <= 12 && year != null)
             {
-                orders = orders.Where(o => o.CreatedAt.Month == month && o.CreatedAt.Year == year).ToList();
+                orders = orders.Where(o => o.CreatedAt.Month == month && o.CreatedAt.Year == year).ToList(); 
+            }
+            else
+            {
+                month = 0;
+                year = 0;
             }
 
-            if (sortBy == null || sortBy > 4 || sortBy < 0)
+            if (sortBy == null || !Enum.IsDefined(typeof(SortEnum), sortBy))
             {
                 Debug.WriteLine(sortBy);
                 sortBy = 0;
             }
+            if (direct == null || !Enum.IsDefined(typeof(DirectEnum), direct))
+            {
+                Debug.WriteLine(direct);
+                direct = 0;
+            }
 
             var listOrder = new List<Order>();
-            switch (sortBy)
+
+            if (sortBy is (int) SortEnum.Date)
             {
-                case (int)SortEnum.Date:
+                if (direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = orders.OrderBy(p => p.CreatedAt);
+                    listOrder.AddRange(dataList);
+                }
+                else
                 {
                     var dataList = orders.OrderByDescending(p => p.CreatedAt);
                     listOrder.AddRange(dataList);
-                    break;
                 }
-                case (int)SortEnum.Name:
+            }
+            else if (sortBy is (int) SortEnum.Name)
+            {
+                if (direct is (int)DirectEnum.Asc)
                 {
-                    var dataList = orders.OrderBy(p => p.ApplicationUser.UserName);
+                    var dataList = orders.OrderBy(p => p.ShipName);
                     listOrder.AddRange(dataList);
-                    break;
                 }
-                case (int)SortEnum.Status:
+                else
+                {
+                    var dataList = orders.OrderByDescending(p => p.ShipName);
+                    listOrder.AddRange(dataList);
+                }
+            }
+            else if (sortBy is (int) SortEnum.Status)
+            {
+                if (direct is (int)DirectEnum.Asc)
                 {
                     var dataList = orders.OrderBy(p => p.OrderStatus);
                     listOrder.AddRange(dataList);
-                    break;
                 }
-                case (int)SortEnum.AmountAsc:
+                else
+                {
+                    var dataList = orders.OrderByDescending(p => p.OrderStatus);
+                    listOrder.AddRange(dataList);
+                }
+            }
+            else if (sortBy is (int) SortEnum.Amount)
+            {
+                if (direct is (int) DirectEnum.Asc)
                 {
                     var dataList = orders.OrderBy(p => p.Amount);
                     listOrder.AddRange(dataList);
-                    break;
                 }
-                default:
+                else
                 {
                     var dataList = orders.OrderByDescending(p => p.Amount);
                     listOrder.AddRange(dataList);
-                    break;
+                }
+            }
+            else
+            {
+                if (direct is (int)DirectEnum.Asc)
+                {
+                    var dataList = orders.OrderBy(p => p.PaymentMethod);
+                    listOrder.AddRange(dataList);
+                }
+                else
+                {
+                    var dataList = orders.OrderByDescending(p => p.PaymentMethod);
+                    listOrder.AddRange(dataList);
                 }
             }
 
@@ -89,7 +154,10 @@ namespace Flora_Queen_Project.Controllers
                 limit = 10;
             }
 
+            ViewBag.shipName = shipName;
             ViewBag.sortBy = sortBy;
+            ViewBag.direct = direct;
+            ViewBag.directSet = direct is (int)DirectEnum.Asc ? (int)DirectEnum.Desc : (int)DirectEnum.Asc;
             Debug.WriteLine(sortBy);
             ViewBag.TotalPage = Math.Ceiling((double)listOrder.Count / limit.Value);
             ViewBag.CurrentPage = page;
@@ -98,9 +166,12 @@ namespace Flora_Queen_Project.Controllers
 
             ViewBag.TotalItem = listOrder.Count;
            
-            ViewBag.minAmount = minPrice;
-            ViewBag.maxAmount = maxPrice;
+            ViewBag.minAmount = minAmount;
+            ViewBag.maxAmount = maxAmount;
             ViewBag.status = status;
+            ViewBag.payment = payment;
+            ViewBag.month = month;
+            ViewBag.year = year;
 
             listOrder = listOrder.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
             return View(listOrder.ToList());
@@ -108,16 +179,16 @@ namespace Flora_Queen_Project.Controllers
 
         public enum SortEnum
         {
-            [Display(Name = "Price Ascending")]
-            Status = 4,
-            [Display(Name = "Price Ascending")]
-            AmountDesc = 3,
-            [Display(Name = "Name Descending")]
-            AmountAsc = 2,
-            [Display(Name = "Name Ascending")]
+            PaymentMethod = 4,
+            Status = 3,
+            Amount = 2,
             Name = 1,
-            [Display(Name = "Date")]
             Date = 0
+        }
+        public enum DirectEnum
+        {
+            Asc = 0,
+            Desc = 1
         }
 
         // GET: Orders/Details/5

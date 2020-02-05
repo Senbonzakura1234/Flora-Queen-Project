@@ -1,5 +1,6 @@
 ﻿@using Flora_Queen_Project.Controllers
 @model IEnumerable<Flora_Queen_Project.Models.Product>
+@* ReSharper disable  Html.IdNotResolved *@
 
 @{
     ViewBag.Title = "Index";
@@ -33,11 +34,11 @@
                     <div class="form-row">
                         <div class="col-md-6 form-group">
                             <label for="name">Product Name</label>
-                            <input type="text" name="name" id="name" class="form-control"/>
+                            <input type="text" name="name" id="name" class="form-control" />
                         </div>
                         @*<div class="col-md-6 form-group">
-                            @Html.DropDownList("typeData", EnumHelper.GetSelectList(typeof(Order.OrderStatusEnum)), "Select Status", new { @class = "form-control", id = "OrderStatus" })
-                        </div>*@
+                                @Html.DropDownList("typeData", EnumHelper.GetSelectList(typeof(Order.OrderStatusEnum)), "Select Status", new { @class = "form-control", id = "OrderStatus" })
+                            </div>*@
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 form-group"></div>
