@@ -207,113 +207,120 @@ $(function () {
                 }
             });
     }
+
+
     if ($("#visit-sale-chart").length) {
-        window.Chart.defaults.global.legend.labels.usePointStyle = true;
-        var ctxvisitsalechart = document.getElementById("visit-sale-chart").getContext("2d");
+        var monthArray = [];
+        var revenue = [];
+        $.ajax({
+            url: "/Chart/GetOrderData",
+            type: "GET",
+            success: function(res) {
+                if (res != null) {
+                    console.log(res);
+                    for (var i = 0; i < res.listOrder.length; i++) {
+                        monthArray.push(`${res.listOrder[i].Month}/${res.listOrder[i].Year}`);
+                        revenue.push(res.listOrder[i].Revenue / res.listOrder[i].Quantity);
+                    }
 
-        var gradientStrokeVioletvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 181);
-        gradientStrokeVioletvisitsalechart.addColorStop(0, "rgba(218, 140, 255, 1)");
-        gradientStrokeVioletvisitsalechart.addColorStop(1, "rgba(154, 85, 255, 1)");
-        var gradientLegendVioletvisitsalechart = "linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))";
+                    window.Chart.defaults.global.legend.labels.usePointStyle = true;
+                    var ctxvisitsalechart = document.getElementById("visit-sale-chart").getContext("2d");
 
-        var gradientStrokeBluevisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 360);
-        gradientStrokeBluevisitsalechart.addColorStop(0, "rgba(54, 215, 232, 1)");
-        gradientStrokeBluevisitsalechart.addColorStop(1, "rgba(177, 148, 250, 1)");
-        //var gradientLegendBluevisitsalechart = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
+                    var gradientStrokeVioletvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 181);
+                    gradientStrokeVioletvisitsalechart.addColorStop(0, "rgba(218, 140, 255, 1)");
+                    gradientStrokeVioletvisitsalechart.addColorStop(1, "rgba(154, 85, 255, 1)");
+                    var gradientLegendVioletvisitsalechart = "linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))";
 
-        var gradientStrokeRedvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 300);
-        gradientStrokeRedvisitsalechart.addColorStop(0, "rgba(255, 191, 150, 1)");
-        gradientStrokeRedvisitsalechart.addColorStop(1, "rgba(254, 112, 150, 1)");
-        var gradientLegendRedvisitsalechart = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
+                    var gradientStrokeBluevisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 360);
+                    gradientStrokeBluevisitsalechart.addColorStop(0, "rgba(54, 215, 232, 1)");
+                    gradientStrokeBluevisitsalechart.addColorStop(1, "rgba(177, 148, 250, 1)");
+                    //var gradientLegendBluevisitsalechart = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
 
-        var myChartvisitsalechart = new window.Chart(ctxvisitsalechart,
-            {
-                type: "line",
-                data: {
-                    labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG"],
-                    datasets: [
+                    var gradientStrokeRedvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 300);
+                    gradientStrokeRedvisitsalechart.addColorStop(0, "rgba(255, 191, 150, 1)");
+                    gradientStrokeRedvisitsalechart.addColorStop(1, "rgba(254, 112, 150, 1)");
+                    var gradientLegendRedvisitsalechart = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
+
+                    var myChartvisitsalechart = new window.Chart(ctxvisitsalechart,
                         {
-                            label: "CHN",
-                            borderColor: gradientStrokeVioletvisitsalechart,
-                            backgroundColor: gradientStrokeVioletvisitsalechart,
-                            hoverBackgroundColor: gradientStrokeVioletvisitsalechart,
-                            legendColor: gradientLegendVioletvisitsalechart,
-                            pointRadius: 0,
-                            borderWidth: 2,
-                            fill: false,
-                            data: [20, 40, 15, 35, 25, 50, 30, 20]
-                        },
-                        {
-                            label: "USA",
-                            borderColor: gradientStrokeRedvisitsalechart,
-                            backgroundColor: gradientStrokeRedvisitsalechart,
-                            hoverBackgroundColor: gradientStrokeRedvisitsalechart,
-                            legendColor: gradientLegendRedvisitsalechart,
-                            pointRadius: 0,
-                            borderWidth: 2,
-                            fill: false,
-                            data: [40, 30, 20, 10, 50, 15, 35, 40]
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    legend: false,
-                    legendCallback: function (chart) {
-                        const text = [];
-                        text.push("<ul>");
-                        for (let i = 0; i < chart.data.datasets.length; i++) {
-                            text.push(`<li><span class="legend-dots" style="background:${chart.data.datasets[i].legendColor}"></span>`);
-                            if (chart.data.datasets[i].label) {
-                                text.push(chart.data.datasets[i].label);
-                            }
-                            text.push("</li>");
-                        }
-                        text.push("</ul>");
-                        return text.join("");
-                    },
-                    scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    display: true,
-                                    min: 0,
-                                    stepSize: 20,
-                                    max: 80
+                            type: "line",
+                            data: {
+                                labels: monthArray,
+                                datasets: [
+                                    {
+                                        label: "Average Monthly Revenue",
+                                        borderColor: gradientStrokeVioletvisitsalechart,
+                                        backgroundColor: gradientStrokeVioletvisitsalechart,
+                                        hoverBackgroundColor: gradientStrokeVioletvisitsalechart,
+                                        legendColor: gradientLegendVioletvisitsalechart,
+                                        pointRadius: 0,
+                                        borderWidth: 2,
+                                        fill: false,
+                                        data: revenue
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                legend: false,
+                                legendCallback: function (chart) {
+                                    const text = [];
+                                    text.push("<ul>");
+                                    for (let i = 0; i < chart.data.datasets.length; i++) {
+                                        text.push(`<li><span class="legend-dots" style="background:${chart.data.datasets[i].legendColor}"></span>`);
+                                        if (chart.data.datasets[i].label) {
+                                            text.push(chart.data.datasets[i].label);
+                                        }
+                                        text.push("</li>");
+                                    }
+                                    text.push("</ul>");
+                                    return text.join("");
                                 },
-                                gridLines: {
-                                    drawBorder: false,
-                                    color: "rgba(235,237,242,1)",
-                                    zeroLineColor: "rgba(235,237,242,1)"
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                display: true,
+                                                min: 0,
+                                                stepSize: 200,
+                                                max: 400
+                                            },
+                                            gridLines: {
+                                                drawBorder: false,
+                                                color: "rgba(235,237,242,1)",
+                                                zeroLineColor: "rgba(235,237,242,1)"
+                                            }
+                                        }
+                                    ],
+                                    xAxes: [
+                                        {
+                                            gridLines: {
+                                                display: false,
+                                                drawBorder: false,
+                                                color: "rgba(0,0,0,1)",
+                                                zeroLineColor: "rgba(235,237,242,1)"
+                                            },
+                                            ticks: {
+                                                padding: 20,
+                                                fontColor: "#9c9fa6",
+                                                autoSkip: true
+                                            },
+                                            categoryPercentage: 0.5,
+                                            barPercentage: 0.5
+                                        }
+                                    ]
+                                }
+                            },
+                            elements: {
+                                point: {
+                                    radius: 0
                                 }
                             }
-                        ],
-                        xAxes: [
-                            {
-                                gridLines: {
-                                    display: false,
-                                    drawBorder: false,
-                                    color: "rgba(0,0,0,1)",
-                                    zeroLineColor: "rgba(235,237,242,1)"
-                                },
-                                ticks: {
-                                    padding: 20,
-                                    fontColor: "#9c9fa6",
-                                    autoSkip: true
-                                },
-                                categoryPercentage: 0.5,
-                                barPercentage: 0.5
-                            }
-                        ]
-                    }
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
+                        });
+                    $("#visit-sale-chart-legend").html(myChartvisitsalechart.generateLegend());
                 }
-            });
-        $("#visit-sale-chart-legend").html(myChartvisitsalechart.generateLegend());
+            }
+        });
     }
     if ($("#visit-sale-chart-dark").length) {
         window.Chart.defaults.global.legend.labels.usePointStyle = true;
