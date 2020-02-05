@@ -12,12 +12,12 @@ namespace Flora_Queen_Project.Controllers
 {
     public class OrdersController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Orders
         public ActionResult Index(double? minPrice, double? maxPrice, int? status, int? month, int? year, int? page, int? limit, int? sortBy)
         {
-            var orders = db.ApplicationOrders.ToList();
+            var orders = _db.ApplicationOrders.ToList();
             if (minPrice != null && minPrice.Value > 0)
             {
                 orders = orders.Where(o => o.Amount >= minPrice).ToList();
@@ -45,38 +45,46 @@ namespace Flora_Queen_Project.Controllers
             }
 
             var listOrder = new List<Order>();
-            if (sortBy is (int)SortEnum.Date)
+            switch (sortBy)
             {
-                var dataList = orders.OrderByDescending(p => p.CreatedAt);
-                listOrder.AddRange(dataList);
-            }
-            else if (sortBy is (int)SortEnum.Name)
-            {
-                var dataList = orders.OrderBy(p => p.ApplicationUser.UserName);
-                listOrder.AddRange(dataList);
-            }
-            else if (sortBy is (int)SortEnum.Status)
-            {
-                var dataList = orders.OrderBy(p => p.OrderStatus);
-                listOrder.AddRange(dataList);
-            }
-            else if (sortBy is (int)SortEnum.AmountAsc)
-            {
-                var dataList = orders.OrderBy(p => p.Amount);
-                listOrder.AddRange(dataList);
-            }
-            else
-            {
-                var dataList = orders.OrderByDescending(p => p.Amount);
-                listOrder.AddRange(dataList);
+                case (int)SortEnum.Date:
+                {
+                    var dataList = orders.OrderByDescending(p => p.CreatedAt);
+                    listOrder.AddRange(dataList);
+                    break;
+                }
+                case (int)SortEnum.Name:
+                {
+                    var dataList = orders.OrderBy(p => p.ApplicationUser.UserName);
+                    listOrder.AddRange(dataList);
+                    break;
+                }
+                case (int)SortEnum.Status:
+                {
+                    var dataList = orders.OrderBy(p => p.OrderStatus);
+                    listOrder.AddRange(dataList);
+                    break;
+                }
+                case (int)SortEnum.AmountAsc:
+                {
+                    var dataList = orders.OrderBy(p => p.Amount);
+                    listOrder.AddRange(dataList);
+                    break;
+                }
+                default:
+                {
+                    var dataList = orders.OrderByDescending(p => p.Amount);
+                    listOrder.AddRange(dataList);
+                    break;
+                }
             }
 
-            if (page != null)
+            if (page == null)
             {
                 page = 1;
             }
 
-            if (limit != null)
+            if (limit == null)
             {
                 limit = 10;
             }
@@ -95,7 +103,6 @@ namespace Flora_Queen_Project.Controllers
             ViewBag.status = status;
 
             listOrder = listOrder.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
-            //ViewBag.orderStatus = 
             return View(listOrder.ToList());
         }
 
@@ -120,31 +127,36 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var order = db.ApplicationOrders.Find(id);
+            var order = _db.ApplicationOrders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.listOrderItem = db.OrderItems.Where(od => od.OrderId == id).ToList();
+            ViewBag.listOrderItem = _db.OrderItems.Where(od => od.OrderId == id).ToList();
             return View(order);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // ReSharper disable once InconsistentNaming
         public ActionResult Edit(string id, int OrderStatus)
         {
-            var order = db.ApplicationOrders.Find(id);
+            var order = _db.ApplicationOrders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
             order.OrderStatus = (Order.OrderStatusEnum) OrderStatus;
 
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(order).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
          
-            return View("Details/" + id);
+            return RedirectToAction("Details", "Orders", id);
         }
 
         // GET: Orders/Delete/5
@@ -154,7 +166,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var order = db.ApplicationOrders.Find(id);
+            var order = _db.ApplicationOrders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -167,9 +179,13 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            var order = db.ApplicationOrders.Find(id);
-            db.ApplicationOrders.Remove(order);
-            db.SaveChanges();
+            var order = _db.ApplicationOrders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            order.OrderStatus = Order.OrderStatusEnum.Deleted;
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -177,7 +193,7 @@ namespace Flora_Queen_Project.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

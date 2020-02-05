@@ -11,7 +11,7 @@
     var totalPage = ((int?)ViewBag.TotalPage).Value;
     var currentPage = ((int?)ViewBag.CurrentPage).Value;
     var limit = ((int?)ViewBag.Limit).Value;
-    var status = ((int?)ViewBag.status).Value;
+    var status = ((string)ViewBag.status);
     var currentPara = "?minPrice=" + ViewBag.minPrice +
                       "&maxPrice=" + ViewBag.maxPrice +
                       "&status=" + ViewBag.status +
@@ -19,6 +19,10 @@
         ;
 }
 
+@section styles
+{
+    @Styles.Render("~/Content/Purple DashBoard/css/slider-range.css")
+}
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -27,6 +31,7 @@
                 <p class="card-description"> Basic form layout </p>
                 @using (Html.BeginForm("Index", "Orders", FormMethod.Get))
                 {
+                    <div id="slider-range"></div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="minPrice">Username</label>
@@ -183,4 +188,13 @@
             <li><a href="@currentPara&page=@(totalPage)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a></li>
         }
     </ul>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+
+        });
+    </script>
 }
