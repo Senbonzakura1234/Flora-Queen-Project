@@ -27,11 +27,11 @@ namespace Flora_Queen_Project.Models
         public enum OrderPaymentMethodEnum
         {
             [Display(Name = "Online Banking")]
-            OB = 0,
+            OnlineBanking = 0,
             [Display(Name = "Cash on Delivery")]
-            CoD = 1,
+            CashOnDelivery = 1,
             [Display(Name = "Direct Bank Transfer")]
-            DBT = 2
+            DirectBankTransfer = 2
         }
 
 
