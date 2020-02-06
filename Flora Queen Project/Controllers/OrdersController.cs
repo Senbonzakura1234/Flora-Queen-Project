@@ -204,7 +204,7 @@ namespace Flora_Queen_Project.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.listOrderItem = _db.OrderItems.Where(od => od.OrderId == id).ToList();
+            ViewBag.listOrderDetails = _db.OrderItems.Where(od => od.OrderId == id).ToList();
             return View(order);
         }
 
