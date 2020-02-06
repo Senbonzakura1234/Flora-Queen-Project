@@ -4,25 +4,37 @@
 
 @{
     ViewBag.Title = "Index";
+    var name = ((string) ViewBag.name);
+    var occasion = ((string) ViewBag.occasion);
+    var type = ((string) ViewBag.type);
+    var color = ((string) ViewBag.color);
+    var minPrice = ((double?) ViewBag.minPrice).Value;
+    var maxPrice = ((double?) ViewBag.maxPrice).Value;
     var sortBy = ((int?)ViewBag.sortBy).Value;
+    var direct = ((int?)ViewBag.direct).Value;
     var totalPage = ((int?)ViewBag.TotalPage).Value;
     var currentPage = ((int?)ViewBag.CurrentPage).Value;
-    var direct = ((int?)ViewBag.direct).Value;
     var directSet = ((int?)ViewBag.directSet).Value;
     var limit = ((int?)ViewBag.Limit).Value;
-    var currentPara = "?occasion=" + ViewBag.Occasion +
-                      "&type=" + ViewBag.Type +
-                      "&color=" + ViewBag.Color +
-                      "&minAmount=" + ViewBag.minAmount +
-                      "&maxAmount=" + ViewBag.maxAmount +
+    var currentPara = "?occasion=" + ViewBag.occasion +
+                      "&type=" + ViewBag.type +
+                      "&color=" + ViewBag.color +
+                      "&minPrice=" + ViewBag.minPrice +
+                      "&maxPrice=" + ViewBag.maxPrice +
                       "&sortBy=" + ViewBag.sortBy +
                       "&direct=" + ViewBag.direct +
-                      "&monthData=" + ViewBag.monthData +
-                      "&yearData=" + ViewBag.yearData
+                      "&month=" + ViewBag.month +
+                      "&year=" + ViewBag.year +
+                      "&name=" + ViewBag.name
         ;
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
+@section styles
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    @Styles.Render("~/Content/Purple DashBoard/css/slider-range.css")
+    @Styles.Render("~/Content/Purple DashBoard/css/paginate.css")
+}
 <div class="row">
     <div class="col-md-12 mx-auto grid-margin stretch-card">
         <div class="card">
@@ -31,24 +43,33 @@
                 <p class="card-description"> Basic form layout </p>
                 @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { id = "productForm" }))
                 {
+                    @Html.Hidden("occasion",occasion,new {id = "occasion"})
+                    @Html.Hidden("type",type,new {id = "type"})
+                    @Html.Hidden("color",color,new {id = "color"})
+                    @Html.Hidden("minPrice",minPrice,new {id = "minPrice"})
+                    @Html.Hidden("maxPrice",maxPrice,new {id = "maxPrice"})
+                    @Html.Hidden("sortBy",sortBy,new {id = "sortBy"})
+                    @Html.Hidden("direct",direct,new {id = "direct"})
                     <div class="form-row">
-                        <div class="col-md-6 form-group">
-                            <label for="name">Product Name</label>
-                            <input type="text" name="name" id="name" class="form-control" />
+                        <div class="col-md-8 form-group">
+                            @Html.Label("name", "Product Name")
+                            @Html.TextBox("name", name, new {@class = "form-control", id = "name"})
                         </div>
-                        @*<div class="col-md-6 form-group">
-                                @Html.DropDownList("typeData", EnumHelper.GetSelectList(typeof(Order.OrderStatusEnum)), "Select Status", new { @class = "form-control", id = "OrderStatus" })
-                            </div>*@
+                        <div class="col-md-4 form-group">
+                            @Html.Label("", "Price Range")
+                            <div class="px-3 mt-3">
+                                <div id="slider-range">
+
+                                </div>
+                            </div>
+                            <div class="px-3 mt-1">
+                                <div id="amount" class="text-primary"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 form-group"></div>
-                        <div class="col-md-6 form-group"></div>
-                    </div>
-                    <span class="my-auto col-md-auto">Sort By</span>
-                    <input name="sortBy" id="sortBy" type="hidden" value="@sortBy" />
-                    <input name="direct" id="direct" type="hidden" value="@direct" />
-                    <div class="form-row">
-                        <button type="submit" class="btn btn-gradient-primary ml-auto">Submit</button>
+                        <a href="@Url.Action("Index","Products")" class="btn btn-light ml-auto">Clear Filter</a>
+                        <button type="submit" class="btn btn-gradient-primary ml-2">Submit</button>
                     </div>
                 }
 
@@ -60,9 +81,11 @@
             <div class="card-body table-responsive">
                 <h4 class="card-title">Products</h4>
                 <p class="card-description d-sm-flex">
-                    <span class="text-muted text-small my-auto">Click product name to see detail</span>
+                    <span class="text-muted text-small my-auto">
+                        Showing @((currentPage - 1) * limit + 1) – @((currentPage - 1) * limit + Model.Count()) of @ViewBag.TotalItem results
+                    </span>
                     <br class="d-sm-none" />
-                    <a class="btn btn-sm btn-primary ml-auto mr-2 mt-2 mt-sm-0" href="@Url.Action("Create", "Products")">
+                    <a class="btn btn-sm btn-gradient-primary ml-auto mr-2 mt-2 mt-sm-0" href="@Url.Action("Create", "Products")">
                         Create New <span class="mdi mdi-plus-circle"></span>
                     </a>
                 </p>
@@ -74,33 +97,53 @@
                             </th>
                             <th class="text-center">
                                 <a href="#/" class="sortData text-primary" data-direct="@directSet"
-                                   data-sort="@((int)ProductsController.FilterEnum.Name)">
+                                   data-sort="@((int)ProductsController.SortEnum.Name)">
                                     @Html.DisplayNameFor(model => model.Name)
+                                    <span style="font-size: 15px" class="mdi
+                                          @(direct == (int) ProductsController.DirectEnum.Asc ? "mdi-menu-down" : "mdi-menu-up")
+                                          @(sortBy == (int) ProductsController.SortEnum.Name ? "" : "d-none")">
+                                    </span>
                                 </a>
                             </th>
+                            <th class="text-center text-primary">Categories</th>
                             <th class="text-center">
                                 <a href="#/" class="sortData text-primary" data-direct="@directSet"
-                                   data-sort="@((int)ProductsController.FilterEnum.InStock)">
-
+                                   data-sort="@((int)ProductsController.SortEnum.InStock)">
                                     @Html.DisplayNameFor(model => model.InStock)
+                                    <span style="font-size: 15px" class="mdi
+                                          @(direct == (int) ProductsController.DirectEnum.Asc ? "mdi-menu-down" : "mdi-menu-up")
+                                          @(sortBy == (int) ProductsController.SortEnum.InStock ? "" : "d-none")">
+                                    </span>
                                 </a>
                             </th>
                             <th class="text-center">
                                 <a href="#/" class="sortData text-primary" data-direct="@directSet"
-                                   data-sort="@((int)ProductsController.FilterEnum.SellRate)">
-                                    @Html.DisplayNameFor(model => model.OrderItems.Count)
+                                   data-sort="@((int) ProductsController.SortEnum.SellRate)">
+                                    Sell Rate
+                                    <span style="font-size: 15px" class="mdi
+                                          @(direct == (int) ProductsController.DirectEnum.Asc ? "mdi-menu-down" : "mdi-menu-up")
+                                          @(sortBy == (int) ProductsController.SortEnum.SellRate ? "" : "d-none")">
+                                    </span>
                                 </a>
                             </th>
                             <th class="text-center">
                                 <a href="#/" class="sortData text-primary" data-direct="@directSet"
-                                   data-sort="@((int)ProductsController.FilterEnum.Price)">
+                                   data-sort="@((int)ProductsController.SortEnum.Price)">
                                     @Html.DisplayNameFor(model => model.Price)
+                                    <span style="font-size: 15px" class="mdi
+                                          @(direct == (int) ProductsController.DirectEnum.Asc ? "mdi-menu-down" : "mdi-menu-up")
+                                          @(sortBy == (int) ProductsController.SortEnum.Price ? "" : "d-none")">
+                                    </span>
                                 </a>
                             </th>
                             <th class="text-center">
                                 <a href="#/" class="sortData text-primary" data-direct="@directSet"
-                                   data-sort="@((int)ProductsController.FilterEnum.Date)">
+                                   data-sort="@((int)ProductsController.SortEnum.Date)">
                                     @Html.DisplayNameFor(model => model.CreatedAt)
+                                    <span style="font-size: 15px" class="mdi
+                                          @(direct == (int) ProductsController.DirectEnum.Asc ? "mdi-menu-down" : "mdi-menu-up")
+                                          @(sortBy == (int) ProductsController.SortEnum.Date ? "" : "d-none")">
+                                    </span>
                                 </a>
                             </th>
                             <th class="text-right d-none d-lg-table-cell">
@@ -114,12 +157,26 @@
 
                             <tr>
                                 <td class="text-center">
-                                    <img src="@item.ImgUrl" alt="@item.Name" height="160" width="160" />
+                                    <img src="@item.ImgUrl" alt="@item.Name" style="width: 50px !important; height: 50px !important"/>
                                 </td>
                                 <td>
                                     <a class="badge w-100 badge-gradient-primary w-100"
                                        href="@Url.Action("Details", "Products", new {id = item.Id})">
                                         @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#/" class="badge badge-gradient-success occasion-click" 
+                                       data-occasion="@item.OccasionId">
+                                        @Html.DisplayFor(modelItem => item.Occasion.Name)
+                                    </a>
+                                    <a href="#/" class="badge badge-gradient-warning type-click"
+                                       data-type="@item.TypeId">
+                                        @Html.DisplayFor(modelItem => item.Type.Name)
+                                    </a>
+                                    <a href="#/" class="badge badge-gradient-danger color-click"
+                                       data-color="@item.ColorId">
+                                        @Html.DisplayFor(modelItem => item.Color.Name)
                                     </a>
                                 </td>
                                 <td class="text-center">
@@ -129,10 +186,12 @@
                                     @Html.DisplayFor(modelItem => item.OrderItems.Count)
                                 </td>
                                 <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.Price)
+                                    <b class="text-small">$@Html.DisplayFor(modelItem => item.Price)</b>
                                 </td>
                                 <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                                    <a href="#/" class="text-small date-click" data-month="@item.CreatedAt.Month" data-year="@item.CreatedAt.Year">
+                                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                                    </a>
                                 </td>
                                 <td class="text-right d-none d-lg-table-cell">
                                     <a class="badge badge-warning" href="@Url.Action("Edit", "Products", new {id = item.Id})">
@@ -144,58 +203,151 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card-footer bg-white border-0">
+                @if (totalPage > 0)
+                {
+                    <div>
+                        <ul class="pagination text-center">
+                            <li class="page-item ml-auto" style="opacity: 0"></li>
+
+                            @if (currentPage > 3)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(1)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-double-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage - 1)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage > 2)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage - 2)&limit=@(limit)">
+                                        @(currentPage - 2)
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage - 1)&limit=@(limit)">
+                                        @(currentPage - 1)
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="active page-item" aria-current="page">
+                                <a class="page-link" href="@currentPara&page=@(currentPage)&limit=@(limit)">
+                                    @currentPage
+                                </a>
+                            </li>
+
+                            @if (totalPage - currentPage > 0)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage + 1)&limit=@(limit)">
+                                        @(currentPage + 1)
+                                    </a>
+                                </li>
+                            }
+
+                            @if (totalPage - currentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage + 2)&limit=@(limit)">
+                                        @(currentPage + 2)
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage < totalPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage + 1)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage < totalPage - 2)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(totalPage)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-double-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="page-item mr-auto" style="opacity: 0"></li>
+                        </ul>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
-@if (totalPage > 0)
-{
-    <ul class="wn__pagination">
-        @if (currentPage > 3)
-        {
-            <li><a href="@currentPara&page=@(1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-        }
-        @if (currentPage > 1)
-        {
-            <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-        }
-        @if (currentPage > 2)
-        {
-            <li><a href="@currentPara&page=@(currentPage-2)&limit=@(limit)">@(currentPage - 2)</a></li>
-        }
-        @if (currentPage > 1)
-        {
-            <li><a href="@currentPara&page=@(currentPage-1)&limit=@(limit)">@(currentPage - 1)</a></li>
-        }
-        <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
-        @if (totalPage - currentPage > 0)
-        {
-            <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)">@(currentPage + 1)</a></li>
-        }
-        @if (totalPage - currentPage > 1)
-        {
-            <li><a href="@currentPara&page=@(currentPage+2)&limit=@(limit)">@(currentPage + 2)</a></li>
-        }
-        @if (currentPage < totalPage)
-        {
-            <li><a href="@currentPara&page=@(currentPage+1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
-        }
 
-        @if (currentPage < totalPage - 2)
-        {
-            <li><a href="@currentPara&page=@(totalPage)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a></li>
-        }
-    </ul>
-}
 @section scripts
 {
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
+            const minPrice = $("#minPrice").val();
+            const maxPrice = $("#maxPrice").val();
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 100,
+                values: [minPrice, maxPrice],
+                slide: function (event, ui) {
+                    $("#amount").html(`$${ui.values[0]} - $${ui.values[1]}`);
+                    $("#minPrice").val(ui.values[0]);
+                    $("#maxPrice").val(ui.values[1]);
+                }
+            });
+            $("#amount").html(`$${$("#slider-range").slider("values", 0)} - $${$("#slider-range").slider("values", 1)}`);
+
+
             $(".sortData").click(function () {
                 const sortByData = $(this).data("sort");
                 $('input[name="sortBy"]').val(sortByData);
                 const directData = $(this).data("direct");
                 $('input[name="direct"]').val(directData);
                 console.log(directData);
+                $("#productForm").submit();
+            });
+
+            $(".date-click").click(function () {
+                const monthData = $(this).data("month");
+                $('input[name="month"]').val(monthData);
+                const yearData = $(this).data("year");
+                $('input[name="year"]').val(yearData);
+                $("#productForm").submit();
+            });
+
+            $(".occasion-click").click(function () {
+                const data = $(this).data("occasion");
+                $('input[name="occasion"]').val(data);
+                $("#productForm").submit();
+            });
+            $(".type-click").click(function () {
+                const data = $(this).data("type");
+                $('input[name="type"]').val(data);
+                $("#productForm").submit();
+            });
+            $(".color-click").click(function () {
+                const data = $(this).data("color");
+                $('input[name="color"]').val(data);
                 $("#productForm").submit();
             });
         });

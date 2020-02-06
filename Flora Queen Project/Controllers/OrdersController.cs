@@ -18,7 +18,7 @@ namespace Flora_Queen_Project.Controllers
             int? limit, int? sortBy, int? direct, int? payment, string shipName )
         {
             var orders = _db.ApplicationOrders.Where(o => o.OrderStatus != Order.OrderStatusEnum.Deleted).ToList();
-
+            var totalItem = orders.Count;
             if (string.IsNullOrWhiteSpace(shipName))
             {
                 shipName = "";
@@ -77,7 +77,7 @@ namespace Flora_Queen_Project.Controllers
             }
 
             var listOrder = new List<Order>();
-
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (sortBy is (int) SortEnum.Date)
             {
                 if (direct is (int)DirectEnum.Asc)
@@ -130,7 +130,7 @@ namespace Flora_Queen_Project.Controllers
                     listOrder.AddRange(dataList);
                 }
             }
-            else
+            else if (sortBy is (int)SortEnum.PaymentMethod)
             {
                 if (direct is (int)DirectEnum.Asc)
                 {
@@ -142,6 +142,11 @@ namespace Flora_Queen_Project.Controllers
                     var dataList = orders.OrderByDescending(p => p.PaymentMethod);
                     listOrder.AddRange(dataList);
                 }
+            }
+            else
+            {
+                var dataList = orders.OrderBy(p => p.CreatedAt);
+                listOrder.AddRange(dataList);
             }
 
             if (page == null)
@@ -164,7 +169,7 @@ namespace Flora_Queen_Project.Controllers
 
             ViewBag.Limit = limit;
 
-            ViewBag.TotalItem = listOrder.Count;
+            ViewBag.TotalItem = totalItem;
            
             ViewBag.minAmount = minAmount;
             ViewBag.maxAmount = maxAmount;

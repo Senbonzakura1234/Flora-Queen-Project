@@ -39,14 +39,15 @@
 {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     @Styles.Render("~/Content/Purple DashBoard/css/slider-range.css")
+    @Styles.Render("~/Content/Purple DashBoard/css/paginate.css")
 }
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Search Order</h4>
-                @*<p class="card-description"></p>*@
-                @using (Html.BeginForm("Index", "Orders", FormMethod.Get, new {id = "orderForm"}))
+
+                @using (Html.BeginForm("Index", "Orders", FormMethod.Get, new { id = "orderForm" }))
                 {
                     @Html.Hidden("minAmount", minAmount, new { id = "minAmount" })
                     @Html.Hidden("maxAmount", maxAmount, new { id = "maxAmount" })
@@ -59,7 +60,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             @Html.Label("shipName", "Ship Name")
-                            @Html.TextBox("shipName", shipName, new {@class = "form-control", id = "shipName"})
+                            @Html.TextBox("shipName", shipName, new { @class = "form-control", id = "shipName" })
                         </div>
                         <div class="form-group col-md-4">
                             @Html.Label("", "Amount Range")
@@ -75,7 +76,7 @@
                         <div class="form-group col-md-4">
                             @* ReSharper disable once Html.IdNotResolved *@
                             @Html.Label("OrderStatus", "Status")
-                            <select  id="OrderStatus" class="form-control">
+                            <select id="OrderStatus" class="form-control">
                                 <option value="5">----------</option>
                                 @foreach (var item in Enum.GetValues(typeof(Order.OrderStatusEnum)))
                                 {
@@ -98,7 +99,9 @@
         <div class="card">
             <div class="card-body table-responsive">
                 <h4 class="card-title">Orders</h4>
-
+                <p class="card-description text-small">
+                    Showing @((currentPage - 1) * limit + 1) – @((currentPage - 1) * limit + Model.Count()) of @ViewBag.TotalItem results
+                </p>    
                 <table class="table" id="update-student">
                     <thead class="text-primary">
                         <tr>
@@ -106,8 +109,8 @@
                                 #
                             </th>
                             <th class="text-center">
-                                <a href="#/" class="sortData text-primary" 
-                                   data-sort="@((int) OrdersController.SortEnum.Name)" 
+                                <a href="#/" class="sortData text-primary"
+                                   data-sort="@((int) OrdersController.SortEnum.Name)"
                                    data-direct="@directSet">
                                     @Html.DisplayNameFor(model => model.ShipName)
                                     <span style="font-size: 15px" class="mdi
@@ -179,7 +182,7 @@
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <b class="text-small">@Html.DisplayFor(modelItem => item.Amount)</b>
+                                    <b class="text-small">$@Html.DisplayFor(modelItem => item.Amount)</b>
                                 </td>
                                 <td class="text-center d-none d-sm-table-cell">
                                     <a href="#/" class="text-small date-click" data-month="@item.CreatedAt.Month" data-year="@item.CreatedAt.Year">
@@ -218,48 +221,100 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card-footer bg-white border-0">
+                @if (totalPage > 0)
+                {
+                    <div>
+                        <ul class="pagination text-center">
+                            <li class="page-item ml-auto" style="opacity: 0"></li>
+
+                            @if (currentPage > 3)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(1)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-double-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage - 1)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage > 2)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage - 2)&limit=@(limit)">
+                                        @(currentPage - 2)
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage - 1)&limit=@(limit)">
+                                        @(currentPage - 1)
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="active page-item" aria-current="page">
+                                <a class="page-link" href="@currentPara&page=@(currentPage)&limit=@(limit)">
+                                    @currentPage
+                                </a>
+                            </li>
+
+                            @if (totalPage - currentPage > 0)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage + 1)&limit=@(limit)">
+                                        @(currentPage + 1)
+                                    </a>
+                                </li>
+                            }
+
+                            @if (totalPage - currentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage + 2)&limit=@(limit)">
+                                        @(currentPage + 2)
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage < totalPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(currentPage + 1)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (currentPage < totalPage - 2)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@currentPara&page=@(totalPage)&limit=@(limit)">
+                                        <i class="mdi mdi-chevron-double-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="page-item mr-auto" style="opacity: 0"></li>
+                        </ul>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
-@if (totalPage > 0)
-{
-    <ul class="wn__pagination">
-        @if (currentPage > 3)
-        {
-            <li><a href="@currentPara&page=@(1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-        }
-        @if (currentPage > 1)
-        {
-            <li><a href="@currentPara&page=@(currentPage - 1)&limit=@(limit)"><i class="zmdi zmdi-chevron-left"></i></a></li>
-        }
-        @if (currentPage > 2)
-        {
-            <li><a href="@currentPara&page=@(currentPage - 2)&limit=@(limit)">@(currentPage - 2)</a></li>
-        }
-        @if (currentPage > 1)
-        {
-            <li><a href="@currentPara&page=@(currentPage - 1)&limit=@(limit)">@(currentPage - 1)</a></li>
-        }
-        <li class="active"><a href="@currentPara&page=@(currentPage)&limit=@(limit)">@currentPage</a></li>
-        @if (totalPage - currentPage > 0)
-        {
-            <li><a href="@currentPara&page=@(currentPage + 1)&limit=@(limit)">@(currentPage + 1)</a></li>
-        }
-        @if (totalPage - currentPage > 1)
-        {
-            <li><a href="@currentPara&page=@(currentPage + 2)&limit=@(limit)">@(currentPage + 2)</a></li>
-        }
-        @if (currentPage < totalPage)
-        {
-            <li><a href="@currentPara&page=@(currentPage + 1)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i></a></li>
-        }
 
-        @if (currentPage < totalPage - 2)
-        {
-            <li><a href="@currentPara&page=@(totalPage)&limit=@(limit)"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a></li>
-        }
-    </ul>
-}
 
 @section scripts
 {

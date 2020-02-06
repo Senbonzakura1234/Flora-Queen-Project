@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
@@ -12,27 +11,12 @@ namespace Flora_Queen_Project.Controllers
 {
     public class ProductsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Products
         public ActionResult Index(string occasion, string type, string color, int? page,
-            int? limit, int? minAmount, int? maxAmount, int? sortBy, int? direct, string name)
+            int? limit, double? minPrice, double? maxPrice, int? sortBy, int? direct, string name, int? month, int? year)
         {
-            if (occasion == null)
-            {
-                occasion = "";
-            }
-
-            if (type == null)
-            {
-                type = "";
-            }
-
-            if (color == null)
-            {
-                color = "";
-            }
-
             if (page == null)
             {
                 page = 1;
@@ -43,18 +27,66 @@ namespace Flora_Queen_Project.Controllers
                 limit = 9;
             }
 
-            if (minAmount == null)
+
+            var data = _db.Products.Where(p => p.ProductStatus != Product.ProductStatusEnum.Removed).ToList();
+            var totalItem = data.Count;
+            if (name == null)
             {
-                minAmount = 0;
+                name = "";
+            }
+            data = data.Where(p => p.Name.Contains(name)).ToList();
+
+            if (!string.IsNullOrWhiteSpace(occasion))
+            {
+                data = data.Where(p => p.OccasionId == occasion).ToList();
+            }
+            else
+            {
+                occasion = "";
             }
 
-            if (maxAmount == null)
+
+            if (!string.IsNullOrWhiteSpace(type))
             {
-                maxAmount = 500;
+                data = data.Where(p => p.TypeId == type).ToList();
+            }
+            else
+            {
+                type = "";
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(color))
+            {
+                data = data.Where(p => p.ColorId == color).ToList();
+            }
+            else
+            {
+                color = "";
+            }
+
+
+            
+            if (minPrice == null)
+            {
+                minPrice = 0;
+            }
+            if (maxPrice == null)
+            {
+                maxPrice = 100;
             }            
-            
-            
-            
+            data = data.Where(p => p.Price <= maxPrice && p.Price >= minPrice).ToList();
+
+            if (month != null && month >= 1 && month <= 12 && year != null)
+            {
+                data = data.Where(p => p.CreatedAt.Month == month && p.CreatedAt.Year == year).ToList();
+            }
+            else
+            {
+                month = 0;
+                year = 0;
+            }
+
 
             if (sortBy == null || sortBy > 4 || sortBy < 0)
             {
@@ -68,22 +100,10 @@ namespace Flora_Queen_Project.Controllers
                 direct = 0;
             }
 
-            if(name == null)
-            {
-                name = "";
-            }
-
-            var data = db.Products.Where(p =>
-                     p.TypeId.Contains(type) &&
-                     p.OccasionId.Contains(occasion) &&
-                     p.ColorId.Contains(color) &&
-                     p.Price >= minAmount &&
-                     p.Price <= maxAmount &&
-                     p.Name.Contains(name)
-                ).ToList();
+            
             var listProduct = new List<Product>();
             // ReSharper disable once ConvertIfStatementToSwitchStatement
-            if (sortBy is (int)FilterEnum.Date)
+            if (sortBy is (int)SortEnum.Date)
             {
                 if(direct is (int)DirectEnum.Asc)
                 {
@@ -96,7 +116,7 @@ namespace Flora_Queen_Project.Controllers
                     listProduct.AddRange(dataList);
                 }
             }
-            else if (sortBy is (int)FilterEnum.Name)
+            else if (sortBy is (int)SortEnum.Name)
             {
                 if(direct is (int)DirectEnum.Asc)
                 {
@@ -110,7 +130,7 @@ namespace Flora_Queen_Project.Controllers
                 }
             }
 
-            else if (sortBy is (int)FilterEnum.Price)
+            else if (sortBy is (int)SortEnum.Price)
             {
                 if (direct is (int)DirectEnum.Asc)
                 {
@@ -124,7 +144,7 @@ namespace Flora_Queen_Project.Controllers
                 }
             }
 
-            else if (sortBy is (int)FilterEnum.SellRate)
+            else if (sortBy is (int)SortEnum.SellRate)
             {
                 if (direct is (int)DirectEnum.Asc)
                 {
@@ -137,7 +157,7 @@ namespace Flora_Queen_Project.Controllers
                     listProduct.AddRange(dataList);
                 }
             }            
-            else if (sortBy is (int)FilterEnum.InStock)
+            else if (sortBy is (int)SortEnum.InStock)
             {
                 if (direct is (int)DirectEnum.Asc)
                 {
@@ -150,6 +170,11 @@ namespace Flora_Queen_Project.Controllers
                     listProduct.AddRange(dataList);
                 }
             }
+            else
+            {
+                var dataList = data.OrderBy(p => p.CreatedAt);
+                listProduct.AddRange(dataList);
+            }
 
 
 
@@ -160,15 +185,20 @@ namespace Flora_Queen_Project.Controllers
 
             ViewBag.Limit = limit;
 
-            ViewBag.TotalItem = listProduct.Count;
-            ViewBag.Occasion = occasion;
-            ViewBag.Type = type;
-            ViewBag.Color = color;
-            ViewBag.minAmount = minAmount;
-            ViewBag.maxAmount = maxAmount;
+            ViewBag.TotalItem = totalItem;
+
+            ViewBag.occasion = occasion;
+            ViewBag.type = type;
+            ViewBag.color = color;
+
+            ViewBag.minPrice = minPrice;
+            ViewBag.maxPrice = maxPrice;
+
             ViewBag.direct = direct;
             ViewBag.directSet = direct is (int)DirectEnum.Asc ? (int)DirectEnum.Desc : (int)DirectEnum.Asc;
             ViewBag.name = name;
+            ViewBag.month = month;
+            ViewBag.year = year;
             listProduct = listProduct.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
 
             foreach (var variable in listProduct)
@@ -178,7 +208,7 @@ namespace Flora_Queen_Project.Controllers
 
             return View(listProduct);
         }
-        public enum FilterEnum
+        public enum SortEnum
         {
             InStock = 4,           
             SellRate = 3,
@@ -198,7 +228,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.Products.Find(id);
+            var product = _db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -209,9 +239,9 @@ namespace Flora_Queen_Project.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.ColorId = new SelectList(db.Colors, "Id", "Name");
-            ViewBag.OccasionId = new SelectList(db.Occasions, "Id", "Name");
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name");
+            ViewBag.ColorId = new SelectList(_db.Colors, "Id", "Name");
+            ViewBag.OccasionId = new SelectList(_db.Occasions, "Id", "Name");
+            ViewBag.TypeId = new SelectList(_db.Types, "Id", "Name");
             return View();
         }
 
@@ -224,14 +254,14 @@ namespace Flora_Queen_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
+                _db.Products.Add(product);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ColorId = new SelectList(db.Colors, "Id", "Name", product.ColorId);
-            ViewBag.OccasionId = new SelectList(db.Occasions, "Id", "Name", product.OccasionId);
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
+            ViewBag.ColorId = new SelectList(_db.Colors, "Id", "Name", product.ColorId);
+            ViewBag.OccasionId = new SelectList(_db.Occasions, "Id", "Name", product.OccasionId);
+            ViewBag.TypeId = new SelectList(_db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -242,14 +272,14 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.Products.Find(id);
+            var product = _db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ColorId = new SelectList(db.Colors, "Id", "Name", product.ColorId);
-            ViewBag.OccasionId = new SelectList(db.Occasions, "Id", "Name", product.OccasionId);
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
+            ViewBag.ColorId = new SelectList(_db.Colors, "Id", "Name", product.ColorId);
+            ViewBag.OccasionId = new SelectList(_db.Occasions, "Id", "Name", product.OccasionId);
+            ViewBag.TypeId = new SelectList(_db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -262,13 +292,13 @@ namespace Flora_Queen_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(product).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ColorId = new SelectList(db.Colors, "Id", "Name", product.ColorId);
-            ViewBag.OccasionId = new SelectList(db.Occasions, "Id", "Name", product.OccasionId);
-            ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", product.TypeId);
+            ViewBag.ColorId = new SelectList(_db.Colors, "Id", "Name", product.ColorId);
+            ViewBag.OccasionId = new SelectList(_db.Occasions, "Id", "Name", product.OccasionId);
+            ViewBag.TypeId = new SelectList(_db.Types, "Id", "Name", product.TypeId);
             return View(product);
         }
 
@@ -279,7 +309,7 @@ namespace Flora_Queen_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.Products.Find(id);
+            var product = _db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -292,11 +322,17 @@ namespace Flora_Queen_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            var product = db.Products.Find(id);
+            var product = _db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
             product.DeletedAt = DateTime.Now;
-            product.ProductStatus = 0;
-            db.Entry(product).State = EntityState.Modified;
-            db.SaveChanges();
+            product.ProductStatus = Product.ProductStatusEnum.Removed;
+            _db.Entry(product).State = EntityState.Modified;
+
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -304,7 +340,7 @@ namespace Flora_Queen_Project.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
