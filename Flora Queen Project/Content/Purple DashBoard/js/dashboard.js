@@ -218,37 +218,38 @@ $(function () {
             success: function(res) {
                 if (res != null) {
                     console.log(res);
-                    for (var i = 0; i < res.listOrder.length; i++) {
+                    for (let i = 0; i < res.listOrder.length; i++) {
                         monthArray.push(`${res.listOrder[i].Month}/${res.listOrder[i].Year}`);
                         revenue.push(res.listOrder[i].Revenue / res.listOrder[i].Quantity);
                     }
 
                     window.Chart.defaults.global.legend.labels.usePointStyle = true;
-                    var ctxvisitsalechart = document.getElementById("visit-sale-chart").getContext("2d");
+                    const ctxvisitsalechart = document.getElementById("visit-sale-chart").getContext("2d");
 
-                    var gradientStrokeVioletvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 181);
+                    const gradientStrokeVioletvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 181);
                     gradientStrokeVioletvisitsalechart.addColorStop(0, "rgba(218, 140, 255, 1)");
                     gradientStrokeVioletvisitsalechart.addColorStop(1, "rgba(154, 85, 255, 1)");
-                    var gradientLegendVioletvisitsalechart = "linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))";
+                    const gradientLegendVioletvisitsalechart = "linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))";
 
-                    var gradientStrokeBluevisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 360);
+                    const gradientStrokeBluevisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 360);
                     gradientStrokeBluevisitsalechart.addColorStop(0, "rgba(54, 215, 232, 1)");
                     gradientStrokeBluevisitsalechart.addColorStop(1, "rgba(177, 148, 250, 1)");
                     //var gradientLegendBluevisitsalechart = "linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))";
 
-                    var gradientStrokeRedvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 300);
+                    const gradientStrokeRedvisitsalechart = ctxvisitsalechart.createLinearGradient(0, 0, 0, 300);
                     gradientStrokeRedvisitsalechart.addColorStop(0, "rgba(255, 191, 150, 1)");
                     gradientStrokeRedvisitsalechart.addColorStop(1, "rgba(254, 112, 150, 1)");
-                    var gradientLegendRedvisitsalechart = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
+                    // ReSharper disable once UnusedLocals
+                    const gradientLegendRedvisitsalechart = "linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))";
 
-                    var myChartvisitsalechart = new window.Chart(ctxvisitsalechart,
+                    const myChartvisitsalechart = new window.Chart(ctxvisitsalechart,
                         {
                             type: "line",
                             data: {
                                 labels: monthArray,
                                 datasets: [
                                     {
-                                        label: "Average Monthly Revenue",
+                                        label: "Showing data of last 12 months",
                                         borderColor: gradientStrokeVioletvisitsalechart,
                                         backgroundColor: gradientStrokeVioletvisitsalechart,
                                         hoverBackgroundColor: gradientStrokeVioletvisitsalechart,
@@ -282,8 +283,8 @@ $(function () {
                                             ticks: {
                                                 display: true,
                                                 min: 0,
-                                                stepSize: 200,
-                                                max: 400
+                                                stepSize: 50,
+                                                max: 250
                                             },
                                             gridLines: {
                                                 drawBorder: false,
@@ -576,10 +577,10 @@ $(function () {
                 occasionGradientStrokeGreen.addColorStop(1, "rgba(132, 217, 210, 1)");
                 const occasionGradientLegendGreen = "linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))";
 
-                const occasionGradientStrokeMystic = ctxOccasion.createLinearGradient(0, 0, 0, 132);
-                occasionGradientStrokeMystic.addColorStop(0, "rgba(233, 142, 152, 1)");
-                occasionGradientStrokeMystic.addColorStop(1, "rgba(127, 217, 210, 1)");
-                const occasiongradientLegendMystic = "linear-gradient(to right, rgba(233, 142, 152, 1), rgba(127, 217, 210, 1))";
+                const occasionGradientStrokeYellow = ctxOccasion.createLinearGradient(0, 0, 0, 132);
+                occasionGradientStrokeYellow.addColorStop(0, "#f6e384");
+                occasionGradientStrokeYellow.addColorStop(1, "#ffd500");
+                const occasiongradientLegendYellow = "linear-gradient(to right, #f6e384, #ffd500)";
 
                 var occasionsChartData = {
                     datasets: [{
@@ -588,25 +589,25 @@ $(function () {
                             occasionGradientStrokeBlue,
                             occasionGradientStrokeGreen,
                             occasionGradientStrokeRed,
-                            occasionGradientStrokeMystic
+                            occasionGradientStrokeYellow
                         ],
                         hoverBackgroundColor: [
                             occasionGradientStrokeBlue,
                             occasionGradientStrokeGreen,
                             occasionGradientStrokeRed,
-                            occasionGradientStrokeMystic
+                            occasionGradientStrokeYellow
                         ],
                         borderColor: [
                             occasionGradientStrokeBlue,
                             occasionGradientStrokeGreen,
                             occasionGradientStrokeRed,
-                            occasionGradientStrokeMystic
+                            occasionGradientStrokeYellow
                         ],
                         legendColor: [
                             occasionGradientLegendBlue,
                             occasionGradientLegendGreen,
                             occasiongradientLegendRed,
-                            occasiongradientLegendMystic
+                            occasiongradientLegendYellow
                         ]
                     }],
 

@@ -86,32 +86,32 @@ namespace Flora_Queen_Project.Controllers
             ).ToList();
             var listProduct = new List<Product>();
             // ReSharper disable once ConvertIfStatementToSwitchStatement
-            if (sortBy is (int) FilterEnum.Date)
+            if (sortBy is (int) SortEnum.Date)
             {
                 var dataList = data.OrderByDescending(p => p.CreatedAt);
                 listProduct.AddRange(dataList);
             }
-            else if (sortBy is (int) FilterEnum.NameAsc)
+            else if (sortBy is (int) SortEnum.NameAsc)
             {
                 var dataList = data.OrderBy(p => p.Name);
                 listProduct.AddRange(dataList);
             }
-            else if (sortBy is (int) FilterEnum.NameDesc)
+            else if (sortBy is (int) SortEnum.NameDesc)
             {
                 var dataList = data.OrderByDescending(p => p.Name);
                 listProduct.AddRange(dataList);
             }
-            else if (sortBy is (int) FilterEnum.PriceAsc)
+            else if (sortBy is (int) SortEnum.PriceAsc)
             {
                 var dataList = data.OrderBy(p => p.Price);
                 listProduct.AddRange(dataList);
             }
-            else if (sortBy is (int) FilterEnum.PriceDesc)
+            else if (sortBy is (int) SortEnum.PriceDesc)
             {
                 var dataList = data.OrderByDescending(p => p.Price);
                 listProduct.AddRange(dataList);
             }
-            else if (sortBy is (int) FilterEnum.SellRate)
+            else if (sortBy is (int) SortEnum.SellRate)
             {
                 var dataList = data.OrderByDescending(p => p.OrderItems.Count);
                 listProduct.AddRange(dataList);
@@ -146,7 +146,7 @@ namespace Flora_Queen_Project.Controllers
 
             return View(listProduct);
         }
-        public enum FilterEnum
+        public enum SortEnum
         {
             [Display(Name = "Sell rate")]
             SellRate = 5,

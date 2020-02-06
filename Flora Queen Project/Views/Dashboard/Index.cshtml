@@ -67,11 +67,26 @@
 
 
 <div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="clearfix text-center">
+                    <h4 class="card-title">Flora Queen</h4>
+                </div>
+                <div class="clearfix mt-5 mx-auto text-center">
+                    <img src="https://res.cloudinary.com/senbonzakura/image/upload/v1579329139/images/ImagePlaceHolder/logo/floraqueen-small-logo_ice1ul.png" alt="" />
+                </div>
+                <div class="clearfix mt-5 mx-auto text-center">
+                    <img src="https://res.cloudinary.com/senbonzakura/image/upload/v1578992839/images/ImagePlaceHolder/logo/floraqueen-logo_itq82z.svg" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="clearfix">
-                    <h4 class="card-title float-left">Visit And Sales Statistics</h4>
+                    <h4 class="card-title float-left">Average Monthly Revenue Per Order($)</h4>
                     <div id="visit-sale-chart-legend"
                          class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                 </div>
@@ -79,20 +94,12 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Colors Sources</h4>
-                <canvas id="color-chart"></canvas>
-                <div id="color-chart-legend"
-                     class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Occasions Sources</h4>
+                <h4 class="card-title">Occasions</h4>
+                <p class="card-description text-small">Percentage of each Occasion category</p>
                 <canvas id="occasion-chart"></canvas>
                 <div id="occasion-chart-legend"
                      class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
@@ -102,9 +109,21 @@
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Types Sources</h4>
+                <h4 class="card-title">Types</h4>
+                <p class="card-description text-small">Percentage of each Type category</p>
                 <canvas id="type-chart"></canvas>
                 <div id="type-chart-legend"
+                     class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Colors</h4>
+                <p class="card-description text-small">Percentage of each Color category</p>
+                <canvas id="color-chart"></canvas>
+                <div id="color-chart-legend"
                      class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
             </div>
         </div>

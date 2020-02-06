@@ -70,27 +70,27 @@
                                 <span>Sort By</span>
                                 <select class="shot__byselect" id="sortSelect">
                                     <option @(sortBy == 0 ? "selected" : "")
-                                        value="@((int) ShopController.FilterEnum.Date)">
+                                        value="@((int) ShopController.SortEnum.Date)">
                                         Date
                                     </option>
                                     <option @(sortBy == 1 ? "selected" : "")
-                                        value="@((int) ShopController.FilterEnum.NameAsc)">
+                                        value="@((int) ShopController.SortEnum.NameAsc)">
                                         Name (Ascending)
                                     </option>
                                     <option @(sortBy == 2 ? "selected" : "")
-                                        value="@((int) ShopController.FilterEnum.NameDesc)">
+                                        value="@((int) ShopController.SortEnum.NameDesc)">
                                         Name (Descending)
                                     </option>
                                     <option @(sortBy == 3 ? "selected" : "")
-                                        value="@((int) ShopController.FilterEnum.PriceAsc)">
+                                        value="@((int) ShopController.SortEnum.PriceAsc)">
                                         Price (Ascending)
                                     </option>
                                     <option @(sortBy == 4 ? "selected" : "")
-                                        value="@((int) ShopController.FilterEnum.PriceDesc)">
+                                        value="@((int) ShopController.SortEnum.PriceDesc)">
                                         Price (Descending)
                                     </option>
                                     <option @(sortBy == 5 ? "selected" : "")
-                                        value="@((int) ShopController.FilterEnum.SellRate)">
+                                        value="@((int) ShopController.SortEnum.SellRate)">
                                         SellRate
                                     </option>
                                 </select>
