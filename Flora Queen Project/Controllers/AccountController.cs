@@ -345,9 +345,7 @@ namespace Flora_Queen_Project.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
 
-            var result = await UserManager.FindByEmailAsync(loginInfo.Email) != null
-                ? SignInStatus.Failure
-                : await SignInManager.ExternalSignInAsync(loginInfo, true);
+            var result = await SignInManager.ExternalSignInAsync(loginInfo, true);
 
             switch (result)
             {
