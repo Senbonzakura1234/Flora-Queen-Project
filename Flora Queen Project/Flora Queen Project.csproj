@@ -194,6 +194,10 @@
     <Compile Include="Migrations\202002011124142_InitialTable.Designer.cs">
       <DependentUpon>202002011124142_InitialTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002081416440_UpdateProduct.cs" />
+    <Compile Include="Migrations\202002081416440_UpdateProduct.Designer.cs">
+      <DependentUpon>202002081416440_UpdateProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
@@ -724,6 +728,9 @@
     <Content Include="Views\Shop\Cart.cshtml" />
     <Content Include="Views\Payment\Checkout.cshtml" />
     <Content Include="Views\Shop\_Alert.cshtml" />
+    <Content Include="Views\Payment\PaymentResult.cshtml" />
+    <Content Include="Views\Account\MyOrder.cshtml" />
+    <Content Include="Views\Account\MyOrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -743,6 +750,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002011124142_InitialTable.resx">
       <DependentUpon>202002011124142_InitialTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002081416440_UpdateProduct.resx">
+      <DependentUpon>202002081416440_UpdateProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
