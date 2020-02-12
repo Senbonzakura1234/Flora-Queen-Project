@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Flora_Queen_Project.Models.MyOrderViewModel>
+
+@{
+    ViewBag.Title = "MyOrder";
+}
+
+<h2>MyOrder</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vnp_TransactionNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vpn_Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vpn_TxnResponseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vnp_TransactionNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vpn_Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vpn_TxnResponseCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -43,6 +44,41 @@ namespace Flora_Queen_Project.Models
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
+    }
+
+    public class MyOrderViewModel
+    {
+        public string Id { get; set; }
+
+        public double Amount { get; set; }
+        public string OrderDescription { get; set; }
+
+        public string ShipName { get; set; }
+        public string ShipAddress { get; set; }
+        public string ShipPhone { get; set; }
+        public string ShipEmail { get; set; }
+
+        public string BankCode { get; set; }
+        // ReSharper disable InconsistentNaming
+        public string vnp_TransactionNo { get; set; }
+        public string vpn_Message { get; set; }
+        public string vpn_TxnResponseCode { get; set; }
+
+        public Order.OrderPaymentMethodEnum PaymentMethod { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime CreatedAt { get; set; }
+
+        public Order.OrderStatusEnum OrderStatus { get; set; }
+    }
+
+    public class MyOrderItemViewModel
+    {
+        public int Quantity { get; set; }
+        public double UnitPrice { get; set; }
+        public double Discount { get; set; }
+        public string ImgUrl { get; set; }
     }
 
     public class ForgotViewModel

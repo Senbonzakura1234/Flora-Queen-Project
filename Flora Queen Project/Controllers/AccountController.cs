@@ -1,4 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -448,6 +451,94 @@ namespace Flora_Queen_Project.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+
+        public ActionResult MyOrder(int? page, int? limit)
+        {
+            if (page == null)
+            {
+                page = 1;
+            }
+
+            if (limit == null)
+            {
+                limit = 10;
+            }
+            var id = User.Identity.GetUserId();
+            var listOrder = _db.ApplicationOrders.Where(o => o.ApplicationUserId == id).OrderByDescending(o=>o.CreatedAt).ToList();
+           
+            var mylistOrder = new List<MyOrderViewModel>();
+            for (int i = 0; i < listOrder.Count; i++)
+            {
+                mylistOrder.Add(new MyOrderViewModel
+                {
+                    OrderStatus = listOrder[i].OrderStatus,
+                    CreatedAt = listOrder[i].CreatedAt,
+                    Amount = listOrder[i].Amount,
+                    PaymentMethod = listOrder[i].PaymentMethod,
+                    BankCode = listOrder[i].BankCode,
+                    OrderDescription = listOrder[i].OrderDescription,
+                    ShipName = listOrder[i].ShipName,
+                    ShipPhone = listOrder[i].ShipPhone,
+                    ShipAddress = listOrder[i].ShipAddress,
+                    ShipEmail = listOrder[i].ShipEmail,
+                    vpn_Message = listOrder[i].vpn_Message,
+                    vpn_TxnResponseCode = listOrder[i].vpn_TxnResponseCode,
+                    vnp_TransactionNo = listOrder[i].vnp_TransactionNo,
+                    Id = listOrder[i].Id
+                });
+            }
+
+            ViewBag.TotalPage = Math.Ceiling((double)mylistOrder.Count / limit.Value);
+            ViewBag.CurrentPage = page;
+            ViewBag.Limit = limit;
+
+            mylistOrder = mylistOrder.Skip((page.Value - 1) * limit.Value).Take(limit.Value).ToList();
+            return View(mylistOrder);
+        }
+
+        public async Task<ActionResult> MyOrderDetail(string orderId)
+        {
+            var order = await _db.ApplicationOrders.FindAsync(orderId);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            var listOrderItem = await _db.OrderItems.Where(od => od.OrderId == orderId).ToListAsync();
+
+            var myOrder = new MyOrderViewModel
+            {
+                OrderStatus = order.OrderStatus,
+                CreatedAt = order.CreatedAt,
+                Amount = order.Amount,
+                PaymentMethod = order.PaymentMethod,
+                BankCode = order.BankCode,
+                OrderDescription = order.OrderDescription,
+                ShipName = order.ShipName,
+                ShipPhone = order.ShipPhone,
+                ShipAddress = order.ShipAddress,
+                ShipEmail = order.ShipEmail,
+                vpn_Message = order.vpn_Message,
+                vpn_TxnResponseCode = order.vpn_TxnResponseCode,
+                vnp_TransactionNo = order.vnp_TransactionNo,
+                Id = order.Id
+            };
+
+            var listMyOderItem = new List<MyOrderItemViewModel>();
+            for (int i = 0; i < listOrderItem.Count; i++)
+            {
+                listMyOderItem.Add(new MyOrderItemViewModel
+                {
+                    ImgUrl = listOrderItem[i].Product.ImgUrl,
+                    Discount = listOrderItem[i].Discount,
+                    Quantity = listOrderItem[i].Quantity,
+                    UnitPrice = listOrderItem[i].UnitPrice
+                });
+            }
+
+            ViewBag.listMyOderItem = listMyOderItem;
+            return View(myOrder);
         }
 
         protected override void Dispose(bool disposing)

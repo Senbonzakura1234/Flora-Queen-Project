@@ -1,0 +1,106 @@
+﻿@model Flora_Queen_Project.Models.MyOrderViewModel
+
+@{
+    ViewBag.Title = "MyOrderDetail";
+}
+
+<h2>MyOrderDetail</h2>
+
+<div>
+    <h4>MyOrderViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vnp_TransactionNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vnp_TransactionNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vpn_Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vpn_Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vpn_TxnResponseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vpn_TxnResponseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
